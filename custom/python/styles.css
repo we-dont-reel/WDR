@@ -1,0 +1,160 @@
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+.btn-silver {
+    background-color: rgb(225, 225, 225);
+    color: black;
+    border: 1px solid rgb(225, 225, 225);
+    border-radius: 0;
+    width: 80px;
+}
+
+.btn-silver:hover {
+    background-color: rgb(225, 225, 225);
+    color: black;
+    border-radius: 0;
+    width: 80px;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.custom-heading {
+    color: rgb(6, 161, 65);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.heading-color {
+    color: rgb(6, 161, 65);
+}
+
+.animated-text {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.title-bar {
+    background-color: rgb(43, 87, 154);
+    width: 100%;
+    padding: 1rem;
+}
+
+.title-text {
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-weight: 900;
+}
+
+.bg-custom {
+    background-color: rgb(6, 161, 65);
+     width: 100%;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.left-box, .right-box {
+    border: 1px solid rgb(200, 200, 200);
+    box-sizing: border-box;
+}
+
+.left-content {
+    padding-left: 3px;
+}
+
+.custom-textarea {
+    border: 1px solid rgb(45,45,45);
+    border-radius: 0px;
+    background-color: rgb(45,45,45);
+    resize: none;
+    padding: 0px;
+    padding-left: 5px;
+    font-family: var(--bs-font-monospace);
+    color: white;
+}
+
+.custom-textarea:focus {
+    border: 1px solid rgb(45,45,45);
+    outline: none;
+    box-shadow: none;
+    background-color: rgb(45,45,45);
+    border-radius: 0px;
+    color: white
+}
+
+.form-control::placeholder {
+  color: darkgray;
+  opacity: 1;
+}
+
+.prg-editor {
+    border: 1px solid rgb(200,200,200);
+    box-sizing: border-box;
+}
+
+.program-input {
+    padding-bottom: 2px;
+}
+
+.prg-output {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.table {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+.table th, .table td {
+    border: 1px solid gray;
+    vertical-align: middle;
+}
+
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1050;
+}
+
+.spinner {
+    font-size: 3rem;
+    color: rgb(6, 161, 65);
+}

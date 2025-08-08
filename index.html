@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="GenZer, GenZer.me, GenZer me, genzer, genzer.me, gsml">
+    <meta name="description" content="GenZer.me - Combine your socials, projects, articles, content, portfolio, and more into one secure and shareable link: perfect for everyone!">
+    <link rel="canonical" href="https://genzer.me">
+    <meta property="og:title" content="GenZer.me - Showcase Everything">
+    <meta property="og:description" content="GenZer.me - Combine your socials, projects, articles, content, portfolio, and more into one secure and shareable link: perfect for everyone!">
+    <meta property="og:url" content="https://genzer.me">
+    <meta property="og:type" content="website">
+    <title>GenZer.me - Showcase Everything</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff00ff, #6600ff, #00ccff);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .top-bar {
+            background: white;
+            color: black;
+            width: 95%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            margin: 5px auto 3px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .top-bar img {
+            height: 50px;
+            width: 50px;
+            border-radius: 10px;
+        }
+        .top-bar .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .top-bar .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .encryption-status {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 2px;
+            margin-top: 2px;
+            line-height: 1;
+        }
+        .encryption-status span {
+            color: black;
+            margin-right: 5px;
+        }
+        .encryption-status i {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            color: #28a745;
+        }
+        .hero {
+            height: calc(100vh - 100px);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 0px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        .abstract-art {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            filter: blur(5px) brightness(0.7);
+            z-index: -1;
+        }
+        .btn-custom {
+            transition: transform 0.1s ease-in-out;
+            background: #ffcc00;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+        .btn-custom:active {
+            transform: scale(0.95);
+        }
+        .btn-edit {
+            margin-top: 15px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            background: white;
+            color: black;
+            font-weight: bold;
+        }
+        .btn-custom:hover {
+            background: #ffcc00 !important;
+            color: #000 !important;
+        }
+        .btn-edit:hover {
+            background: white !important;
+            color: black !important;
+        }
+        .btn-custom:focus, .btn-edit:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lead {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .btn-custom {
+            padding-top: 17px !important;
+        }
+        .btn-edit {
+            padding-top: 10px !important;
+        }
+        .modal-content {
+          color: black !important;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+
+      }
+      .modal-body {
+          text-align: left !important;
+      }
+      
+      .modal-body h5 {
+          text-align: left !important;
+      }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <img src="/GenZerLogo.jpg" alt="GenZer Logo">
+        <div class="title-container">
+            <div class="title" data-nosnippet>GenZer.me/LinkCode...</div>
+            <div class="encryption-status" data-nosnippet>
+                <span>End-to-End Encrypted</span> <i class="fas fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="hero">
+        <h1 class="lead-pitch">One Link to Rule Them All</h1>
+        <p class="lead">&#128073;Host a page (HTML) or story (GSML) quickly for any purpose. Share with a 
+            <span style="background-color: palegreen; color: black; padding: 2px 2px; font: inherit; border-radius: 3px;">secure</span> 
+            link.
+        </p>
+        <div class="button-container">
+            <button class="btn btn-custom" onclick="window.location.href='https://genzer.me/editor.html'">Get a GenZer.me Link <i class="fas fa-link"></i></button>
+            <div style="display:inline-flex; gap:6px;">
+            <button class="btn btn-edit" onclick="window.open('https://genzer.me/we-dont-reel.html', '_blank')">We Don't Reel <i class="fas fa-info-circle"></i></button>
+            <button class="btn btn-edit" onclick="window.location.href='https://genzer.me/builder.html'">GSML Builder <i class="fas fa-plus-circle"></i></button>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">GenZer.me</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5><strong>Coming Soon</strong></h5>
+                    <ul>
+                        <li>Vanity IDs &ndash; <strong>YourName.GenZer.me</strong></li>
+                        <li>Modular, Reusable Component-Based Architecture</li>
+                        <li>Shareable Interactive Presentations</li>
+                        <li>Shareable Smart Sheets with Built-in Analytics</li>
+                        <li>Secure Form Submissions</li>
+                    </ul>
+                    <p>And more, all with the same trusted End-to-End Encryption.</p>
+                    <hr>
+                    <h5><strong>Contact Us</strong></h5>
+                    <p style="margin-bottom:10px;">
+                        You can email us for anything at 
+                        <strong>hi@genzer.me</strong> 
+                        (be careful, it ends with <strong>.me</strong>)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+window.onload = window.onresize = function () {
+    let topBar = document.querySelector('.top-bar');
+    let leadPitch = document.querySelector('.lead-pitch');
+    leadPitch.style.marginTop = '0px';
+    leadPitch.style.marginBottom = '8px';
+    let buttonContainer = document.querySelector('.button-container');
+    let spaceAbove = topBar.offsetTop;
+    let spaceBelow = window.innerHeight - (buttonContainer.getBoundingClientRect().bottom + window.scrollY);
+    if (spaceAbove < spaceBelow) {
+        let extraMargin = (spaceBelow - spaceAbove);
+        leadPitch.style.marginTop = `${(parseFloat(leadPitch.style.marginTop) || 0) + extraMargin / 2}px`;
+        leadPitch.style.marginBottom = `${(parseFloat(leadPitch.style.marginBottom) || 0) + extraMargin / 2}px`;
+        let top = parseFloat(getComputedStyle(leadPitch).marginTop) || 0;
+        let bottom = parseFloat(getComputedStyle(leadPitch).marginBottom) || 0;
+        let average = (top + bottom) / 2;
+        leadPitch.style.marginTop = `${average}px`;
+        leadPitch.style.marginBottom = `${average}px`;
+    }
+};
+window.addEventListener('pageshow', () => window.onload());
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') window.onload();
+});
+</script>
+</html>

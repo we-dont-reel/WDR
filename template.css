@@ -1,0 +1,599 @@
+    html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background-color:black; }
+    .swiper, .swiper-wrapper, .swiper-slide { width:100%; height:100%; }
+    .swiper-slide { display:flex; align-items:center; justify-content:center; font-size:24px; color:white; text-align:center; overflow:hidden; }
+    @media (min-width: 350px) {
+    ::-webkit-scrollbar {width:4px;}
+    ::-webkit-scrollbar-thumb {background:lightgrey;border-radius:2px;}
+    ::-webkit-scrollbar-track {background:transparent;}
+    * {scrollbar-width:thin;scrollbar-color:lightgrey transparent;}
+    }
+    @media (min-width: 350px) {
+    ::-webkit-scrollbar:horizontal {height:4px;}
+    ::-webkit-scrollbar-thumb:horizontal {background:lightgrey;border-radius:2px;}
+    ::-webkit-scrollbar-track:horizontal {background:transparent;}
+    }
+    .gsml-error {
+    font-family: sans-serif !important;
+    color: white;
+    font-size:18px;
+    margin-top:24px;
+    margin-bottom:24px;
+    }
+    .gsml-text {
+    font-family: sans-serif !important;
+    }
+    .gsml-title {
+    font-weight: bold;
+    font-family: sans-serif !important;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    }
+    .gsml-biglabel-container {
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    }
+    .gsml-biglabel {
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 0px 5px;
+    overflow: hidden;
+    text-align: center;
+    font-family: sans-serif;
+    }
+    .gsml-youtube-container {
+    background: white;
+    border-radius: 10px;
+    padding: 2px;
+    overflow: hidden;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    }
+    .gsml-youtube-container iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: 8px;
+    }
+    .gsml-image-container {
+    background: white;
+    border-radius: 10px;
+    padding: 2px;
+    overflow: hidden;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    }
+    .gsml-image-full {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: none;
+    }
+    .gsml-image-top {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+    border: none;
+    }
+    .gsml-image-desc {
+    font-family: sans-serif !important;
+    font-size: 16px;
+    color: black;
+    padding: 10px;
+    margin: 0;
+    background: white;
+    border-radius: 0 0 8px 8px;
+    line-height: 1.4;
+    text-align: center;
+    }
+    .gsml-list {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-family: sans-serif !important;
+    text-align: left;
+    }
+    .gsml-list ul {
+    padding-left: 20px;
+    margin: 0;
+    }
+    .gsml-list li {
+     margin-bottom: 8px;
+    }
+    .gsml-list li:last-child {
+    margin-bottom: 0;
+    }
+    .gsml-table-container {
+    background: white;
+    border-radius: 10px;
+    padding: 2px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    }
+    .gsml-table-inner {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: sans-serif !important;
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+    .gsml-table-row.grey {
+    background: #f2f2f2;
+    }
+    .gsml-table-row.white {
+    background: #ffffff;
+    }
+    .gsml-table-cell-left,
+    .gsml-table-cell-right {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+    word-break: break-word;
+    width: 50%;
+    color: black;
+    }
+    .gsml-table-inner tr:first-child td:first-child {
+    border-top-left-radius: 8px;
+    }
+    .gsml-table-inner tr:first-child td:last-child {
+    border-top-right-radius: 8px;
+    }
+    .gsml-table-inner tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+    }
+    .gsml-table-inner tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+    }
+    .gsml-embed-container {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 2px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    }
+    .gsml-embed-inner {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+    .gsml-embed-inner iframe {
+    display: block;
+    width: 100%;
+    border: none;
+    }
+    .gsml-links-container {
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    }
+    .gsml-link-item{
+    background:rgba(255,255,255,0.07);
+    border-radius:10px;
+    padding:10px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    font-family:sans-serif !important;
+    font-size:18px;
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    gap:10px;
+    }
+    .gsml-link-item i{
+    flex-shrink:0;
+    font-size:18px;
+    color:white;
+    }
+    .gsml-link-item span{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-family:sans-serif !important;
+    font-size:18px;
+    font-weight:500;
+    text-align:center;
+    flex-grow:1;
+    }
+    .gsml-link-item:hover{
+    background:rgba(255,255,255,0.08);
+    }
+    .gsml-actionbuttons-container {
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 2px solid white;
+    margin: 24px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+    }
+    .gsml-actionbuttons-description {
+    font-family: sans-serif !important;
+    font-size: 18px;
+    color: white;
+    padding: 12px;
+    }
+    .gsml-actionbuttons-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px;
+    background-color: white;
+    }
+    .gsml-actionbutton-link {
+    flex: 1;
+    text-align: center;
+    color: darkslategrey;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: sans-serif !important;
+    }
+    .gsml-actionbutton-link i {
+    margin-right: 6px;
+    color: darkslategrey !important;
+    font-weight: 900 !important;
+    }
+    .gsml-actionbuttons-buttons a:not(:last-child) {
+    border-right: 1px solid #ccc;
+    }
+    .gsml-actionbuttons-divider {
+    margin: 0;
+    border: none;
+    border-top: 1px solid #ccc;
+    }
+    .gsml-socials-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 8px;
+    margin: 24px 0;
+    padding: 10px 10px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    }
+    .gsml-social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: darkslategrey;
+    background: white;
+    text-decoration: none;
+    font-size: 20px;
+    flex-shrink: 0;
+    }
+    .gsml-date-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    height: 100px;
+    margin: 24px 0;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    overflow: hidden;
+    width: 100%;
+    }
+    .gsml-date-icon {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    box-sizing: border-box;
+    }
+    .gsml-date-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    box-sizing: content-box;
+    }
+    .gsml-date-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    padding: 0 12px;
+    max-width: 320px;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    flex: 1;
+    }
+    .gsml-time-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    height: 100px;
+    margin: 24px 0;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    overflow: hidden;
+    width: 100%;
+    }
+    .gsml-time-icon {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    box-sizing: border-box;
+    }
+    .gsml-time-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    box-sizing: content-box;
+    }
+    .gsml-time-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 12px;
+    max-width: 320px;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    flex: 1;
+    overflow: auto;
+    white-space: normal;
+    }
+    .gsml-place-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    height: 100px;
+    margin: 24px 0;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    overflow: hidden;
+    width: 100%;
+    }
+    .gsml-place-icon {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    box-sizing: border-box;
+    }
+    .gsml-place-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    box-sizing: content-box;
+    }
+    .gsml-place-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    padding: 0 12px;
+    max-width: 320px;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    flex: 1;
+    overflow: auto;
+    white-space: normal;
+    }
+    .gsml-timebomb-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    height: 100px;
+    margin: 24px 0;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    overflow: hidden;
+    width: 100%;
+    }
+    .gsml-timebomb-icon {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    box-sizing: border-box;
+    }
+    .gsml-timebomb-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    box-sizing: content-box;
+    }
+    .gsml-timebomb-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 12px;
+    max-width: 320px;
+    font-family: sans-serif !important;
+    font-weight: bold;
+    flex: 1;
+    }
+    .gsml-map-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    height: 100px;
+    margin: 24px 0;
+    font-family: sans-serif !important;
+    overflow: hidden;
+    width: 100%;
+    text-decoration: none;
+    }
+    .gsml-map-icon {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    box-sizing: border-box;
+    }
+    .gsml-map-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    box-sizing: content-box;
+    }
+    .gsml-map-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: beige;
+    font-size: 22px;
+    padding: 0 12px;
+    max-width: 320px;
+    font-family: sans-serif !important;
+    flex: 1;
+    font-weight: bold;
+    }
+    .gsml-customdiv, .gsml-customdiv * {
+    font-family: sans-serif !important;
+    }
+    .gsml-customdiv {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    }
+    .gsml-customdiv > :first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    }
+    .gsml-customdiv > :last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    }
+    .gsml-codeblock-container {
+    margin-top: 24px;
+    margin-bottom:24px;
+    }
+    .gsml-codeblock {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: rgba(30, 30, 30, 0.5);
+    text-align: left;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    }
+    .gsml-mcqoptions-container {
+    margin: 24px 0;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    font-size: 18px;
+    }
+    .gsml-mcqoptions {
+    background-color: rgba(30, 30, 30, 0.5);
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    color: rgba(30, 30, 30, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-word;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    }
+    .gsml-mcqoptions:first-child {
+    margin-top: 0;
+    }
+    .gsml-mcqoptions:last-child {
+    margin-bottom: 0;
+    }
+    .gsml-chatblock {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    background: transparent;
+    max-width: 100%;
+    }
+    .gsml-chat-left,
+    .gsml-chat-right {
+    font-size: 18px;
+    font-family: sans-serif;
+    max-width: 100%;
+    padding: 10px;
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    }
+    .gsml-chatblock > :first-child {
+    margin-top: 0;
+    }
+    .gsml-chatblock > :last-child {
+    margin-bottom: 0;
+    }
+    .gsml-chat-left {
+    text-align: left;
+    margin-right: 25%;
+    }
+    .gsml-chat-right {
+    text-align: left;
+    margin-left: 25%;
+    background: rgba(30, 30, 30, 0.8);
+    }
+    .gsml-title,
+    .gsml-text,
+    .gsml-list,
+    .gsml-error {
+      margin-top: 22px;
+      margin-bottom: 22px;
+    }
+    .gsml-title + [class*="gsml-"],
+    .gsml-text + [class*="gsml-"],
+    .gsml-list + [class*="gsml-"],
+    .gsml-error + [class*="gsml-"] {
+      margin-top: 22px;
+    }

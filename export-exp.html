@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<meta name="robots" content="noindex, nofollow">
+<meta name="keywords" content="GenZer, GenZer.me, GenZer me, genzer, genzer.me">
+<meta name="description" content="GenZer.me - Combine your socials, projects, articles, content, and portfolio into one sleek, shareable link: perfect for everyone!">
+<link rel="canonical" href="https://genzer.me">
+<meta property="og:title" content="Preview - GenZer.me">
+<meta property="og:description" content="GenZer.me - Combine your socials, projects, articles, content, and portfolio into one sleek, shareable link: perfect for everyone!">
+<meta property="og:url" content="https://genzer.me">
+<meta property="og:type" content="website">
+<title>Preview - GenZer.me</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+#loadingSpinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    color: white;
+    z-index: 9999;
+}
+#loadingSpinner .svg-inline--fa {
+    font-size: 2rem !important;
+}
+.btn-light:active,
+.btn-light:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    background-color: #f8f9fa !important;
+    color: #000 !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+</style>
+</head>
+<body class="changeTheContentHereImmediately-GenZer-me" style="background: black;">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script>
+window.addEventListener("load", function () {
+    if (document.body.classList.contains("changeTheContentHereImmediately-GenZer-me")) {
+        document.body.classList.remove("changeTheContentHereImmediately-GenZer-me");
+        contentPopulatorGenZerME();
+    }
+});
+window.addEventListener("pageshow", (event) => {
+    const navEntries = performance.getEntriesByType("navigation");
+    const navType = navEntries.length > 0 ? navEntries[0].type : null;
+    if (["reload", "back_forward"].includes(navType) || event.persisted) {
+        contentPopulatorGenZerME();
+    }
+});
+async function contentPopulatorGenZerME() {
+    if (sessionStorage.getItem("genzerPreviewAlert") === "true") {
+        sessionStorage.setItem("genzerPreviewAlert", "false");
+        alert("- All elements and devices are not supported.\n- Tested on Android and Windows Chrome.\n- Please wait till 'completed' alert is shown.\n- *This is experimental and will be updated.");
+    }
+    const rawHTML = sessionStorage.getItem("genzerEditorContent") || "";
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(rawHTML, "text/html");
+    const currentHead = document.head;
+    const styles = doc.querySelectorAll("head link[rel='stylesheet'], head style");
+    if (styles.length > 0) {
+        styles.forEach(element => currentHead.appendChild(document.importNode(element, true)));
+    }
+    await new Promise(resolve => {
+        const links = document.head.querySelectorAll("link[rel='stylesheet']");
+        if (links.length === 0) return resolve();
+        let loadedCount = 0;
+        links.forEach(link => {
+            try {
+                if (link.sheet && link.sheet.cssRules && link.sheet.cssRules.length) {
+                    if (++loadedCount === links.length) resolve();
+                } else {
+                    link.onload = () => { if (++loadedCount === links.length) resolve(); };
+                    link.onerror = () => { if (++loadedCount === links.length) resolve(); };
+                }
+            } catch (e) {
+                resolve();
+            }
+        });
+    });
+    const scripts = [];
+    doc.querySelectorAll("head script").forEach(scriptInHead => scripts.push(scriptInHead));
+    const newBody = document.createElement("body");
+    newBody.style.width = "512px";
+    newBody.style.height = "640px";
+    newBody.style.overflow = "auto";
+    newBody.style.background = "black";
+    Array.from(doc.body.childNodes).forEach(node => {
+        if (node.tagName?.toLowerCase() === "script") {
+            scripts.push(node);
+        } else {
+            newBody.appendChild(node.cloneNode(true));
+        }
+    });
+    document.body.replaceWith(newBody);
+    for (let script of scripts) {
+        await new Promise((resolve) => {
+            let newScript = document.createElement("script");
+            if (script.src) {
+                newScript.src = script.src;
+                newScript.onload = resolve;
+                newScript.onerror = resolve;
+            } else {
+                newScript.textContent = script.textContent;
+                resolve();
+            }
+            document.body.appendChild(newScript);
+        });
+    }
+    requestAnimationFrame(() => {
+        document.dispatchEvent(new Event("readystatechange"));
+        document.dispatchEvent(new Event("DOMContentLoaded"));
+        document.dispatchEvent(new Event("load"));
+        window.dispatchEvent(new Event("load"));
+        startCreatingImages()
+    });
+}
+function startCreatingImages() {
+    swiper.autoplay.stop();
+    startSpinner();
+    const firstChild = document.body.firstElementChild;
+    if (!(firstChild && firstChild.tagName === "DIV" && firstChild.classList.contains("swiper"))) {
+        document.body.removeChild(firstChild);
+    }
+    document.querySelectorAll('.rbgen-mask-right, .rbgen-mask-left').forEach(el => el.remove());
+    document.querySelectorAll('.swiper-slide').forEach(slide => {
+        const first = slide.children[0];
+        if (first && getComputedStyle(first).position === "absolute") {
+            const current = first.firstElementChild?.textContent?.trim();
+            const total = first.lastElementChild?.textContent?.trim();
+            const tag = document.createElement('div');
+            tag.style.position = 'absolute';
+            tag.style.top = '7px';
+            tag.style.left = '20px';
+            tag.style.fontSize = '10px';
+            tag.style.zIndex = "1000";
+            tag.innerHTML = `<div style="text-align:left;line-height:1.1"><span style="color:white;font-weight:bold">${current} / ${total}</span><br>&nbsp;<br><span style="color:lightgrey;font-size:8px">GenZer.me</span></div>`;
+            first.parentElement.appendChild(tag);
+            first.style.display = 'none';
+        }
+        const second = slide.children[1];
+        if (second && second.style) {
+            second.style.maxWidth = ""; 
+            second.firstElementChild.style.marginTop = "2px";
+            second.lastElementChild.style.marginBottom = "2px";
+        }
+    });
+    const waitForLibrary = setInterval(() => {
+        if (typeof html2canvas === "function") {
+            clearInterval(waitForLibrary);
+            const slides = document.querySelectorAll('.swiper-slide');
+            const totalSlides = slides.length;
+            const imageUrls = [];
+            let index = 0;
+            function next() {
+                if (index >= totalSlides) {
+                    stopSpinner();
+                    alert("Completed!");
+                    document.body.style.width = "";
+                    document.body.style.height = "";
+                    document.body.style.overflow = "";
+                    document.body.innerHTML = "";
+                    const container = document.createElement("div");
+                    container.style.width = "100%";
+                    container.style.display = "flex";
+                    container.style.flexDirection = "column";
+                    container.style.alignItems = "center";
+                    function createDownloadButton() {
+                        const btn = document.createElement("button");
+                        btn.textContent = "Save Images";
+                        btn.className = "btn btn-light";
+                        btn.onclick = () => {
+                            let i = 0;
+                            function downloadNextImage() {
+                                if (i >= imageUrls.length) return;
+                                const timestamp = new Date().toISOString().replace(/[:.-]/g, "");
+                                const a = document.createElement("a");
+                                a.href = imageUrls[i];
+                                a.download = `s${String(i + 1).padStart(2, '0')}-${timestamp}.jpg`;
+                                document.body.appendChild(a);
+                                a.click();
+                                a.remove();
+                                i++;
+                                setTimeout(downloadNextImage, 500);
+                            }
+                            downloadNextImage();
+                        };
+                        return btn;
+                    }
+                    const topBtnWrapper = document.createElement("div");
+                    topBtnWrapper.className = "my-4";
+                    topBtnWrapper.style.marginTop = "20px";
+                    topBtnWrapper.style.setProperty("margin-bottom", "20px", "important");
+                    topBtnWrapper.appendChild(createDownloadButton());
+                    container.appendChild(topBtnWrapper);
+                    imageUrls.forEach((url, i) => {
+                        const img = document.createElement("img");
+                        img.src = url;
+                        img.alt = `Slide ${i + 1}`;
+                        img.style.width = "100%";
+                        img.style.maxWidth = "480px";
+                        img.style.marginBottom = "20px";
+                        container.appendChild(img);
+                    });
+                    const bottomBtnWrapper = document.createElement("div");
+                    bottomBtnWrapper.className = "my-4";
+                    bottomBtnWrapper.style.setProperty("margin-top", "0", "important");
+                    bottomBtnWrapper.style.marginBottom = "20px";
+                    bottomBtnWrapper.appendChild(createDownloadButton());
+                    container.appendChild(bottomBtnWrapper);
+                    document.body.style.overflowY = "auto";
+                    document.body.style.height = "auto";
+                    document.documentElement.style.overflowY = "auto";
+                    document.documentElement.style.height = "auto";
+                    document.body.appendChild(container);
+                    addPDFButtonsNextToDownloadAll();
+                    return;
+                }
+                swiper.slideTo(index);
+                setTimeout(() => {
+                    html2canvas(slides[index], {
+                        backgroundColor: "#000",
+                        width: 512,
+                        height: 640,
+                        scale: 5,
+                        useCORS: true
+                    }).then(canvas => {
+                        imageUrls.push(canvas.toDataURL("image/jpeg", 0.95));
+                        index++;
+                        next();
+                    }).catch(() => {
+                        setTimeout(next, 500);
+                    });
+                }, 300);
+            }
+            next();
+        }
+    }, 500);
+}
+function startSpinner() {
+    if (!document.getElementById("loadingSpinner")) {
+        const spinnerContainer = document.createElement("div");
+        spinnerContainer.id = "loadingSpinner";
+        spinnerContainer.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+        document.body.appendChild(spinnerContainer);
+    }
+}
+function stopSpinner() {
+    const spinner = document.getElementById("loadingSpinner");
+    if (spinner) {
+        spinner.remove();
+    }
+}
+function downloadSlidesAsPDF() {
+    startSpinner();
+    const waitForJsPDF = setInterval(() => {
+        if (window.jspdf && window.jspdf.jsPDF) {
+            clearInterval(waitForJsPDF);
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ unit: 'px', format: [512, 640] });
+            const imgs = Array.from(document.querySelectorAll("img[src^='data:image/']"));
+            let loaded = 0;
+            imgs.forEach((imgEl, i) => {
+                const img = new Image();
+                img.onload = function () {
+                    if (i > 0) pdf.addPage([512, 640]);
+                    pdf.setPage(i + 1);
+                    pdf.addImage(img.src, "JPEG", 0, 0, 512, 640);
+                    loaded++;
+                    if (loaded === imgs.length) {
+                        const timestamp = new Date().toISOString().replace(/[:.-]/g, "");
+                        pdf.save(`GenZer_me_slides-${timestamp}.pdf`);
+                        stopSpinner();
+                        alert("PDF download completed!");
+                    }
+                };
+                img.src = imgEl.src;
+            });
+            if (imgs.length === 0) stopSpinner();
+        }
+    }, 500);
+}
+function addPDFButtonsNextToDownloadAll() {
+    const allButtons = Array.from(document.querySelectorAll("button"));
+    allButtons.forEach((btn) => {
+        if (btn.textContent.trim() === "Save Images") {
+            const pdfBtn = document.createElement("button");
+            pdfBtn.textContent = "Save PDF";
+            pdfBtn.className = "btn btn-light ms-2";
+            pdfBtn.onclick = downloadSlidesAsPDF;
+            btn.parentElement.insertBefore(pdfBtn, btn.nextSibling);
+        }
+    });
+}
+</script>
+</body>
+</html>

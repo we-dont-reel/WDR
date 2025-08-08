@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="google" content="notranslate">
+  <link rel="preload" href="https://genzer.me/img/place.png" as="image">
+  <link rel="preload" href="https://genzer.me/img/date.png" as="image">
+  <link rel="preload" href="https://genzer.me/img/time.png" as="image">
+  <title>Hi...</title>
+  <meta property="og:title" content="Hi...">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://genzer.me/img/og-image-square-1.jpg">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div style="max-width:480px;text-align:center;margin-top:50px;margin-bottom:50px;">
+    <img src="https://genzer.me/img/loading.jpg" alt="Loading..." style="width:50%; height:auto;">
+  </div>
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAABCZP0kYMPfqRUhd" data-callback="onSuccess"></div>
+  <script>
+  function onSuccess(token) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fragment = window.location.hash;
+    let subdomain = urlParams.get('v');
+    if (subdomain) {
+      subdomain = subdomain.replace(/-/g, '');
+      subdomain = 'a' + subdomain;
+      subdomain = subdomain.replace(/[A-Z]/g, match => '-' + match.toLowerCase());
+      const redirectUrl = `https://${subdomain}.genzer.me/view.html?t=${encodeURIComponent(token)}${fragment}`;
+      window.location.replace(redirectUrl);
+    }
+  }
+</script>
+<script src="https://genzer.me/swiper.js"></script>
+<script src="https://genzer.me/rbgen.js"></script>
+<script src="https://genzer.me/template.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="GenZer, GenZer.me, GenZer me, genzer, genzer.me, gsml">
+    <meta name="description" content="GenZer.me - Combine your socials, projects, articles, content, portfolio, and more into one secure and shareable link: perfect for everyone!">
+    <link rel="canonical" href="https://genzer.me/editor.html">
+    <meta property="og:title" content="Editor - GenZer.me">
+    <meta property="og:description" content="GenZer.me - Combine your socials, projects, articles, content, portfolio, and more into one secure and shareable link: perfect for everyone!">
+    <meta property="og:url" content="https://genzer.me/editor.html">
+    <meta property="og:type" content="website">
+    <title>Editor - GenZer.me</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/lib/codemirror.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/theme/dracula.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            margin-top: 0;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ff00ff, #6600ff, #00ccff);
+            background-attachment: fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        .container {
+            max-width: 975px;
+            padding: 10px;
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px;
+        }
+        h5 {
+            color: #bb86fc;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        ul li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ul {
+            margin-bottom: 0 !important;
+        }
+        .code-container {
+            max-width: 975px;
+            padding: 10px;
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px;
+            text-align: center;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .btn-group button {
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            min-width: 100px;
+            margin: 0 5px;
+            border-radius: 10px;
+        }
+        .btn-delete {
+            background: #ff79c6;
+            color: white;
+        }
+        .btn-preview {
+            background: #f1fa8c;
+            color: black;
+        }
+        .btn-generate {
+            background: lightgreen;
+            color: black;
+        }
+        .CodeMirror {
+            background: black;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .CodeMirror {
+                height: 150vw !important;
+            }
+        }
+        @media (min-width: 769px) {
+            .CodeMirror {
+                height: 600px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .btn-group button {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            .btn-group button i {
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
+        }
+        .CodeMirror-vscrollbar {
+            display: none !important;
+        }
+        .CodeMirror-hscrollbar {
+            display: none !important;
+        }
+        .CodeMirror-scrollbar-filler {
+            display: none !important;
+        }
+        .end-footer {
+            max-width: 975px;
+            padding: 10px;
+            background: rgba(30, 30, 30, 0.75);
+            border-radius: 10px;
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: lightgray;
+        }
+        .svg-inline--fa {
+            font-size: 1rem !important;
+            width: 1em !important;
+        }
+        .modal-content {
+          color: black !important;
+          background: rgba(255, 255, 255);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+        .modal-body {
+            text-align: left !important;
+        }
+        
+        .modal-body h5 {
+            text-align: left !important;
+        }
+        #loadingSpinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+        }
+        #loadingSpinner .svg-inline--fa {
+            font-size: 2rem !important;
+        }
+        #linkModal .modal-body .input-group {
+            max-width: 430px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="margin-top:10px;">
+      <p style="line-height:1.5; margin-bottom:8px;text-align:center;">
+        Try our new GSML Builder. Create swipable stories for mobile devices, with the comfort of a quick and simple syntax.
+      </p>
+      <div style="text-align:center;">
+        <button onclick="window.open('/builder.html','_blank')" style="background:lightgreen;color:black;font-weight:bold;padding:12px 20px;border:none;border-radius:10px;transition:0.3s;font-size:1rem;min-width:100px;" onmouseover="this.style.background='lightgreen';this.style.color='black';this.style.fontWeight='bold'" onmouseout="this.style.background='lightgreen';this.style.color='black';this.style.fontWeight='bold'">GSML Builder</button>
+      </div>
+    </div>
+    <div class="container">
+        <h5>Before you begin...</h5>
+        <ul>
+            <li>You can add one-page HTML&#8239;+&#8239;Bootstrap, with max 150K characters.  If it doesn't work, simplify the code, especially JS functions.</li>
+            <li>You can embed third-party resources, media like images and videos, and forms if their policies allow it.</li>
+            <li>You can use Base64-encoded media within the page, ensuring it remains within the character limit.</li>
+            <li>The generated link is final and cannot be edited. Please preview and review your page thoroughly.</li>
+            <li>The generated link will remain active for about 100 days before deactivation.</li>
+            <li style="margin-bottom:0">Ensure your content complies with all laws and regulations. Email us at hi@genzer.me (ends with .me) to report abuse.</li>
+        </ul>
+    </div>
+    <div class="container">
+        <h5 style="margin-bottom:0">Let's start...</h5>
+        <p style="color:dimgrey;text-align:center;line-height:1.2;margin-bottom:10px">Always make sure to open this editor page in a regular browser, not an in-app browser.</p>
+        <div class="btn-group">
+            <button class="btn-delete" onclick="clearEditor()"><i class="fas fa-trash"></i> Clear</button>
+            <button class="btn-preview"><i class="fas fa-file-alt"></i> Preview</button>
+            <button class="btn-generate" data-bs-toggle="modal" data-bs-target="#agreeModal"><i class="fas fa-lock"></i> Generate</button>
+        </div>
+        <textarea id="code-editor" style="background:rgba(30, 30, 30, 0.95)"></textarea>
+    </div>
+    <div class="container end-footer">
+        <p style="margin-bottom:0"><strong>Coming soon...</strong></p>
+        <p style="margin-bottom:0">Vanity IDs &ndash; YourName.GenZer.me,
+            modular and reusable component-based architecture,
+            shareable interactive presentations,
+            shareable smart sheets with built-in analytics,
+            secure form submissions and more, with End-to-End Encryption!
+        </p>
+        <hr>
+        <p style="margin-bottom:0"><strong>Contact us...</strong></p>
+        <p style="margin-bottom:0">Email us at hi@genzer.me (ends with .me)</p>
+     </div>
+<!--Modals start-->
+<div class="modal fade" id="agreeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel" style="color:black;">Terms & Privacy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You acknowledge that you have read and agree to the following:</p>
+                <ol>
+                  <li>GenZer.me <a href="terms.html" target="_blank" style="text-decoration: none; color: #4a90e2;">Terms and Conditions</a></li>
+                  <li>GenZer.me <a href="privacy.html" target="_blank" style="text-decoration: none; color: #4a90e2;">Privacy Policy</a></li>
+                  </ol>
+                    <div id="cf-turnstile-container" style="margin-bottom:10px;text-align:center;">
+                      <p id="verify-msg" style="color:lightgrey;">Human verification...</p>
+                      <div id="cf-turnstile"
+                           class="turnstile"
+                           data-sitekey="0x4AAAAAABB8kbiTIHCrLyxu"
+                           data-callback="onTurnstileSuccess"
+                           data-theme="light"
+                           data-size="normal">
+                      </div>
+                      <input type="hidden" id="turnstile-verification-token" value="">
+                    </div>
+                  <hr>
+                <div class="text-center action-buttons" style="display:none">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-right:20px;width:50px;">No</button>
+                    <button type="button" class="btn btn-success" style="margin-left:20px;width:50px;" onclick="acceptTerms()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="linkModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="color:black;">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:black;">Encrypted Link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p style="font-size: 0.95rem;">Your secure GenZer.me link:</p>
+        <div class="input-group" style="display: block;">
+          <textarea id="encryptedLinkInput" readonly rows="2"
+            style="width: 100%; padding: 10px; font-size: 0.9rem; background: #f1f1f1; color: black; text-align: center; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; resize: none;"></textarea>
+          <div style="text-align: center;">
+            <button onclick="copyEncryptedLink()"
+              style="padding: 8px 20px; background: #198754; color: white; font-weight: bold; border: none; border-radius: 4px;">Copy</button>
+          </div>
+        </div>
+        <small id="copyStatus" style="display:block;margin-top:8px;color:green;"></small>
+        <p style="text-align:center">Full vanity IDs are not yet supported, but you can still add your name as a subdomain.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modals end-->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/lib/codemirror.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/mode/htmlmixed/htmlmixed.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/mode/css/css.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/mode/javascript/javascript.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/addon/display/autorefresh.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/mode/xml/xml.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+    let encryptionKey="", encryptedData="", salt="", iv="", toStore={};
+    document.addEventListener("DOMContentLoaded", function () {
+        window.editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "htmlmixed",
+            theme: "dracula",
+            lineNumbers: false,
+            autoRefresh: true,
+            tabSize: 4
+        });
+        window.editor.setOption("extraKeys", { Tab: "indentMore" });
+        window.editor.getWrapperElement().setAttribute("tabindex", "0");
+        window.editor.setValue("<!--HTML-CSS-JS code here-->\n<!--Can scroll in X and Y-->\n"); 
+    });
+    document.querySelector(".btn-preview").addEventListener("click", function () {
+        const codeContent = window.editor.getValue() || "";
+        sessionStorage.setItem("genzerEditorContent", codeContent.trim());
+        sessionStorage.setItem("genzerPreviewAlert", "true");
+        window.open("preview.html", "_blank");
+    });
+    function clearEditor() {
+        if (window.editor) {
+            window.editor.setValue("<!--HTML-CSS-JS code here-->\n<!--Can scroll in X and Y-->\n");
+        }
+    }
+    function startSpinner() {
+        if (!document.getElementById("loadingSpinner")) {
+            const spinnerContainer = document.createElement("div");
+            spinnerContainer.id = "loadingSpinner";
+            spinnerContainer.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+            document.body.appendChild(spinnerContainer);
+        }
+    }
+    function stopSpinner() {
+        const spinner = document.getElementById("loadingSpinner");
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+    function enforceCharLimit() {
+        const content = window.editor.getValue().trim();
+        if (!content) {
+            stopSpinner();
+            alert("Editor is empty. Please enter content before encrypting");
+            return false;
+        }
+        if (content.length > 152500) {
+            stopSpinner();
+            alert("Chars more than the limit!");
+            return false;
+        }
+        return true;
+    }
+    function generateRandomKey() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const array = new Uint8Array(16);
+        window.crypto.getRandomValues(array);
+        return Array.from(array, byte => chars.charAt(byte % chars.length)).join('');
+    }
+    async function deriveKey(password,salt) {
+        try {
+            const encoder=new TextEncoder();
+            const keyMaterial=await window.crypto.subtle.importKey("raw",encoder.encode(password),{name:"PBKDF2"},false,["deriveKey"]);
+            return window.crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:3000000,hash:"SHA-256"},keyMaterial,{name:"AES-GCM",length:256},true,["encrypt","decrypt"]);
+        } catch(error) {
+            stopSpinner();
+            console.log("Encryption failed:",error);
+        }
+    }
+    function utf16ToBase64(data) {
+        let binary = '';
+        const bytes = new Uint8Array(data);
+        for (let i = 0; i < bytes.length; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return btoa(binary);
+    }
+    async function encryptContent() {
+        startSpinner();
+        if(!enforceCharLimit()) return;
+        try {
+            const content=window.editor.getValue().trim();
+            encryptionKey=generateRandomKey();
+            const encoder=new TextEncoder();
+            const saltBuffer=window.crypto.getRandomValues(new Uint8Array(16));
+            const ivBuffer=window.crypto.getRandomValues(new Uint8Array(12));
+            const derivedKey=await deriveKey(encryptionKey,saltBuffer);
+            if(!derivedKey) throw new Error("Derived key is undefined");
+            const encryptedBuffer=await window.crypto.subtle.encrypt({name:"AES-GCM",iv:ivBuffer},derivedKey,encoder.encode(content));
+            salt=utf16ToBase64(saltBuffer);
+            iv=utf16ToBase64(ivBuffer);
+            encryptedData=utf16ToBase64(encryptedBuffer);
+            toStore={salt:salt,iv:iv,encryptedData:encryptedData};
+            stopSpinner();
+            //console.log("Encryption Completed",toStore);
+            return toStore;
+        } catch(error) {
+            stopSpinner();
+            alert("Error occurred: " + error);
+        }
+    }
+    function onTurnstileSuccess(token) {
+        document.getElementById("turnstile-verification-token").value = token;
+        document.querySelector('.action-buttons').style.display = 'block';
+        document.getElementById("verify-msg").style.display = 'none';
+    }
+    document.getElementById('agreeModal').addEventListener('shown.bs.modal', function () {
+        document.querySelector('.action-buttons').style.display = 'none';
+        document.getElementById("verify-msg").style.display = 'block';
+        document.getElementById("turnstile-verification-token").value = "";
+        const container = document.getElementById("cf-turnstile");
+        container.innerHTML = "";
+        turnstile.render("#cf-turnstile", {
+            sitekey: "0x4AAAAAABB8kbiTIHCrLyxu",
+            callback: onTurnstileSuccess,
+            theme: "light",
+            size: "normal"
+        });
+    });
+    async function acceptTerms() {
+        const modal = document.getElementById("agreeModal");
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) modalInstance.hide(); 
+        const payload = await encryptContent();
+        const cfToken = document.getElementById("turnstile-verification-token").value;
+        if (!payload || !cfToken) {
+          stopSpinner();
+          alert("Encryption or token failed. Please try again");
+          return;
+      }
+      try {
+          const response = await fetch("/api/newpage", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  encrypted_data: JSON.stringify(payload),
+                  "cf-turnstile-response": cfToken
+              })
+          });
+          const result = await response.json();
+          stopSpinner();
+          if (result.success && result.shortcode) {
+              const formattedKey = encryptionKey.match(/.{1,4}/g).join("-");
+              const finalUrl = `https://genzer.me/${result.shortcode}#${formattedKey}`;
+              document.getElementById("encryptedLinkInput").value = finalUrl;
+              document.getElementById("copyStatus").innerText = "";
+              const linkModal = new bootstrap.Modal(document.getElementById("linkModal"));
+              linkModal.show();
+          } else {
+              alert(result.message || "Something went wrong. Please try again");
+          }
+      } catch (err) {
+          stopSpinner();
+          alert("Network error or server unavailable. Please try again later");
+      }
+    }
+    function copyEncryptedLink() {
+        const input = document.getElementById("encryptedLinkInput");
+        input.select();
+        input.setSelectionRange(0, 99999);
+        try {
+            document.execCommand("copy");
+            const btn = event.target;
+            btn.innerText = "Copied!";
+            setTimeout(() => {
+                btn.innerText = "Copy";
+                window.getSelection().removeAllRanges();
+                input.blur();
+            }, 3000);
+        } catch (err) {
+            const status = document.getElementById("copyStatus");
+            status.innerText = "Failed to copy.";
+            setTimeout(() => status.innerText = "", 3000);
+        }
+    }
+    window.addEventListener("load", function () {
+        const firstContainer = document.querySelector(".container");
+        let flashCount = 0;
+        const strobe = setInterval(() => {
+            firstContainer.style.background = "rgba(30,30,30,0)";
+            setTimeout(() => {
+                firstContainer.style.background = "rgba(30,30,30,0.95)";
+                setTimeout(() => {
+                    firstContainer.style.background = "rgba(30,30,30,0)";
+                    setTimeout(() => {
+                        firstContainer.style.background = "rgba(30,30,30,0.95)";
+                        flashCount++;
+                        if (flashCount >= 10) clearInterval(strobe);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 800);
+    });
+</script>
+</body>
+</html>

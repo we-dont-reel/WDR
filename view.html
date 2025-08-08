@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="noindex, nofollow">
+    <title>GenZer.me</title>
+</head>
+<body class="changeTheContentHereImmediately-GenZer-me">
+<div style="font-family: sans-serif; font-size: 16px; color: #000; background: #fff;">
+    <div style="max-width: 480px; margin: 50px auto; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <img src="https://genzer.me/img/loading.jpg" alt="Loading..." style="width: 50%; height: auto;">
+    </div>
+</div>
+<script>
+window.addEventListener("load", function () {
+    if (document.body.classList.contains("changeTheContentHereImmediately-GenZer-me")) {
+        document.body.classList.remove("changeTheContentHereImmediately-GenZer-me");
+        contentPopulatorGenZerME();
+    }
+});
+window.addEventListener("pageshow", (event) => {
+    const navEntries = performance.getEntriesByType("navigation");
+    const navType = navEntries.length > 0 ? navEntries[0].type : null;
+    if (["reload", "back_forward"].includes(navType) || event.persisted) {
+        contentPopulatorGenZerME();
+    }
+});
+async function contentPopulatorGenZerME() {
+    if (!sessionStorage.getItem("genzerDecryptedContent")) {
+        let hostname = window.location.hostname;
+        let subdomain = hostname.split(".")[0];
+        if (subdomain.startsWith("a")) subdomain = subdomain.substring(1);
+        let formattedSubdomain = subdomain.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+        let shortcode = formattedSubdomain.replace(/(.{4})(.{5})(.{4})(.{5})(.{4})/, "$1-$2-$3-$4-$5");
+        let urlParams = new URLSearchParams(window.location.search);
+        let token = decodeURIComponent(urlParams.get("t") || "");
+        let decryptionKey = decodeURIComponent(window.location.hash.substring(1)).replace(/-/g, '');
+        try {
+            let response = await fetch("/api/seepage", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "cf-turnstile-response": token, "shortcode": shortcode })
+            });
+            let data = await response.json();
+            if (!response.ok || !data.success) throw new Error();
+            if (!data.encrypted_data) throw new Error("Missing encrypted_data in response");
+            const parsedData = JSON.parse(data.encrypted_data);
+            if (!parsedData.salt || !parsedData.iv || !parsedData.encryptedData) throw new Error("Missing required encryption fields");
+            const base64ToUint8Array = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+            const salt = base64ToUint8Array(parsedData.salt);
+            const iv = base64ToUint8Array(parsedData.iv);
+            const encryptedData = base64ToUint8Array(parsedData.encryptedData);
+            const encoder = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(decryptionKey), { name: "PBKDF2" }, false, ["deriveKey"]);
+            const key = await crypto.subtle.deriveKey(
+                { name: "PBKDF2", salt: salt, iterations: 3000000, hash: "SHA-256" },
+                keyMaterial, { name: "AES-GCM", length: 256 }, true, ["decrypt"]
+            );
+            const decryptedBuffer = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, encryptedData);
+            const decryptedContent = new TextDecoder().decode(decryptedBuffer);
+            sessionStorage.setItem("genzerDecryptedContent", decryptedContent);
+        } catch (error) {
+            const newBody = document.createElement("body");
+            newBody.style.background = "#ffffff";
+            newBody.style.color = "#000000";
+            const container = document.createElement("div");
+            container.innerHTML = `
+            <div style="font-family: sans-serif; font-size: 16px; padding: 2rem; color: #000; background: #fff;">
+              <p>Session might be expired. Try opening the original link again.</p>
+              <p>If you still don't see the page, the link might be expired or deactivated.</p>
+            </div>`;
+            newBody.appendChild(container);
+            document.body.replaceWith(newBody);
+            return;
+        }
+    }
+    const rawHTML = sessionStorage.getItem("genzerDecryptedContent") || "";
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(rawHTML, "text/html");
+    const currentHead = document.head;
+    const styles = doc.querySelectorAll("head link[rel='stylesheet'], head style");
+    if (styles.length > 0) {
+        styles.forEach(element => currentHead.appendChild(document.importNode(element, true)));
+    }
+    await new Promise(resolve => {
+        const links = document.head.querySelectorAll("link[rel='stylesheet']");
+        if (links.length === 0) return resolve();
+        let loadedCount = 0;
+        links.forEach(link => {
+            try {
+                if (link.sheet && link.sheet.cssRules && link.sheet.cssRules.length) {
+                    if (++loadedCount === links.length) resolve();
+                } else {
+                    link.onload = () => { if (++loadedCount === links.length) resolve(); };
+                    link.onerror = () => { if (++loadedCount === links.length) resolve(); };
+                }
+            } catch (e) {
+                resolve();
+            }
+        });
+    });
+    const scripts = [];
+    doc.querySelectorAll("head script").forEach(scriptInHead => scripts.push(scriptInHead));
+    const newBody = document.createElement("body");
+    Array.from(doc.body.childNodes).forEach(node => {
+        if (node.tagName?.toLowerCase() === "script") {
+            scripts.push(node);
+        } else {
+            newBody.appendChild(node.cloneNode(true));
+        }
+    });
+    document.body.replaceWith(newBody);
+    for (let script of scripts) {
+        await new Promise((resolve) => {
+            let newScript = document.createElement("script");
+            if (script.src) {
+                newScript.src = script.src;
+                newScript.onload = resolve;
+                newScript.onerror = resolve;
+            } else {
+                newScript.textContent = script.textContent;
+                resolve();
+            }
+            document.body.appendChild(newScript);
+        });
+    }
+    requestAnimationFrame(() => {
+        document.dispatchEvent(new Event("readystatechange"));
+        document.dispatchEvent(new Event("DOMContentLoaded"));
+        document.dispatchEvent(new Event("load"));
+        window.dispatchEvent(new Event("load"));
+    });
+}
+</script>
+</body>
+</html>

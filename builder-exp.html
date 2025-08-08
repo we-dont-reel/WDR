@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="keywords" content="GenZer, GenZer.me, GenZer me, genzer, genzer.me, gsml">
+    <meta name="description" content="GenZer.me - Combine your socials, projects, articles, content, portfolio, and more into one secure and shareable link: perfect for everyone!">
+    <link rel="canonical" href="https://genzer.me/builder.html">
+    <meta property="og:title" content="GSML Builder - GenZer.me">
+    <meta property="og:description" content="GenZer.me - Combine your socials, projects, articles, content, portfolio, and more into one secure and shareable link: perfect for everyone!">
+    <meta property="og:url" content="https://genzer.me/builder.html">
+    <meta property="og:type" content="website">
+    <title>GSML Builder - GenZer.me</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/lib/codemirror.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/theme/dracula.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            margin-top: 0;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ff00ff, #6600ff, #00ccff);
+            background-attachment: fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        .container {
+            max-width: 975px;
+            padding: 10px;
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px;
+        }
+        h5 {
+            color: #bb86fc;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        ul li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ul {
+            margin-bottom: 0 !important;
+        }
+        .code-container {
+            max-width: 975px;
+            padding: 10px;
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px;
+            text-align: center;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .btn-group button {
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            min-width: 100px;
+            margin: 0 5px;
+            border-radius: 10px;
+        }
+        .btn-delete {
+            background: #ff79c6;
+            color: white;
+        }
+        .btn-preview {
+            background: #f1fa8c;
+            color: black;
+        }
+        .btn-generate {
+            background: lightgreen;
+            color: black;
+        }
+        .CodeMirror {
+            background: black;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .CodeMirror {
+                height: 15000px !important;
+            }
+        }
+        @media (min-width: 769px) {
+            .CodeMirror {
+                height: 600px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .btn-group button {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            .btn-group button i {
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
+        }
+        .CodeMirror-vscrollbar {
+            display: none !important;
+        }
+        .CodeMirror-hscrollbar {
+            display: none !important;
+        }
+        .CodeMirror-scrollbar-filler {
+            display: none !important;
+        }
+        .end-footer {
+            max-width: 975px;
+            padding: 10px;
+            background: rgba(30, 30, 30, 0.75);
+            border-radius: 10px;
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: lightgray;
+        }
+        .svg-inline--fa {
+            font-size: 1rem !important;
+            width: 1em !important;
+        }
+        .modal-content {
+          color: black !important;
+          background: rgba(255, 255, 255);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+        .modal-body {
+            text-align: left !important;
+        }
+        
+        .modal-body h5 {
+            text-align: left !important;
+        }
+        #loadingSpinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+        }
+        #loadingSpinner .svg-inline--fa {
+            font-size: 2rem !important;
+        }
+        #linkModal .modal-body .input-group {
+            max-width: 430px;
+            margin: 0 auto;
+        }
+        .cm-gsml-directive { color: #ff79c6; }
+        .cm-gsml-tag { color: #50fa7b; }
+        .cm-gsml-specialtag { color: #f1fa8c; }
+        .cm-gsml-dash { color: #6272a4; }
+        .cm-gsml-embedblock { color: #ffd08f; }
+        #widgetButtonBar .capsule-btn {
+          background: white;
+          color: #007bff;
+          border: 1px solid #007bff;
+          border-radius: 8px;
+          padding: 2px 8px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          line-height:1.7;
+        }
+        #widgetButtonBar .import-impl {
+        background: white;
+        color: #d63384;
+        border: 1px solid #d63384;
+        }
+        #widgetButtonBar .export-impl {
+        background: white;
+        color: #d63384;
+        border: 1px solid #d63384;
+        }
+        .CodeMirror-selected {
+        background: #a3adc2 !important;
+        }
+        .CodeMirror ::selection {
+        background: #a3adc2 !important;
+        color: black;
+        }
+        .CodeMirror .genzer-insert-flash {
+        background: rgba(255, 255, 255, 0.6);
+        animation: flashOnce 1s ease-out;
+        }
+        @keyframes flashOnce {
+        0%   { background: rgba(255, 255, 255, 0.6); }
+        100% { background: white; }
+        }
+        #importModal .modal-body .input-group {
+        max-width: 430px;
+        margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="imageUploadContainer" style="margin-top:10px">
+        <h5 style="margin-bottom:0">Upload image...</h5>
+        <p style="color:dimgrey;text-align:center;line-height:1.2;margin-bottom:10px">
+            Upload one square image (65KB), if you want.
+        </p>
+        <div style="text-align:center">
+          <label style="background:#fff; color:#000; padding:6px 14px; border-radius:6px; cursor:pointer;">
+            Upload
+            <input type="file" id="imageInput" accept="image/*" style="display:none;">
+          </label>
+        </div>
+    </div>
+    <div class="container">
+        <h5 style="margin-bottom:0">Let's start...</h5>
+        <p style="color:dimgrey;text-align:center;line-height:1.2;margin-bottom:10px">Always make sure to open this builder page in a regular browser, not an in-app browser.</p>
+        <div class="btn-group">
+            <button class="btn-delete" onclick="clearEditor()"><i class="fas fa-trash"></i> Clear</button>
+            <button class="btn-preview"><i class="fas fa-file-alt"></i> Preview</button>
+            <button class="btn-generate" data-bs-toggle="modal" data-bs-target="#agreeModal"><i class="fas fa-lock"></i> Generate</button>
+        </div>
+        <div id="widgetButtonBar" style="text-align:center;margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px;padding: 0px 10px;"></div>
+        <textarea id="code-editor" style="background:rgba(30, 30, 30, 0.95)"></textarea>
+        <div onclick="(() => { const el = document.querySelector('.btn-group'); const offset = -20; const y = el.getBoundingClientRect().top + window.pageYOffset + offset; window.scrollTo({ top: y, behavior: 'smooth' }); })()" style="color:#4A90E2; font-size:14px; display:flex; align-items:center; justify-content:center; cursor:pointer; height:30px; margin:10px 0 0 0;">
+  <span>Top</span><i class="fa fa-arrow-up" aria-hidden="true" style="margin-left:2px;"></i>
+</div>
+    </div>
+    <div class="container end-footer">
+        <p style="margin-bottom:0"><strong>Coming soon...</strong></p>
+        <p style="margin-bottom:0">Vanity IDs &ndash; YourName.GenZer.me,
+            modular and reusable component-based architecture,
+            shareable interactive presentations,
+            shareable smart sheets with built-in analytics,
+            secure form submissions and more, with End-to-End Encryption!
+        </p>
+        <hr>
+        <p style="margin-bottom:0"><strong>Contact us...</strong></p>
+        <p style="margin-bottom:0">Email us at hi@genzer.me (ends with .me)</p>
+     </div>
+<!--Modals start-->
+<div class="modal fade" id="agreeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel" style="color:black;">Terms & Privacy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You acknowledge that you have read and agree to the following:</p>
+                <ol>
+                  <li>GenZer.me <a href="terms.html" target="_blank" style="text-decoration: none; color: #4a90e2;">Terms and Conditions</a></li>
+                  <li>GenZer.me <a href="privacy.html" target="_blank" style="text-decoration: none; color: #4a90e2;">Privacy Policy</a></li>
+                  </ol>
+                    <div id="cf-turnstile-container" style="margin-bottom:10px;text-align:center;">
+                      <p id="verify-msg" style="color:lightgrey;">Human verification...</p>
+                      <div id="cf-turnstile"
+                           class="turnstile"
+                           data-sitekey="0x4AAAAAABB8kbiTIHCrLyxu"
+                           data-callback="onTurnstileSuccess"
+                           data-theme="light"
+                           data-size="normal">
+                      </div>
+                      <input type="hidden" id="turnstile-verification-token" value="">
+                    </div>
+                  <hr>
+                <div class="text-center action-buttons" style="display:none">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-right:20px;width:50px;">No</button>
+                    <button type="button" class="btn btn-success" style="margin-left:20px;width:50px;" onclick="acceptTerms()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="linkModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="color:black;">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:black;">Encrypted Link</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p style="font-size: 0.95rem;">Your end-to-end encrypted link:</p>
+        <div class="input-group" style="display: block; text-align: center;">
+          <textarea id="encryptedLinkInput" readonly rows="2"
+            style="width: 100%; padding: 10px; font-size: 0.9rem; background: #f1f1f1; color: black; text-align: center; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; resize: none;"></textarea>
+          <div style="text-align: center;">
+            <button onclick="copyEncryptedLink()"
+              style="padding: 8px 20px; background: #198754; color: white; font-weight: bold; border: none; border-radius: 4px;">Copy</button>
+          </div>
+        </div>
+        <small id="copyStatus" style="display:block;margin-top:8px;color:green;"></small>
+        <p style="text-align:center">The link will be active for around 100 days!</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="importModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="color:black;">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:black;">Import</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p style="font-size: 0.95rem;">
+          You can import only links that are active. Expired or deactivated links will not work.
+        </p>
+        <div class="input-group" style="display: block; text-align: center;">
+          <textarea id="importLinkInput" rows="2" placeholder="GenZer.me link"
+            style="width: 100%; padding: 10px; font-size: 0.9rem; background: #f1f1f1; color: black; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; resize: none;"></textarea>
+          <div style="text-align: center;">
+            <button onclick="handleImport()"
+              style="padding: 8px 20px; background: #198754; color: white; font-weight: bold; border: none; border-radius: 4px;">
+              Import
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modals end-->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/lib/codemirror.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.14/addon/display/autorefresh.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+const widgets = [
+  {
+    display_name: `New Slide`,
+    control_prefix: `@`,
+    control_tag: `@Slide;`,
+    div_class_name: `gsml-slide`,
+    button_class_name: `button-gsml-slide`,
+    widget_template: `<div class="gsml-slide"></div>`,
+    editor_placeholder: `@Slide;`
+  },
+  {
+    display_name: `Title`,
+    control_prefix: `#`,
+    control_tag: `#Title;`,
+    div_class_name: `gsml-title`,
+    button_class_name: `button-gsml-title`,
+    widget_template: `<div class="gsml-title"></div>`,
+    editor_placeholder: `#Title;\nAdd a title`
+  },
+  {
+    display_name: `Big Label`,
+    control_prefix: `#`,
+    control_tag: `#BigLabel;`,
+    div_class_name: `gsml-biglabel`,
+    button_class_name: `button-gsml-biglabel`,
+    widget_template: `<div class="gsml-biglabel"></div>`,
+    editor_placeholder: `#BigLabel;\nAdd label text`
+  },
+  {
+    display_name: `Text`,
+    control_prefix: `#`,
+    control_tag: `#Text;`,
+    div_class_name: `gsml-text`,
+    button_class_name: `button-gsml-text`,
+    widget_template: `<div class="gsml-text"></div>`,
+    editor_placeholder: `#Text;\nAdd some text`
+  },
+  {
+    display_name: `Image`,
+    control_prefix: `#`,
+    control_tag: `#Image;`,
+    div_class_name: `gsml-image`,
+    button_class_name: `button-gsml-image`,
+    widget_template: `<div class="gsml-image"></div>`,
+    editor_placeholder: `#Image;\nOptional description`
+  },
+  {
+    display_name: `Date`,
+    control_prefix: `#`,
+    control_tag: `#Date;`,
+    div_class_name: `gsml-date`,
+    button_class_name: `button-gsml-date`,
+    widget_template: `<div class="gsml-date"></div>`,
+    editor_placeholder: `#Date;\nyyyy/mm/dd`
+  },
+  {
+    display_name: `Time`,
+    control_prefix: `#`,
+    control_tag: `#Time;`,
+    div_class_name: `gsml-time`,
+    button_class_name: `button-gsml-time`,
+    widget_template: `<div class="gsml-time"></div>`,
+    editor_placeholder: `#Time;\nAdd a time`
+  },
+  {
+    display_name: `Time Bomb`,
+    control_prefix: `#`,
+    control_tag: `#TimeBomb;`,
+    div_class_name: `gsml-timebomb`,
+    button_class_name: `button-gsml-timebomb`,
+    widget_template: `<div class="gsml-timebomb"></div>`,
+    editor_placeholder: `#TimeBomb;\nNo. of hours remaining`
+  },
+  {
+    display_name: `Place`,
+    control_prefix: `#`,
+    control_tag: `#Place;`,
+    div_class_name: `gsml-place`,
+    button_class_name: `button-gsml-place`,
+    widget_template: `<div class="gsml-place"></div>`,
+    editor_placeholder: `#Place;\nBuilding or address`
+  },
+  {
+    display_name: `Map`,
+    control_prefix: `#`,
+    control_tag: `#Map;`,
+    div_class_name: `gsml-map`,
+    button_class_name: `button-gsml-map`,
+    widget_template: `<div class="gsml-map"></div>`,
+    editor_placeholder: `#Map;\nhttps://map link`
+  },
+  {
+    display_name: `Links`,
+    control_prefix: `#`,
+    control_tag: `#Links;`,
+    div_class_name: `gsml-links`,
+    button_class_name: `button-gsml-links`,
+    widget_template: `<div class="gsml-links"></div>`,
+    editor_placeholder: `#Links;\nLink title 1\nhttps://actual link 1\nLink title 2\nhttps://actual link 2...`
+  },
+  {
+    display_name: `List`,
+    control_prefix: `#`,
+    control_tag: `#List;`,
+    div_class_name: `gsml-list`,
+    button_class_name: `button-gsml-list`,
+    widget_template: `<div class="gsml-list"></div>`,
+    editor_placeholder: `#List;\n--Item 1\n--Item 2...`
+  },
+  {
+    display_name: `Table`,
+    control_prefix: `#`,
+    control_tag: `#Table;`,
+    div_class_name: `gsml-table`,
+    button_class_name: `button-gsml-table`,
+    widget_template: `<div class="gsml-table"></div>`,
+    editor_placeholder: `#Table;\n--Left text 1\nRight text 1\n--Left text 2\nRight text 2...`
+  },
+  {
+    display_name: `Action Buttons`,
+    control_prefix: `#`,
+    control_tag: `#ActionButtons;`,
+    div_class_name: `gsml-actionbuttons`,
+    button_class_name: `button-gsml-actionbuttons`,
+    widget_template: `<div class="gsml-actionbuttons"></div>`,
+    editor_placeholder: `#ActionButtons;\nAdd name or any text\nCall(1234567890)\nEmail(name@mail.com)\nWhatsApp(+1234567890)`
+  },
+  {
+    display_name: `Socials`,
+    control_prefix: `#`,
+    control_tag: `#Socials;`,
+    div_class_name: `gsml-socials`,
+    button_class_name: `button-gsml-socials`,
+    widget_template: `<div class="gsml-socials"></div>`,
+    editor_placeholder: `#Socials;\nWebsite(https://link)\nInstagram(https://link)\nX(https://link)\nGitHub(https://link)\nFacebook(https://link)\nLinkedIn(https://link)`
+  },
+  {
+    display_name: `YouTube`,
+    control_prefix: `#`,
+    control_tag: `#YouTube;`,
+    div_class_name: `gsml-youtube`,
+    button_class_name: `button-gsml-youtube`,
+    widget_template: `<div class="gsml-youtube"></div>`,
+    editor_placeholder: `#YouTube;\nhttps://youtube link`
+  },
+  {
+    display_name: `Embed`,
+    control_prefix: `#`,
+    control_tag: `#Embed;`,
+    div_class_name: `gsml-embed`,
+    button_class_name: `button-gsml-embed`,
+    widget_template: `<div class="gsml-embed"></div>`,
+    editor_placeholder: `#Embed;\nPaste iframe code`
+  },
+  {
+    display_name: `Chat Block`,
+    control_prefix: `#`,
+    control_tag: `#ChatBlock;`,
+    div_class_name: `gsml-chatblock`,
+    button_class_name: `button-gsml-chatblock`,
+    widget_template: `<div class="gsml-chatblock"></div>`,
+    editor_placeholder: `#ChatBlock;\n--Left message 1\nRight message 1\n--Left message 2\nRight message 2...`
+  },
+  {
+    display_name: `MCQ Options`,
+    control_prefix: `#`,
+    control_tag: `#MCQOptions;`,
+    div_class_name: `gsml-mcqoptions`,
+    button_class_name: `button-gsml-mcqoptions`,
+    widget_template: `<div class="gsml-mcqoptions"></div>`,
+    editor_placeholder: `#MCQOptions;\nRight(option)\nWrong(option)\nWrong(option)\nWrong(option)`
+  }
+];
+const GenZerBGColors = ['#5580D1', '#D95D96', '#46B66F', '#A96BE3', '#F28256'];
+const GenZerBasehtmlTemplate = `<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swiper Story</title>
+  <link rel="stylesheet" href="https://genzer.me/swiper.css">
+  <link rel="stylesheet" href="https://genzer.me/template.css">
+</head>
+<body>
+  <div class="swiper">
+    <div class="swiper-wrapper"></div>
+  </div>
+  <script src="https://genzer.me/swiper.js"><\/script>
+  <script src="https://genzer.me/rbgen.js"><\/script>
+  <script src="https://genzer.me/template.js"><\/script>
+  <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js"><\/script>
+</body>
+</html>`;
+    let imageB64 = "";
+    let imageMime = "";
+    let encryptionKey="", encryptedData="", salt="", iv="", toStore={};
+    document.addEventListener("DOMContentLoaded", function () {
+        window.editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "gsml",
+            theme: "dracula",
+            lineNumbers: false,
+            autoRefresh: true,
+            tabSize: 4,
+            lineWrapping: true 
+        });
+        window.editor.setOption("extraKeys", { Tab: "indentMore" });
+        window.editor.getWrapperElement().setAttribute("tabindex", "0");
+        window.editor.setValue(`@Slide;
+#Title;
+GenZer Story Markup Language (GSML)
+#Text;
+This is the first of its kind - and we're excited!
+@Slide;
+#Title;
+How to Use?
+#Text;
+Pretty easy, don't worry! There's a helper at the top. Just keep tapping the buttons - the script is added automatically.
+#Text;
+You can add and edit content here. That's it! If you are a pro, go on...
+#Text;
+Before you start, clear this!\n`); 
+        attachImageUploadHandler();
+        renderWidgetButtons();
+    });
+    document.querySelector(".btn-preview").addEventListener("click", function () {
+        const codeContent = buildFinalHTMLFromEditor() || "";
+        sessionStorage.setItem("genzerEditorContent", codeContent.trim());
+        sessionStorage.setItem("genzerPreviewAlert", "true");
+        window.open("builder-preview.html", "_blank");
+    });
+    function clearEditor() {
+        if (window.editor) {
+            window.editor.setValue("@Slide;\n");
+        }
+    }
+    function startSpinner() {
+        if (!document.getElementById("loadingSpinner")) {
+            const spinnerContainer = document.createElement("div");
+            spinnerContainer.id = "loadingSpinner";
+            spinnerContainer.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+            document.body.appendChild(spinnerContainer);
+        }
+    }
+    function stopSpinner() {
+        const spinner = document.getElementById("loadingSpinner");
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+    function enforceCharLimit() {
+        const content = window.editor.getValue().trim();
+        if (!content) {
+            stopSpinner();
+            alert("Editor is empty. Please enter content before encrypting");
+            return false;
+        }
+        if (content.length > 152500) {
+            stopSpinner();
+            alert("Chars more than the limit!");
+            return false;
+        }
+        return true;
+    }
+    function generateRandomKey() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const array = new Uint8Array(16);
+        window.crypto.getRandomValues(array);
+        return Array.from(array, byte => chars.charAt(byte % chars.length)).join('');
+    }
+    async function deriveKey(password,salt) {
+        try {
+            const encoder=new TextEncoder();
+            const keyMaterial=await window.crypto.subtle.importKey("raw",encoder.encode(password),{name:"PBKDF2"},false,["deriveKey"]);
+            return window.crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:3000000,hash:"SHA-256"},keyMaterial,{name:"AES-GCM",length:256},true,["encrypt","decrypt"]);
+        } catch(error) {
+            stopSpinner();
+            console.log("Encryption failed:",error);
+        }
+    }
+    function utf16ToBase64(data) {
+        let binary = '';
+        const bytes = new Uint8Array(data);
+        for (let i = 0; i < bytes.length; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return btoa(binary);
+    }
+    async function encryptContent() {
+        startSpinner();
+        if(!enforceCharLimit()) return;
+        try {
+            const content=buildFinalHTMLFromEditor().trim();
+            encryptionKey=generateRandomKey();
+            const encoder=new TextEncoder();
+            const saltBuffer=window.crypto.getRandomValues(new Uint8Array(16));
+            const ivBuffer=window.crypto.getRandomValues(new Uint8Array(12));
+            const derivedKey=await deriveKey(encryptionKey,saltBuffer);
+            if(!derivedKey) throw new Error("Derived key is undefined");
+            const encryptedBuffer=await window.crypto.subtle.encrypt({name:"AES-GCM",iv:ivBuffer},derivedKey,encoder.encode(content));
+            salt=utf16ToBase64(saltBuffer);
+            iv=utf16ToBase64(ivBuffer);
+            encryptedData=utf16ToBase64(encryptedBuffer);
+            toStore={salt:salt,iv:iv,encryptedData:encryptedData};
+            stopSpinner();
+            //console.log("Encryption Completed",toStore);
+            return toStore;
+        } catch(error) {
+            stopSpinner();
+            alert("Error occurred: " + error);
+        }
+    }
+    function onTurnstileSuccess(token) {
+        document.getElementById("turnstile-verification-token").value = token;
+        document.querySelector('.action-buttons').style.display = 'block';
+        document.getElementById("verify-msg").style.display = 'none';
+    }
+    document.getElementById('agreeModal').addEventListener('shown.bs.modal', function () {
+        document.querySelector('.action-buttons').style.display = 'none';
+        document.getElementById("verify-msg").style.display = 'block';
+        document.getElementById("turnstile-verification-token").value = "";
+        const container = document.getElementById("cf-turnstile");
+        container.innerHTML = "";
+        turnstile.render("#cf-turnstile", {
+            sitekey: "0x4AAAAAABB8kbiTIHCrLyxu",
+            callback: onTurnstileSuccess,
+            theme: "light",
+            size: "normal"
+        });
+    });
+    async function acceptTerms() {
+        const modal = document.getElementById("agreeModal");
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) modalInstance.hide(); 
+        const payload = await encryptContent();
+        const cfToken = document.getElementById("turnstile-verification-token").value;
+        if (!payload || !cfToken) {
+          stopSpinner();
+          alert("Encryption or token failed. Please try again");
+          return;
+      }
+      try {
+          const response = await fetch("/api/newpage", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  encrypted_data: JSON.stringify(payload),
+                  "cf-turnstile-response": cfToken
+              })
+          });
+          const result = await response.json();
+          stopSpinner();
+          if (result.success && result.shortcode) {
+              const formattedKey = encryptionKey.match(/.{1,4}/g).join("-");
+              const finalUrl = `https://genzer.me/${result.shortcode}#${formattedKey}`;
+              document.getElementById("encryptedLinkInput").value = finalUrl;
+              document.getElementById("copyStatus").innerText = "";
+              const linkModal = new bootstrap.Modal(document.getElementById("linkModal"));
+              linkModal.show();
+          } else {
+              alert(result.message || "Something went wrong. Please try again");
+          }
+      } catch (err) {
+          stopSpinner();
+          alert("Network error or server unavailable. Please try again later");
+      }
+    }
+    function copyEncryptedLink() {
+        const input = document.getElementById("encryptedLinkInput");
+        input.select();
+        input.setSelectionRange(0, 99999);
+        try {
+            document.execCommand("copy");
+            const btn = event.target;
+            btn.innerText = "Copied!";
+            setTimeout(() => {
+                btn.innerText = "Copy";
+                window.getSelection().removeAllRanges();
+                input.blur();
+            }, 3000);
+        } catch (err) {
+            const status = document.getElementById("copyStatus");
+            status.innerText = "Failed to copy.";
+            setTimeout(() => status.innerText = "", 3000);
+        }
+    }
+    function attachImageUploadHandler() {
+        document.getElementById("imageInput").addEventListener("change", function () {
+            const file = this.files[0];
+            if (!file) return;
+            const maxSize = 65 * 1024;
+            if (file.size > maxSize) {
+                alert("Only images up to 65KB are allowed.");
+                this.value = "";
+                return;
+            }
+            imageMime = file.type;
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                imageB64 = reader.result;
+                showImagePreview(imageB64);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    function showImagePreview(dataURL) {
+        document.getElementById("imageUploadContainer").innerHTML = `
+        <div class="row g-3" style="text-align:center;">
+            <div class="col-md-6">
+                <img src="${dataURL}" style="width:100%; height:auto; object-fit:contain; border-radius:0px;" />
+            </div>
+            <div class="col-md-6 d-flex flex-wrap justify-content-center align-items-center" style="gap:10px; flex-direction: row; margin-top:10px">
+                <label onclick="removeImage()" style="background:#fff; color:#000; padding:6px 14px; width:120px; border-radius:6px; cursor:pointer;">Remove</label>
+                <label onclick="replaceImage()" style="background:#fff; color:#000; padding:6px 14px; width:120px; border-radius:6px; cursor:pointer;">Replace</label>
+            </div>
+        </div>
+      `;
+    }
+    function removeImage() {
+        imageB64 = "";
+        imageMime = "";
+        document.getElementById("imageUploadContainer").innerHTML = `
+        <h5 style="margin-bottom:0">Upload image...</h5>
+        <p style="color:dimgrey;text-align:center;line-height:1.2;margin-bottom:10px">
+          Upload one square image (65KB), if you want.
+        </p>
+        <div style="text-align:center">
+          <label style="background:#fff; color:#000; padding:6px 14px; border-radius:6px; cursor:pointer;">
+            Upload
+            <input type="file" id="imageInput" accept="image/*" style="display:none;">
+          </label>
+        </div>
+      `;
+        attachImageUploadHandler();
+    }
+    function replaceImage() {
+        removeImage();
+        setTimeout(() => {
+            document.getElementById("imageInput").click();
+        }, 1);
+    }
+    CodeMirror.defineMode("gsml", function () {
+        return {
+            startState: () => ({ lastTag: "", inEmbed: false }),
+            token: function (stream, state) {
+                if (stream.sol()) {
+                    const line = stream.string.trim();
+                    const lineLower = line.toLowerCase();
+                    if (lineLower === "#embed;" || lineLower === "#customdiv;" || lineLower ==="#codeblock;") {
+                        state.inEmbed = true;
+                        stream.skipToEnd();
+                        return "gsml-tag";
+                    }
+                    const isExactDirective = /^@[\w-]+;$/i.test(lineLower);
+                    const isExactTag = /^#[^;]+;$/i.test(lineLower);
+                    if (isExactDirective) {
+                        state.inEmbed = false;
+                        stream.skipToEnd();
+                        return "gsml-directive";
+                    }
+                    if (isExactTag) {
+                        state.inEmbed = false;
+                        state.lastTag = line.replace(/^#/, "").replace(/;.*/, "").trim();
+                        stream.skipToEnd();
+                        return "gsml-tag";
+                    }
+                    if (!state.inEmbed && line.includes("(") && line.includes(")") && ["actionbuttons", "socials", "mcqoptions"].includes(state.lastTag.toLowerCase())) {
+                        stream.skipToEnd();
+                        return "gsml-specialtag";
+                    }
+                    if (line.startsWith("--")) {
+                        stream.next(); stream.next();
+                        return "gsml-dash";
+                    }
+                }
+                if (state.inEmbed) {
+                    stream.skipToEnd();
+                    return "gsml-embedblock";
+                }
+                stream.next();
+                return null;
+            }
+        };
+    });
+function renderWidgetButtons() {
+  const bar = document.getElementById("widgetButtonBar");
+  widgets.forEach(widget => {
+    const btn = document.createElement("button");
+    btn.textContent = widget.display_name;
+    btn.className = `capsule-btn ${widget.button_class_name}`;
+    btn.onclick = function () {
+      insertWidgetByClass(widget.button_class_name);
+    };
+    bar.appendChild(btn);
+  });
+  const importBtn = document.createElement("button");
+  importBtn.textContent = "Import";
+  importBtn.className = "capsule-btn import-impl";
+  importBtn.onclick = function () {
+    insertWidgetByClass("import-impl");
+  };
+  bar.appendChild(importBtn);
+  const exportBtn = document.createElement("button");
+  exportBtn.textContent = "*Export as Images";
+  exportBtn.className = "capsule-btn export-impl";
+  exportBtn.onclick = function () {
+    insertWidgetByClass("export-impl");
+  };
+  bar.appendChild(exportBtn);
+}
+function insertWidgetByClass(buttonClassName) {
+    const widget = widgets.find(w => w.button_class_name === buttonClassName);
+    if (!widget || !window.editor) return;
+    window.editor.focus();
+    window.editor.scrollIntoView(window.editor.getCursor());
+    const doc = window.editor.getDoc();
+    let cursor = doc.getCursor();
+    const lineContent = doc.getLine(cursor.line);
+    const oldLine = cursor.line;
+    cursor = { line: cursor.line, ch: lineContent.length };
+    let insertText;
+    if (lineContent === '') {
+        insertText = widget.editor_placeholder;
+    } else {
+        insertText = '\n' + widget.editor_placeholder;
+    }
+    doc.replaceRange(insertText, cursor);
+    const newCursor = doc.getCursor();
+    if (newCursor.line === oldLine) {
+        const insertedLines = insertText.split('\n').length;
+        const finalLine = oldLine + insertedLines - 1;
+        const finalCh = doc.getLine(finalLine).length;
+        window.editor.setCursor({ line: finalLine, ch: finalCh });
+    }
+    window.editor.focus();
+    setTimeout(() => {
+      const cmScroll = window.editor.getScrollerElement();
+      const cursorCoords = window.editor.cursorCoords(null, "local");
+      cmScroll.scrollTop = cursorCoords.top - 100;
+      
+      const cursorPos = doc.getCursor();
+      const insertLength = insertText.length;
+      const endIndex = doc.indexFromPos(cursorPos);
+      const startIndex = Math.max(endIndex - insertLength, 0);
+      const from = doc.posFromIndex(startIndex);
+      const to = cursorPos;
+      const marker = doc.markText(from, to, { className: 'genzer-insert-flash' });
+      setTimeout(() => marker.clear(), 1000);
+      
+    }, 200);
+}
+function buildFinalHTMLFromEditor() {
+  let raw=window.editor.getValue().replace(/\n{2,}/g,'\n');
+  const matches=[...raw.matchAll(/^@slide;\n/gim)];
+  const slideCount=matches.length;
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(GenZerBasehtmlTemplate,"text/html");
+  const wrapper=doc.querySelector('.swiper-wrapper');
+  for(let i=0;i<slideCount;i++) {
+    const slide=doc.createElement('div');
+    slide.className=`swiper-slide rbgen gsml-slide-${i+1}`;
+    slide.setAttribute('data-rbgen-tone','dark');
+    slide.setAttribute('data-rbgen-shapes','circles');
+    slide.setAttribute('data-rbgen-shapes-count','10');
+    slide.setAttribute('data-rbgen-shapes-color-hex','#000000');
+    slide.setAttribute('data-rbgen-shapes-max-opacity','0.05');
+    const inner=document.createElement('div');
+    inner.setAttribute('style','flex:1;overflow-y:auto;max-height:100%;padding:20px;box-sizing:border-box;max-width:480px;background:transparent;');
+    slide.appendChild(inner);
+    wrapper.appendChild(slide);
+  }
+  if (raw.startsWith('\n')) raw = raw.replace(/^\n+/, '');
+  if (raw.endsWith('\n')) raw = raw.replace(/\n+$/, '');
+  if (raw.trim().toLowerCase().endsWith('@slide;')) {
+    let lines = raw.trim().split('\n');
+    if (lines[lines.length - 1].toLowerCase() === '@slide;') {
+      lines.pop();
+      raw = lines.join('\n');
+    }
+  }
+  raw = raw + '\n';
+  //console.log(raw);
+  //console.log(doc);
+  const slideContents = [];
+  let indices = [...raw.matchAll(/^@slide;\n/gim)].map(m => m.index);
+  indices.push(raw.length);
+  for (let i = 0; i < slideCount; i++) {
+    const start = indices[i] + '@slide;\n'.length;
+    const end = indices[i + 1];
+    slideContents.push(raw.slice(start, end));
+  }
+  //console.log(slideContents);
+const handlers = {
+  '#text;': GSML_Text,
+  '#title;': GSML_Title,
+  '#image;': GSML_Image,
+  '#list;': GSML_List,
+  '#date;': GSML_Date,
+  '#time;': GSML_Time,
+  '#map;': GSML_Map,
+  '#youtube;': GSML_YouTube,
+  '#socials;': GSML_Socials,
+  '#actionbuttons;': GSML_ActionButtons,
+  '#embed;': GSML_Embed,
+  '#place;': GSML_Place,
+  '#timebomb;': GSML_TimeBomb,
+  '#links;': GSML_Links,
+  '#table;': GSML_Table,
+  '#biglabel;': GSML_BigLabel,
+  '#customdiv;': GSML_CustomDiv,
+  '#codeblock;': GSML_CodeBlock,
+  '#chatblock;': GSML_ChatBlock,
+  '#mcqoptions;': GSML_MCQOptions
+};
+for (let i = 0; i < slideContents.length; i++) {
+  const lines = slideContents[i].split('\n');
+  const container = doc.querySelector(`.gsml-slide-${i + 1} > div`);
+  let j = 0;
+  while (j < lines.length) {
+    const line = lines[j].trim();
+    const tag = line.toLowerCase();
+    if (handlers.hasOwnProperty(tag)) {
+      let content = '';
+      j++;
+      while (j < lines.length && !/^#[^;]+;$/i.test(lines[j])) {
+        content += lines[j] + '\n';
+        j++;
+      }
+      const html = handlers[tag](content.trim());
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+      container.appendChild(wrapper.firstChild);
+    } else {
+      j++;
+    }
+  }
+}
+  return '<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
+}
+function GSML_Text(rawContent)
+{
+  if (!rawContent.trim()) {
+    return `<p class="gsml-error">#Text;<br>Please add some text content.</p>`;
+  }
+  return `<p class="gsml-text">${rawContent}</p>`;
+}
+function GSML_CodeBlock(rawContent)
+{
+  if (!rawContent.trim()) {
+    return `<p class="gsml-error">#Text;<br>Please add a code block.</p>`;
+  }
+  const rawContentEscaped = rawContent.replace(/[<>&'"]/g, c => ({
+  '<': '&lt;',
+  '>': '&gt;',
+  '&': '&amp;',
+  "'": '&#39;',
+  '"': '&quot;'
+  }[c]));
+  return `<div class="gsml-codeblock-container"><pre class="gsml-codeblock">${rawContentEscaped}</pre></div>`;
+}
+function GSML_ChatBlock(rawContent) {
+  if (!rawContent.trim()) {
+    return `<p class="gsml-error">#ChatBlock;<br>Please add a chat block like this:<br>#ChatBlock;<br>--Left message 1<br>Right message 1<br>--Left message 2<br>Right message 2...</p>`;
+  }
+  const lines = rawContent.split(/\r?\n/).filter(line => line.trim() !== '');
+  const chatItems = lines.map(line => {
+    const trimmed = line.trim();
+    const isLeft = trimmed.startsWith('--');
+    const content = isLeft ? trimmed.slice(2).trim() : trimmed;
+    return `<div class="${isLeft ? 'gsml-chat-left' : 'gsml-chat-right'}">${content}</div>`;
+  });
+  return `<div class="gsml-chatblock">${chatItems.join('')}</div>`;
+}
+function GSML_MCQOptions(rawContent)
+{
+  const errorMessage = `#MCQOptions;<br>Please add only 4 options like this:<br>#MCQOptions;<br>Right(option)<br>Wrong(option)<br>Wrong(option)<br>Wrong(option)<br>Options will be shuffled automatically.`;
+  if (!rawContent.trim()) {
+    return `<p class="gsml-error">${errorMessage}</p>`;
+  }
+  const optionPattern = /^\s*(Right|Wrong)\s*\((.*)\)\s*$/gim;
+  const matches = [...rawContent.matchAll(optionPattern)];
+  if (matches.length !== 4) {
+    return `<p class="gsml-error">${errorMessage}</p>`;
+  }
+  let rightCount = 0;
+  const options = [];
+  for (const match of matches) {
+    const type = match[1].toLowerCase();
+    const content = match[2].trim();
+    if (!content) {
+      return `<p class="gsml-error">${errorMessage}</p>`;
+    }
+    const escapedContent = content.replace(/[<>&'"]/g, c => ({
+      '<': '&lt;',
+      '>': '&gt;',
+      '&': '&amp;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[c]));
+    if (type === 'right') {
+      rightCount++;
+      options.push(`<div class="gsml-mcqoptions right-option">${escapedContent}</div>`);
+    } else {
+      options.push(`<div class="gsml-mcqoptions wrong-option">${escapedContent}</div>`);
+    }
+  }
+  if (rightCount !== 1) {
+    return `<p class="gsml-error">${errorMessage}</p>`;
+  }
+  return `<div class="gsml-mcqoptions-container">${options.join('')}</div>`;
+}
+function GSML_Image(rawContent)
+{
+  const clean = rawContent.replace(/\s+/g, '').trim();
+  if (!imageB64 || imageB64.trim() === '' || !imageMime) return `<p class="gsml-error">#Image;<br>Please add an image at the top of the builder page. You can add only one image per generated link.</p>`;
+  const hasDescription = clean.length > 0;
+  const imgStyle = hasDescription ? 'gsml-image-top' : 'gsml-image-full';
+  const base64pure = imageB64.split(',')[1] || '';
+  const src = `data:${imageMime};base64,${base64pure}`;
+  const descHtml = hasDescription ? `<p class="gsml-image-desc">${rawContent.trim()}</p>` : '';
+  return `<div class="gsml-image-container">
+<img src="${src}" class="${imgStyle}" alt="Image">
+${descHtml}
+</div>`;
+}
+function GSML_Map(rawContent)
+{
+  const clean = rawContent.trim();
+  const lines = clean.split('\n').map(line => line.trim()).filter(Boolean);
+  const links = lines.filter(line => line.startsWith('https://'));
+  if (links.length === 0) return `<p class="gsml-error">#Map;<br>Please add a map link starting with https://</p>`;
+  if (links.length > 1) return `<p class="gsml-error">#Map;<br>Only one map link allowed per widget. You can add multiple map widgets.</p>`;
+  const link = links[0];
+  return `<a href="${link}" target="_blank" class="gsml-map-container">
+  <div class="gsml-map-icon"><img src="https://genzer.me/img/map.png" alt="map icon"></div>
+  <div class="gsml-map-text">Open Map Link</div>
+  </a>`;
+}
+function GSML_Date(rawContent)
+{
+  const clean = rawContent.trim();
+  const lines = clean.split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length === 0)
+  return `<p class="gsml-error">#Date;<br>Please add a date in yyyy/mm/dd format.</p>`;
+  const validDates = [];
+  for (const line of lines) {
+  const match = line.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+  if (match) {
+  const [_, y, m, d] = match;
+  const dateObj = new Date(`${y}-${m}-${d}`);
+  if (!isNaN(dateObj.getTime())) validDates.push(dateObj);
+  }
+  }
+  if (validDates.length === 0)
+  return `<p class="gsml-error">#Date;<br>Please add a date in yyyy/mm/dd format.</p>`;
+  if (validDates.length > 1)
+  return `<p class="gsml-error">#Date;<br>Only one date allowed per widget. You can add multiple date widgets.</p>`;
+  const finalDate = validDates[0];
+  const dateFormatted = finalDate.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+  const dayFormatted = finalDate.toLocaleDateString('en-US', { weekday: 'long' });
+  return `<div class="gsml-date-container">
+  <div class="gsml-date-icon"><img src="https://genzer.me/img/date.png" alt="date icon"></div>
+  <div class="gsml-date-text">
+  <div class="gsml-date-line1">${dateFormatted}</div>
+  <div class="gsml-date-line2">${dayFormatted}</div>
+  </div>
+  </div>`;
+}
+function GSML_YouTube(rawContent)
+{
+  const clean = rawContent.trim();
+  const lines = clean.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  const links = lines.filter(line => line.startsWith('http'));
+  if (links.length === 0) return `<p class="gsml-error">#YouTube;<br> Please add a link.</p>`;
+  if (links.length > 1) return `<p class="gsml-error">#YouTube;<br> You have entered multiple links. Please add each link separately like this:<br>#YouTube;<br>https://link 1<br>#YouTube;<br>https://link 2</p>`;
+  let embedUrl = '';
+  try {
+    const url = new URL(links[0]);
+    if (url.hostname.includes('youtube.com') && url.searchParams.get('v')) {
+      embedUrl = `https://www.youtube.com/embed/${url.searchParams.get('v')}`;
+    } else if (url.hostname.includes('youtube.com') && url.pathname.startsWith('/shorts/')) {
+      embedUrl = `https://www.youtube.com/embed/${url.pathname.split('/shorts/')[1]}`;
+    } else if (url.hostname.includes('youtu.be')) {
+      embedUrl = `https://www.youtube.com/embed/${url.pathname.replace('/', '')}`;
+    } else {
+      return `<p class="gsml-error">#YouTube;<br> Unable to process the link. Check the link again.</p>`;
+    }
+  } catch (e) {
+    return `<p class="gsml-error">#YouTube;<br> Unable to process the link. Check the link again.</p>`;
+  }
+  return `<div class="gsml-youtube-container">
+<iframe src="${embedUrl}" allowfullscreen></iframe>
+</div>`;
+}
+function GSML_List(rawContent)
+{
+  const clean = rawContent.replace(/^\n+|\n+$/g, '');
+  const lines = clean.split('\n');
+  const items = [];
+  for (let line of lines) {
+    if (line.trim().startsWith('--')) {
+      items.push(line.trim().substring(2).trim());
+    }
+  }
+  if (items.length === 0) {
+    return `<p class="gsml-error">#List;<br> Please add the list items like this:<br>#List;<br>--Item 1<br>--Item 2...</p>`;
+  }
+  const listHtml = items.map(item => `<li>${item}</li>`).join('');
+  return `<div class="gsml-list"><ul>${listHtml}</ul></div>`;
+}
+function GSML_Time(rawContent)
+{
+  const clean = rawContent.trim();
+  if (!clean) return `<p class="gsml-error">#Time;<br>Add a time in any format.</p>`;
+  return `<div class="gsml-time-container">
+  <div class="gsml-time-icon"><img src="https://genzer.me/img/time.png" alt="time icon"></div>
+  <div class="gsml-time-text">${clean}</div>
+  </div>`;
+}
+function GSML_Socials(rawContent)
+{
+  const clean = rawContent.trim();
+  if (!clean) return `<p class="gsml-error">#Socials;<br>Please add at least one social link.</p>`;
+  const lines = clean.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  const validItems = [];
+  for (const line of lines) {
+    const match = line.replace(/;\s*$/, '').match(/^([a-zA-Z0-9]+)\(([^)]*)\)$/i);
+    if (!match) continue;
+    const platform = match[1].toLowerCase();
+    const url = match[2].trim();
+    if (!url || !url.startsWith('https://')) continue;
+    let icon = '';
+    if (platform === 'website') icon = 'fas fa-globe';
+    else if (platform === 'instagram') icon = 'fab fa-instagram-square';
+    else if (platform === 'x') icon = 'fab fa-square-x-twitter';
+    else if (platform === 'github') icon = 'fab fa-github';
+    else if (platform === 'facebook') icon = 'fab fa-facebook';
+    else if (platform === 'linkedin') icon = 'fab fa-linkedin';
+    else continue;
+    validItems.push({ url, icon });
+  }
+  if (validItems.length === 0) return `<p class="gsml-error">#Socials;<br>No valid social links found.</p>`;
+  const itemsHtml = validItems.map(s => `<a href="${s.url}" target="_blank" class="gsml-social-icon"><i class="${s.icon}"></i></a>`).join('');
+  return `<div class="gsml-socials-container">${itemsHtml}</div>`;
+}
+function GSML_Title(rawContent)
+{
+  if (!rawContent.trim()) {
+    return `<p class="gsml-error">#Title;<br>Please add a title.</p>`;
+  }
+  const clean = rawContent.replace(/^\n+|\n+$/g, '');
+  return `<h3 class="gsml-title">${clean}</h3>`;
+}
+function GSML_Embed(rawContent)
+{
+  const clean = rawContent.replace(/^\n+|\n+$/g, '');
+  if (!clean.trim()) {
+    return `<p class="gsml-error">#Embed;<br> Please paste iframe code.</p>`;
+  }
+  if (!clean.toLowerCase().includes('<iframe')) {
+    return `<p class="gsml-error">#Embed;<br> Please paste iframe code.</p>`;
+  }
+  const container = document.createElement('div');
+  container.innerHTML = clean;
+  const iframes = container.querySelectorAll('iframe');
+  if (iframes.length === 0) {
+    return `<p class="gsml-error">#Embed;<br> Please paste iframe code.</p>`;
+  }
+  if (iframes.length > 1) {
+    return `<p class="gsml-error">#Embed;<br> One iframe per embed only. You can add multiple embeds.</p>`;
+  }
+  const iframe = iframes[0];
+  iframe.removeAttribute('width');
+  iframe.style.width = '100%';
+  if (iframe.hasAttribute('height')) {
+    let h = parseInt(iframe.getAttribute('height'), 10);
+    if (h > 400) iframe.setAttribute('height', '400');
+  }
+  iframe.setAttribute('scrolling', 'auto');
+  return `<div class="gsml-embed-container">
+    <div class="gsml-embed-inner">
+      ${container.innerHTML}
+    </div>
+  </div>`;
+}
+function GSML_ActionButtons(rawContent)
+{
+  if (/^\s*(call|email|whatsapp)\([^\)]*\)\s*$/i.test(rawContent.trim().split('\n')[0])) return `<p class="gsml-error">#ActionButtons;<br>Please add name or any text.</p>`;
+  const clean = rawContent.trim();
+  if (!clean) return `<p class="gsml-error">#ActionButtons;<br>Please add action buttons content.</p>`;
+  const lines = clean.split('\n').map(l => l.trim()).filter(l => l !== '');
+  if (lines.length < 2) return `<p class="gsml-error">#ActionButtons;<br>Please add at least one action after the name or text.</p>`;
+  const firstLine = lines[0];
+  if (/^(call|email|whatsapp)\([^\)]*\)$/i.test(firstLine)) {
+    return `<p class="gsml-error">#ActionButtons;<br>Please add name or any text.</p>`;
+  }
+  const description = firstLine;
+  const actions = [];
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.includes('(') || !line.includes(')')) continue;
+    const match = line.match(/^(\w+)\(([^)]*)\)$/i);
+    if (!match) continue;
+    const type = match[1].toLowerCase();
+    const value = match[2].trim();
+    if (!value) continue;
+    if (type === 'call' && /^\d+$/.test(value)) {
+      actions.push({ type: 'Call', href: `tel:${value}`, icon: 'fa-volume-up' });
+    } else if (type === 'call') {
+    return `<p class="gsml-error">#ActionButtons;<br>Call number must contain only digits. No +, spaces, or symbols. Enter a number that people can use directly without prefixes or country codes.</p>`;
+    } else if (type === 'email' && /^[^@]+@[^@]+\.[^@]+$/.test(value)) {
+      actions.push({ type: 'Email', href: `mailto:${value}`, icon: 'fa-envelope' });
+    } else if (type === 'email') {
+      return `<p class="gsml-error">#ActionButtons;<br>Please enter a valid email address like name@example.com.</p>`;
+    } else if (type === 'whatsapp' && /^\+\d+$/.test(value)) {
+      const number = value.replace('+', '');
+      actions.push({ type: 'WhatsApp', href: `https://wa.me/${number}`, icon: 'fa-comment-dots' });
+    } else if (type === 'whatsapp') {
+      return `<p class="gsml-error">#ActionButtons;<br>WhatsApp number must be in international format, starting with + followed by digits only. Example: +1234567890</p>`;
+}
+  }
+  if (actions.length === 0) return `<p class="gsml-error">#ActionButtons;<br>No valid actions found.</p>`;
+  if (actions.length > 3) return `<p class="gsml-error">#ActionButtons;<br>A maximum of three action buttons can be added.</p>`;
+  const linksHtml = actions.map(a => `<a href="${a.href}" target="_blank" class="gsml-actionbutton-link"><i class="fas ${a.icon}"></i> ${a.type}</a>`).join('');
+  return `<div class="gsml-actionbuttons-container">
+<div class="gsml-actionbuttons-description">${description}</div>
+<hr class="gsml-actionbuttons-divider">
+<div class="gsml-actionbuttons-buttons">${linksHtml}</div>
+</div>`;
+}
+function GSML_Place(rawContent)
+{
+  const clean = rawContent.trim().split('\n').filter(line => line.trim());
+  if (clean.length === 0) return `<p class="gsml-error">#Place;<br>Add a location name or address.</p>`;
+  const place = clean.join(' ');
+  return `<div class="gsml-place-container"><div class="gsml-place-icon"><img src="https://genzer.me/img/place.png"></div><div class="gsml-place-text">${place}</div></div>`;
+}
+function GSML_TimeBomb(rawContent)
+{
+  const input = rawContent.trim();
+const lines = input.split('\n').map(x => x.trim()).filter(x => x);
+const validLines = lines.filter(x => !isNaN(x) && parseFloat(x) > 0);
+if (validLines.length === 0)
+  return `<p class="gsml-error">#TimeBomb;<br>Please enter number of hours remaining, just a number.</p>`;
+if (validLines.length > 1)
+  return `<p class="gsml-error">#TimeBomb;<br>You can add only one timeout hours counter per widget. You can add multiple widgets.</p>`;
+const hours = parseFloat(validLines[0]);
+if (hours > 999)
+  return `<p class="gsml-error">#TimeBomb;<br>Please enter number of hours remaining, just a number (1 to 999).</p>`;
+const now = Date.now();
+const expire = now + Math.floor(hours * 60 * 60 * 1000);
+return `<div class="gsml-timebomb-container">
+  <div class="gsml-timebomb-icon"><img src="https://genzer.me/img/time-bomb.png" alt="time bomb icon"></div>
+  <div class="gsml-timebomb-text" data-hours="${hours}" data-expire="${expire}"></div>
+</div>`;
+}
+function GSML_Links(rawContent)
+{
+  const clean = rawContent.replace(/^\n+|\n+$/g, '');
+  if (!clean.trim()) {
+    return `<p class="gsml-error">#Links;<br>Please add link title and actual links.</p>`;
+  }
+  const lines = clean.split('\n').map(x => x.trim()).filter(x => x.length > 0);
+  if (lines.length % 2 !== 0) {
+    return `<p class="gsml-error">#Links;<br>Please alternate link title and actual link.</p>`;
+  }
+  const parts = [];
+  for (let i = 0; i < lines.length; i += 2) {
+    const desc = lines[i];
+    const url = lines[i + 1];
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+      return `<p class="gsml-error">#Links;<br>All links must start with https://...</p>`;
+    }
+    parts.push({ desc, url });
+  }
+  const linksHtml = parts.map((item, idx) => {
+  return `<div class="gsml-link-item" onclick="window.open('${item.url}', '_blank')">
+  <i class="fas fa-link"></i>
+  <span>${item.desc}</span>
+</div>`;
+}).join('');
+  return `<div class="gsml-links-container">${linksHtml}</div>`;
+}
+function GSML_Table(rawContent)
+{
+  const clean = rawContent.replace(/^\n+|\n+$/g, '');
+  const lines = clean.split('\n');
+  if (lines.length % 2 !== 0) {
+    return `<p class="gsml-error">#Table;<br> Please add the table rows like this:<br>#Table;<br>--Left text 1<br>Right text 1<br>--Left text 2<br>Right text 2...</p>`;
+  }
+  const rows = [];
+  for (let i = 0; i < lines.length; i += 2) {
+    const left = lines[i].trim();
+    const right = lines[i + 1].trim();
+    if (!left.startsWith('--') || right.startsWith('--')) {
+      return `<p class="gsml-error">#Table;<br> Please add the table rows like this:<br>#Table;<br>--Left text 1<br>Right text 1<br>--Left text 2<br>Right text 2...</p>`;
+    }
+    rows.push({ left: left.substring(2).trim(), right });
+  }
+  const rowsHtml = rows.map((row, index) => {
+    const rowClass = (index % 2 === 0) ? 'gsml-table-row grey' : 'gsml-table-row white';
+    return `<tr class="${rowClass}">
+<td class="gsml-table-cell-left">${row.left}</td>
+<td class="gsml-table-cell-right">${row.right}</td>
+</tr>`;
+  }).join('');
+  return `<div class="gsml-table-container"><table class="gsml-table-inner">${rowsHtml}</table></div>`;
+}
+function GSML_BigLabel(rawContent)
+{
+  if (!rawContent.trim()) {
+    return `<p class="gsml-error">#BigLabel;<br>Please add label text.</p>`;
+  }
+  const clean = rawContent.replace(/^\n+|\n+$/g, '');
+  return `<div class="gsml-biglabel-container">
+<h4 class="gsml-biglabel">${clean}</h4>
+</div>`;
+}
+function GSML_CustomDiv(rawContent)
+{
+  const clean = rawContent.trim();
+  if (!clean) return `<p class="gsml-error">#CustomDiv;<br>Please add content.</p>`;
+  return `<div class="gsml-customdiv">${clean}</div>`;
+}
+const waitForImportButton = setInterval(() => {
+  const btn = document.querySelector('.import-impl');
+  if (btn) {
+    clearInterval(waitForImportButton);
+    btn.addEventListener('click', function () {
+      document.getElementById('importLinkInput').value = '';
+      const importModal = new bootstrap.Modal(document.getElementById('importModal'));
+      importModal.show();
+    });
+  }
+}, 200);
+const waitForExportButton = setInterval(() => {
+  const btn = document.querySelector('.export-impl');
+  if (btn) {
+    clearInterval(waitForExportButton);
+    btn.addEventListener('click', function () {
+      const codeContent = buildFinalHTMLFromEditor() || "";
+      sessionStorage.setItem("genzerEditorContent", codeContent.trim());
+      sessionStorage.setItem("genzerPreviewAlert", "true");
+      window.open("export-exp.html", "_blank");
+    });
+  }
+}, 200);
+function handleImport() {
+  const btn = document.querySelector('#importModal button[onclick="handleImport()"]');
+  if (!btn) return;
+  document.getElementById('importLinkInput').style.display = 'none';
+  const turnstileDiv = document.createElement('div');
+  turnstileDiv.className = 'turnstile-import-wrapper';
+  turnstileDiv.innerHTML = `
+    <p id="verify-msg" style="color: lightgrey; display: block;">Human verification...</p>
+    <div id="cf-turnstile-inline-import"
+         class="turnstile"
+         data-sitekey="0x4AAAAAABCZP0kYMPfqRUhd"
+         data-callback="onTurnstileInlineImportSuccess"
+         data-theme="light"
+         data-size="normal">
+    </div>
+    <input type="hidden" id="turnstile-inline-token" value="">
+    <p style="margin-bottom:10px;"></p>
+  `;
+  btn.replaceWith(turnstileDiv);
+  turnstile.render("#cf-turnstile-inline-import", {
+    sitekey: "0x4AAAAAABCZP0kYMPfqRUhd",
+    callback: onTurnstileInlineImportSuccess,
+    theme: "light",
+    size: "normal"
+  });
+}
+async function onTurnstileInlineImportSuccess(token) {
+  document.getElementById('importLinkInput').style.display = 'inline-block';
+  document.getElementById("turnstile-inline-token").value = token;
+  bootstrap.Modal.getInstance(document.getElementById('importModal')).hide();
+  const wrapper = document.querySelector('.turnstile-import-wrapper');
+  if (wrapper) {
+    const button = document.createElement('button');
+    button.setAttribute('onclick', 'handleImport()');
+    button.setAttribute('style', 'padding: 8px 20px; background: #198754; color: white; font-weight: bold; border: none; border-radius: 4px;');
+    button.innerText = 'Import';
+    wrapper.replaceWith(button);
+  }
+const input = document.getElementById("importLinkInput").value.trim();
+if (!input || !/^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(input)) {
+  alert("Invalid or empty link. Only GenZer.me and its subdomains are allowed.");
+  return;
+}
+let urlValidate = new URL(input);
+if (!input.startsWith("https://") || (!urlValidate.hostname.endsWith(".genzer.me") && urlValidate.hostname !== "genzer.me")) {
+  alert("Only links from https://genzer.me or its subdomains are allowed.");
+  return;
+}
+let url;
+try { url = new URL(input); } catch (e) {
+alert("Some error occurred. Try again. Make sure the link is active.");
+return;
+}
+const hash = url.hash?.substring(1).replaceAll("-", "") || "";
+const path = url.pathname.split("/");
+const shortcode = path[path.length - 1];
+if (!shortcode || hash.length !== 16) {
+alert("Some error occurred. Try again. Make sure the link is active.");
+return;
+}
+startSpinner();
+try {
+const response = await fetch("/api/seepage", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ "cf-turnstile-response": token, "shortcode": shortcode })
+});
+const result = await response.json();
+if (!response.ok || !result.success || !result.encrypted_data) throw new Error();
+const parsed = JSON.parse(result.encrypted_data);
+if (!parsed.salt || !parsed.iv || !parsed.encryptedData) throw new Error();
+const decoder = new TextDecoder();
+const base64ToUint8 = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+const encryptedData = base64ToUint8(parsed.encryptedData);
+const salt = base64ToUint8(parsed.salt);
+const iv = base64ToUint8(parsed.iv);
+const encoder = new TextEncoder();
+const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(hash), { name: "PBKDF2" }, false, ["deriveKey"]);
+const derivedKey = await crypto.subtle.deriveKey({
+name: "PBKDF2",
+salt: salt,
+iterations: 3000000,
+hash: "SHA-256"
+}, keyMaterial, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, derivedKey, encryptedData);
+const decryptedHtml = decoder.decode(decrypted);
+callHtmlToGsml(decryptedHtml);
+} catch (e) {
+alert("Some error occurred. Try again. Make sure the link is active.");
+}
+stopSpinner();
+}
+document.getElementById('importModal').addEventListener('shown.bs.modal', function () {
+  const wrapper = document.querySelector('.turnstile-import-wrapper');
+  if (wrapper) {
+    const button = document.createElement('button');
+    button.setAttribute('onclick', 'handleImport()');
+    button.setAttribute('style', 'padding: 8px 20px; background: #198754; color: white; font-weight: bold; border: none; border-radius: 4px;');
+    button.innerText = 'Import';
+    wrapper.replaceWith(button);
+  }
+  document.getElementById('importLinkInput').style.display = 'inline-block';
+  const token = document.getElementById('turnstile-inline-token');
+  if (token) token.value = '';
+});
+function callHtmlToGsml(decryptedHtml) {
+const parserValidate = new DOMParser();
+const parsedDoc = parserValidate.parseFromString(decryptedHtml, 'text/html');
+const hasGSML = parsedDoc.querySelector('[class^="gsml-"]');
+if (!decryptedHtml || !hasGSML) {
+  alert("This content might be not created using GSML builder.");
+  return;
+}
+removeImage();
+const parser = new DOMParser();
+const doc = parser.parseFromString(decryptedHtml, 'text/html');
+const gsmlImage = doc.querySelector('.gsml-image-container');
+if (gsmlImage && !imageB64) {
+const img = gsmlImage.querySelector('img');
+if (img && img.src.startsWith('data:image/')) {
+imageB64 = img.src;
+const match = imageB64.match(/^data:(image\/[^;]+);base64,/);
+if (match) imageMime = match[1];
+showImagePreview(imageB64);
+}
+}
+if (!window.editor) return;
+const slides = doc.querySelectorAll('.swiper-slide');
+const gsml = [];
+slides.forEach(slide => {
+gsml.push('@Slide;');
+const inner = slide.querySelector('div');
+if (!inner) return;
+Array.from(inner.children).forEach(block => {
+const cls = block.className;
+if (cls.includes('gsml-title')) {
+gsml.push('#Title;');
+gsml.push(block.innerHTML.trim());
+}
+else if (cls.includes('gsml-biglabel')) {
+  const h4 = block.querySelector('h4');
+  if (h4) {
+    gsml.push('#BigLabel;');
+    gsml.push(h4.innerHTML.trim());
+  }
+}
+else if (cls.includes('gsml-text')) {
+gsml.push('#Text;');
+gsml.push(block.innerHTML.trim());
+}
+else if (cls.includes('gsml-codeblock-container')) {
+const codeblk = block.querySelector('.gsml-codeblock');
+gsml.push('#CodeBlock;');
+const codeUnescaped = codeblk.innerHTML.trim().replace(/&lt;|&gt;|&amp;|&#39;|&quot;/g, c => ({
+  '&lt;': '<',
+  '&gt;': '>',
+  '&amp;': '&',
+  '&#39;': "'",
+  '&quot;': '"'
+  }[c]));
+gsml.push(codeUnescaped);
+}
+else if (cls.includes('gsml-chatblock')) {
+const children = block.querySelectorAll('.gsml-chat-left, .gsml-chat-right');
+if (children.length) {
+gsml.push('#ChatBlock;');
+children.forEach(child => {
+const content = child.innerHTML.trim();
+if (!content) return;
+if (child.classList.contains('gsml-chat-left')) {
+  gsml.push(`--${content}`);
+} else {
+  gsml.push(content);
+}
+});
+}
+}
+else if (cls.includes('gsml-mcqoptions-container')) {
+gsml.push('#MCQOptions;');
+const options = block.querySelectorAll('.gsml-mcqoptions');
+options.forEach(opt => {
+  const content = opt.innerHTML.trim();
+  const unescaped = content.replace(/&lt;|&gt;|&amp;|&#39;|&quot;/g, c => ({
+  '&lt;': '<',
+  '&gt;': '>',
+  '&amp;': '&',
+  '&#39;': "'",
+  '&quot;': '"'
+  }[c]));
+  if (opt.classList.contains('right-option')) {
+    gsml.push(`Right(${unescaped})`);
+  } else {
+    gsml.push(`Wrong(${unescaped})`);
+  }
+});
+}
+else if (cls.includes('gsml-image-container')) {
+const desc = block.querySelector('.gsml-image-desc');
+gsml.push('#Image;');
+if (desc) gsml.push(desc.innerHTML.trim());
+}
+else if (cls.includes('gsml-date-container')) {
+const dateLine = block.querySelector('.gsml-date-line1');
+if (dateLine) {
+const raw = new Date(dateLine.textContent.trim());
+const y = raw.getFullYear();
+const m = (raw.getMonth()+1).toString().padStart(2,'0');
+const d = raw.getDate().toString().padStart(2,'0');
+gsml.push('#Date;');
+gsml.push(`${y}/${m}/${d}`);
+}
+}
+else if (cls.includes('gsml-time-container')) {
+const timeText = block.querySelector('.gsml-time-text');
+if (timeText) {
+gsml.push('#Time;');
+gsml.push(timeText.innerHTML.trim());
+}
+}
+else if (cls.includes('gsml-place-container')) {
+const place = block.querySelector('.gsml-place-text');
+if (place) {
+gsml.push('#Place;');
+gsml.push(place.innerHTML.trim());
+}
+}
+else if (cls.includes('gsml-map-container')) {
+const href = block.getAttribute('href');
+if (href) {
+gsml.push('#Map;');
+gsml.push(href);
+}
+}
+else if (cls.includes('gsml-links-container')) {
+const items = block.querySelectorAll('.gsml-link-item');
+if (items.length) {
+gsml.push('#Links;');
+items.forEach(item => {
+const text = item.querySelector('span');
+const onclick = item.getAttribute('onclick') || '';
+const linkMatch = onclick.match(/window\.open\('(.*?)'/);
+if (text && linkMatch) {
+gsml.push(text.innerHTML.trim());
+gsml.push(linkMatch[1]);
+}
+});
+}
+}
+else if (cls.includes('gsml-socials-container')) {
+const links = block.querySelectorAll('a');
+if (links.length) {
+gsml.push('#Socials;');
+links.forEach(a => {
+const href = a.getAttribute('href');
+const icon = a.querySelector('i')?.className || '';
+if (!href || !icon) return;
+if (icon.includes('fa-globe')) gsml.push(`Website(${href})`);
+else if (icon.includes('fa-instagram')) gsml.push(`Instagram(${href})`);
+else if (icon.includes('fa-square-x-twitter')) gsml.push(`X(${href})`);
+else if (icon.includes('fa-github')) gsml.push(`GitHub(${href})`);
+else if (icon.includes('fa-facebook')) gsml.push(`Facebook(${href})`);
+else if (icon.includes('fa-linkedin')) gsml.push(`LinkedIn(${href})`);
+});
+}
+}
+else if (cls.includes('gsml-actionbuttons-container')) {
+const desc = block.querySelector('.gsml-actionbuttons-description');
+const links = block.querySelectorAll('.gsml-actionbutton-link');
+if (desc && links.length) {
+gsml.push('#ActionButtons;');
+gsml.push(desc.innerHTML.trim());
+links.forEach(a => {
+const href = a.getAttribute('href');
+if (!href) return;
+if (href.startsWith('tel:')) gsml.push(`Call(${href.replace('tel:', '')})`);
+else if (href.startsWith('mailto:')) gsml.push(`Email(${href.replace('mailto:', '')})`);
+else if (href.includes('wa.me')) {
+const number = href.split('wa.me/')[1];
+gsml.push(`WhatsApp(${number ? '+' + number : '()'})`);
+}
+else if (href.includes('api.whatsapp')) {
+const match = href.match(/phone=(\d+)/);
+gsml.push(`WhatsApp(${match ? '+' + match[1] : '()'})`);
+}
+});
+}
+}
+else if (cls.includes('gsml-timebomb-container')) {
+const timeDiv = block.querySelector('.gsml-timebomb-text');
+if (timeDiv && timeDiv.dataset && timeDiv.dataset.hours) {
+gsml.push('#TimeBomb;');
+gsml.push(timeDiv.dataset.hours);
+}
+}
+else if (cls.includes('gsml-youtube-container')) {
+const iframe = block.querySelector('iframe');
+if (iframe && iframe.src && iframe.src.includes('/embed/')) {
+const id = iframe.src.split('/embed/')[1].split('?')[0];
+if (id) {
+gsml.push('#YouTube;');
+gsml.push(`https://www.youtube.com/watch?v=${id}`);
+}
+}
+}
+else if (cls.includes('gsml-list')) {
+const items = block.querySelectorAll('li');
+if (items.length) {
+gsml.push('#List;');
+items.forEach(item => gsml.push(`--${item.innerHTML.trim()}`));
+}
+}
+else if (cls.includes('gsml-table-container')) {
+const rows = block.querySelectorAll('tr');
+if (rows.length) {
+gsml.push('#Table;');
+rows.forEach(row => {
+const tds = row.querySelectorAll('td');
+if (tds.length === 2) {
+gsml.push(`--${tds[0].innerHTML.trim()}`);
+gsml.push(tds[1].innerHTML.trim());
+}
+});
+}
+}
+else if (cls.includes('gsml-embed-container')) {
+const inner = block.querySelector('.gsml-embed-inner');
+gsml.push('#Embed;');
+gsml.push(inner.innerHTML.trim());
+}
+else if (cls.includes('gsml-customdiv')) {
+gsml.push('#CustomDiv;');
+gsml.push(block.innerHTML.trim());
+}
+});
+});
+window.editor.setValue(gsml.join('\n'));
+alert('Successfully imported!');
+}
+</script>
+</body>
+</html>
