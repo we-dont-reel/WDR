@@ -790,9 +790,9 @@ Before you start, clear this!\n`);
         document.getElementById("imageInput").addEventListener("change", function () {
             const file = this.files[0];
             if (!file) return;
-            const maxSize = 65 * 1024;
+            const maxSize = 6500 * 1024;
             if (file.size > maxSize) {
-                alert("Only images up to 65KB are allowed.");
+                alert("Only images up to 6500KB are allowed.");
                 this.value = "";
                 return;
             }
