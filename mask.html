@@ -33,18 +33,25 @@ referrerpolicy="strict-origin-when-cross-origin"></iframe>
 <rect x="0" y="0" width="100" height="100" fill="#000" mask="url(#cut)"/>
 </svg>
 </div>
-<div style="position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:5%;font-size:70px;font-weight:bold;color:white;line-height:1.2;">
-  <div>We</div>
-  <div>Don't</div>
-  <div>Reel</div>
+<div style="position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:5%;color:white;line-height:1.2;">
+  <div style="font-size:70px;font-weight:bold;display:inline-block;" id="mainText">
+    <div>We</div>
+    <div>Don't</div>
+    <div>Reel</div>
+  </div>
+  <div style="margin-top:20px;display:flex;flex-direction:column;gap:5px;width:fit-content;" id="subBoxes">
+    <div style="color:black;background:#ff79c6;text-transform:uppercase;text-align:center;">STORIES</div>
+    <div style="color:black;background:#f1fa8c;text-transform:uppercase;text-align:center;">BLOGS</div>
+    <div style="color:black;background:lightgreen;text-transform:uppercase;text-align:center;">MORE</div>
+  </div>
 </div>
 <script>
 (function(){
 const chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const g=document.getElementById('holes');
 const fs=1.7;
-for(let y=2;y<100;y+=1.7){
-for(let x=1;x<100;x+=1.4){
+for(let y=0;y<=100;y+=1.7){
+for(let x=0;x<=100;x+=1.4){
 const t=document.createElementNS('http://www.w3.org/2000/svg','text');
 t.setAttribute('x',x.toFixed(3));
 t.setAttribute('y',y.toFixed(3));
@@ -63,6 +70,10 @@ addEventListener('resize',fit,{passive:true});
 addEventListener('orientationchange',fit,{passive:true});
 fit();
 })();
+</script>
+<script>
+const mainWidth = document.getElementById('mainText').offsetWidth;
+document.getElementById('subBoxes').style.width = mainWidth + 'px';
 </script>
 </body>
 </html>
