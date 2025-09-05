@@ -43,6 +43,7 @@ async function contentPopulatorGenZerME() {
         );
     }
     const rawHTML = sessionStorage.getItem("genzerEditorContent") || "";
+    console.log(rawHTML);
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, "text/html");
     const currentHead = document.head;
