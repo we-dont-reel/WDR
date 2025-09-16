@@ -26,11 +26,12 @@ function applyRbgenToSlide(el) {
         shapesColorHex: el.getAttribute('data-rbgen-shapes-color-hex'),
         shapesMaximumOpacity: parseFloat(el.getAttribute('data-rbgen-shapes-max-opacity') || '0.05')
     });
-    const url = rb.convertSvgHtmlImageToBackgroundUrl(svgHtml);
-    el.setAttribute('data-rbgen-current-bgcolor-hex', backgroundColorHex);
-    el.setAttribute('data-rbgen-current-raw', btoa(svgHtml));
-    el.style.background = "no-repeat black " + url;
-    el.style.backgroundSize = "cover";
+    //const url = rb.convertSvgHtmlImageToBackgroundUrl(svgHtml);
+    //el.setAttribute('data-rbgen-current-bgcolor-hex', backgroundColorHex);
+    //el.setAttribute('data-rbgen-current-raw', btoa(svgHtml));
+    //el.style.background = "no-repeat black " + url;
+    //el.style.backgroundSize = "cover";
+    el.style.background = "#00FF00";
     el.setAttribute('data-rbgen-applied', '1');
 }
 document.querySelectorAll('.swiper-slide.rbgen').forEach(el => applyRbgenToSlide(el));
