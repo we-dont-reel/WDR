@@ -31,7 +31,7 @@ function applyRbgenToSlide(el) {
     //el.setAttribute('data-rbgen-current-raw', btoa(svgHtml));
     //el.style.background = "no-repeat black " + url;
     //el.style.backgroundSize = "cover";
-    el.style.background = "#00FF00";
+    el.style.background = "#000080";
     el.setAttribute('data-rbgen-applied', '1');
 }
 document.querySelectorAll('.swiper-slide.rbgen').forEach(el => applyRbgenToSlide(el));
