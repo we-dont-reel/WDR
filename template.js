@@ -26,11 +26,11 @@ function applyRbgenToSlide(el) {
         shapesColorHex: el.getAttribute('data-rbgen-shapes-color-hex'),
         shapesMaximumOpacity: parseFloat(el.getAttribute('data-rbgen-shapes-max-opacity') || '0.05')
     });
-    //const url = rb.convertSvgHtmlImageToBackgroundUrl(svgHtml);
-    //el.setAttribute('data-rbgen-current-bgcolor-hex', backgroundColorHex);
-    //el.setAttribute('data-rbgen-current-raw', btoa(svgHtml));
-    //el.style.background = "no-repeat black " + url;
-    el.style.background = "url('https://we-dont-reel.github.io/WDR/bg/bg1.jpg') no-repeat center center";
+    const url = rb.convertSvgHtmlImageToBackgroundUrl(svgHtml);
+    el.setAttribute('data-rbgen-current-bgcolor-hex', backgroundColorHex);
+    el.setAttribute('data-rbgen-current-raw', btoa(svgHtml));
+    el.style.background = "no-repeat black " + url;
+    //el.style.background = "url('https://we-dont-reel.github.io/WDR/bg/bg1.jpg') no-repeat center center";
     el.style.backgroundSize = "cover";
     el.setAttribute('data-rbgen-applied', '1');
 }
