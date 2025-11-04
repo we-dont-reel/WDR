@@ -7,11 +7,15 @@
 <title>Full-width gallery</title>
 <style>
   html,body{height:100%;margin:0;padding:0}
-  body{
-    overflow-y:auto;
-    -ms-overflow-style:none;
-    scrollbar-width:none;
-  }
+  body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      overflow-y: scroll;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
   body::-webkit-scrollbar{display:none}
   .gallery img{display:block;width:100vw;height:auto;max-width:none;margin:0}
 </style>
