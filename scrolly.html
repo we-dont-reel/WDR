@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<meta name="google" content="notranslate">
 <title>Full-width gallery</title>
 <style>
   ::-webkit-scrollbar {
@@ -23,24 +24,59 @@
   ::-webkit-scrollbar-thumb {
   background: transparent;
   }
-  html,body{height:100%;margin:0;padding:0}
-  .gallery img {
+  html,body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  }
+  .main-body-outer img {
   display: block;
   width: calc(100% - 4px);
   height: auto;
   max-width: none;
   margin: 0 auto;
-}
+  }
+  .inter-gap {
+  height: 2px;
+  font-size: 1px;
+  line-height: 1;
+  }
 </style>
 </head>
 <body>
-  <div class="gallery">
+  <div class="main-body-outer">
+      
+    <div class="inter-gap">&nbsp;</div>
+    <div class="main-post"> 
     <img src="/img/p1.jpg" alt="">
+    </div>
+      
+    <div class="inter-gap">&nbsp;</div>
+    <div class="main-post">
     <img src="/img/p2.jpg" alt="">
+    </div>
+      
+    <div class="inter-gap">&nbsp;</div>
+    <div class="main-post"> 
     <img src="/img/p1.jpg" alt="">
+    </div>
+      
+    <div class="inter-gap">&nbsp;</div>
+    <div class="main-post">
     <img src="/img/p2.jpg" alt="">
+    </div>
+      
+    <div class="inter-gap">&nbsp;</div>
+    <div class="main-post"> 
     <img src="/img/p1.jpg" alt="">
+    </div>
+      
+    <div class="inter-gap">&nbsp;</div>
+    <div class="main-post">
     <img src="/img/p2.jpg" alt="">
+    </div>
+    
   </div>
 </body>
 </html>
