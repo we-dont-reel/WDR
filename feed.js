@@ -4,14 +4,13 @@ function loadFeedJSON() {
 
 function buildDivs(data) {
   const box = document.querySelector(".the-main-empty-box");
+  let html = "";
   data.divs.forEach(item => {
     const parts = item.split(" ");
     const user = parts.pop();
-    const d = document.createElement("div");
-    d.className = parts.join(" ");
-    d.dataset.user = user;
-    box.appendChild(d);
+    html += `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
   });
+  box.innerHTML = html;
 }
 
 function startFeedLoad() {
