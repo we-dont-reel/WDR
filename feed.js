@@ -10,7 +10,7 @@ function buildDivs(data) {
     const user = parts.pop();
     html += `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
   });
-  box.innerHTML = html;
+  box.innerHTML = html.trim();
 }
 
 function startFeedLoad() {
