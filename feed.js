@@ -8,7 +8,10 @@ function buildDivs(data) {
   data.divs.forEach(item => {
     const parts = item.split(" ");
     const user = parts.pop();
-    html += `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
+    const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
+    const topBar = `<div class="post-top-bar"></div>`;
+    const bottomBar = `<div class="post-bottom-bar"></div>`;
+    html += `${topBar}${mainDiv}${bottomBar}`;
   });
   box.innerHTML = html.trim();
 }
