@@ -1,5 +1,5 @@
 function loadFeedJSON() {
-  let sources = ["feed.json", "feed2.json"];
+  let sources = ["feed1.json", "feed0.json"];
   let promises = sources.map(url => fetch(url).then(r => r.json()));
   return Promise.all(promises).then(results => {
     let allRandomized = [];
