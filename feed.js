@@ -25,6 +25,10 @@ function buildDivs(data) {
       const parts = item.split(" ");
       const user = parts.pop();
       const cleanUser = user.substring(1);
+      const postClass = parts[1];
+      const imageCounter = parts[2].replace("tot-img-", "");
+      console.log(postClass);
+      console.log(imageCounter);
       const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
       const topBar = `
         <div class="post-top-bar">
