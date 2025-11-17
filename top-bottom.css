@@ -1,6 +1,10 @@
 .post-top-left {
 width: 75%;
 padding-left: 6px;
+display: flex;
+align-items: center;
+font-family: sans-serif;
+color: #666666;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
@@ -10,10 +14,11 @@ box-sizing: border-box;
 .post-top-right {
 width: 25%;
 padding-right: 6px;
-text-align: right;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+font-family: sans-serif;
+color: #999999;
 float: right;
 box-sizing: border-box;
-}
-.post-top-left, .post-top-right {
-color: #666666;
 }
