@@ -10,6 +10,7 @@ white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
 box-sizing: border-box;
+font-size: 14px;
 }
 .post-top-right {
 width: 25%;
@@ -21,11 +22,12 @@ height: 100%;
 font-family: sans-serif;
 color: #BBBBBB;
 box-sizing: border-box;
+font-size: 14px;
 }
 .post-top-left i {
 color: inherit;
 font-size: 14px;
-margin-right: 4px;
+margin-right: 2px;
 display: flex;
 align-items: center;
 }
