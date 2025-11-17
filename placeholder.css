@@ -36,8 +36,7 @@ height: calc(100vw - 8px);
 [class^="obsi"] {
 background: white;
 max-width: 100%;
-border-left: 1px solid #DADCE0;
-border-right: 1px solid #DADCE0;
+border: 1px solid #DADCE0;
 box-sizing: border-box;
 }
 .post-top-bar {
