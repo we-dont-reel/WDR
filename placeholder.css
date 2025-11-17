@@ -28,12 +28,14 @@ background: #F1F3F4;
 .asp45 {
 width: calc(100vw - 8px); 
 height: calc((100vw - 8px) * 5 / 4);
-background: white;
 }
 .asp11 {
 width: calc(100vw - 8px);
 height: calc(100vw - 8px);
+}
+[class^="obsi"] {
 background: white;
+max-width: 100%;
 }
 .post-top-bar {
 height: 20px;
