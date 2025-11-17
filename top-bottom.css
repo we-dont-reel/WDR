@@ -22,3 +22,10 @@ font-family: sans-serif;
 color: #BBBBBB;
 box-sizing: border-box;
 }
+.post-top-left i {
+color: inherit;
+font-size: 14px;
+margin-right: 4px;
+display: flex;
+align-items: center;
+}

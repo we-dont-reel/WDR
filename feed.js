@@ -21,18 +21,21 @@ function loadFeedJSON() {
 function buildDivs(data) {
   const box = document.querySelector(".the-main-empty-box");
   let html = "";
-  data.divs.forEach(item => {
-    const parts = item.split(" ");
-    const user = parts.pop();
-    const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
-    const topBar = `
-      <div class="post-top-bar">
-        <div class="post-top-left">${user}</div>
-        <div class="post-top-right"></div>
-      </div>`;
-    const bottomBar = `<div class="post-bottom-bar"></div>`;
-    html += `${topBar}${mainDiv}${bottomBar}`;
-  });
+    data.divs.forEach(item => {
+      const parts = item.split(" ");
+      const user = parts.pop();
+      const cleanUser = user.substring(1);
+      const mainDiv = `<div class="${parts.join(" ")}" data-user="${cleanUser}"></div>`;
+      const topBar = `
+        <div class="post-top-bar">
+          <div class="post-top-left">
+            <i class="fa-brands fa-instagram"></i>&nbsp;${cleanUser}
+          </div>
+          <div class="post-top-right"></div>
+        </div>`;
+      const bottomBar = `<div class="post-bottom-bar"></div>`;
+      html += `${topBar}${mainDiv}${bottomBar}`;
+    });
   box.innerHTML = html.trim();
 }
 
