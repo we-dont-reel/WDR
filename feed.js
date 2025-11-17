@@ -53,7 +53,7 @@ function startFeedLoad() {
 }
 
 function getRandomColor() {
-  const avatarColors = [
+  const colors = [
   "#F4511E","#E91E63","#AD1457","#6A1B9A","#8E24AA",
   "#3949AB","#283593","#1E88E5","#1565C0","#0277BD",
   "#00838F","#00695C","#2E7D32","#1B5E20","#558B2F",
