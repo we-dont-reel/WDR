@@ -1,5 +1,5 @@
 .post-top-left {
-width: 75%;
+width: 99%;
 padding-left: 6px;
 display: inline-flex;
 align-items: center;
@@ -9,18 +9,6 @@ color: #333333;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
-box-sizing: border-box;
-font-size: 14px;
-}
-.post-top-right {
-width: 25%;
-padding-right: 6px;
-display: inline-flex;
-align-items: center;
-justify-content: flex-end;
-height: 100%;
-font-family: sans-serif;
-color: #BBBBBB;
 box-sizing: border-box;
 font-size: 14px;
 }
