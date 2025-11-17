@@ -27,13 +27,14 @@ function buildDivs(data) {
       const cleanUser = user.substring(1);
       const postClass = parts[1];
       const imageCounter = parts[2].replace("tot-img-", "");
-      console.log(postClass);
-      console.log(imageCounter);
       const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
       const topBar = `
         <div class="post-top-bar">
           <div class="post-top-left">
-          ${cleanUser}
+            <div class="avatar-circle" style="background-color:${getRandomColor()}">
+              ${cleanUser.charAt(0).toUpperCase()}
+            </div>
+            ${cleanUser}
           </div>
         </div>`;
       const bottomBar = `<div class="post-bottom-bar"></div>`;
@@ -49,6 +50,17 @@ function startFeedLoad() {
       .catch(() => setTimeout(tryLoad, 500));
   }
   tryLoad();
+}
+
+function getRandomColor() {
+  const colors = [
+    "#3A4A6B", "#5A6B8C", "#2E5A72",
+    "#7B4F8F", "#8C3A4A", "#6A7F3A",
+    "#4A5D4E", "#36495A", "#6B3F5A",
+    "#5C4B8A", "#4F6A7B", "#7A553C",
+    "#3F6B5C", "#6B2F3F", "#4A3F6B"
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 window.addEventListener("load", function() {
