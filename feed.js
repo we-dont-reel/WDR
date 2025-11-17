@@ -25,7 +25,7 @@ function buildDivs(data) {
       const parts = item.split(" ");
       const user = parts.pop();
       const cleanUser = user.substring(1);
-      const mainDiv = `<div class="${parts.join(" ")}" data-user="${cleanUser}"></div>`;
+      const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
       const topBar = `
         <div class="post-top-bar">
           <div class="post-top-left">

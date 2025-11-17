@@ -24,10 +24,3 @@ color: #BBBBBB;
 box-sizing: border-box;
 font-size: 14px;
 }
-.post-top-left i {
-color: inherit;
-font-size: 14px;
-margin-right: 2px;
-display: flex;
-align-items: center;
-}
