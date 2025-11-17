@@ -1,0 +1,19 @@
+.post-top-left {
+width: 75%;
+padding-left: 6px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+float: left;
+box-sizing: border-box;
+}
+.post-top-right {
+width: 25%;
+padding-right: 6px;
+text-align: right;
+float: right;
+box-sizing: border-box;
+}
+.post-top-left, .post-top-right {
+color: #666666;
+}
