@@ -39,7 +39,7 @@ height: calc(100vw - 8px);
 }
 .post-top-bar {
 height: 20px;
-background-color: transparent;
+background-color: white;
 border-top-left-radius: 4px;
 border-top-right-radius: 4px;
 border-top: 2px solid #ECECEC;
@@ -50,7 +50,7 @@ margin-top: 8px;
 }
 .post-bottom-bar {
 height: 20px;
-background-color: transparent;
+background-color: white;
 border-bottom-left-radius: 4px;
 border-bottom-right-radius: 4px;
 border-bottom: 2px solid #ECECEC;
