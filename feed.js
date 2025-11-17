@@ -29,7 +29,7 @@ function buildDivs(data) {
       const topBar = `
         <div class="post-top-bar">
           <div class="post-top-left">
-            <i class="fa-brands fa-instagram"></i>${cleanUser}
+          ${cleanUser}
           </div>
           <div class="post-top-right"></div>
         </div>`;
