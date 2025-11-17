@@ -40,7 +40,7 @@ border: 1px solid #DADCE0;
 box-sizing: border-box;
 }
 .post-top-bar {
-height: 30px;
+height: 35px;
 background-color: white;
 border-top: 1px solid #DADCE0;
 border-left: 1px solid #DADCE0;
@@ -51,7 +51,7 @@ margin-top: 8px;
 box-sizing: border-box;
 }
 .post-bottom-bar {
-height: 30px;
+height: 35px;
 background-color: white;
 border-bottom: 1px solid #DADCE0;
 border-left: 1px solid #DADCE0;
