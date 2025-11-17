@@ -13,8 +13,8 @@ box-sizing: border-box;
 font-size: 14px;
 }
 .avatar-circle {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
