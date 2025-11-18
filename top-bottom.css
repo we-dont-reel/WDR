@@ -38,12 +38,15 @@ margin-top: 1px;
 line-height: 1;
 }
 .post-top-right {
-display: grid;
-place-items: center;
+float: right;
+display: inline-flex;
+align-items: center;
+justify-content: flex-end;
+text-align: right;
 margin-right: 6px;
-flex-shrink: 0;
-background: none;
+height: 100%;
 font-size: 12px;
 font-weight: normal;
 color: grey;
+box-sizing: border-box;
 }
