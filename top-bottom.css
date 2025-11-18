@@ -23,10 +23,16 @@ height: 28px;
 border-radius: 50%;
 display: grid;
 place-items: center;
+margin-right: 6px;
+flex-shrink: 0;
+background: none;
+}
+.avatar-circle p {
 font-family: interX;
 font-size: 14px;
 font-weight: 700;
 color: white;
-margin-right: 6px;
-flex-shrink: 0;
+margin: 0;
+padding: 0;
+line-height: 1;
 }
