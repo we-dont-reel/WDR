@@ -17,10 +17,10 @@ font-weight: bold;
 width: 28px;
 height: 28px;
 border-radius: 50%;
-justify-content: center;
+text-align: center
 font-size: 14px;
 font-weight: 700;
 color: white;
 margin-right: 6px;
-line-height: 28;
+line-height: 2;
 }
