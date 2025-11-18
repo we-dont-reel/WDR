@@ -27,6 +27,8 @@ function buildDivs(data) {
       const cleanUser = user.substring(1);
       const postClass = parts[1];
       const imageCounter = parts[2].replace("tot-img-", "");
+      var topHint = "Single";
+      if (imageCounter > 1) topHint = "Swipe";
       const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
       const topBar = `
         <div class="post-top-bar">
@@ -35,6 +37,7 @@ function buildDivs(data) {
               <p>${cleanUser.charAt(0).toUpperCase()}</p>
             </div>
             ${cleanUser}
+              <div class="post-top-right">${topHint}</div>
           </div>
         </div>`;
       const bottomBar = `<div class="post-bottom-bar"></div>`;

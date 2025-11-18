@@ -37,3 +37,13 @@ padding: 0;
 margin-top: 1px;
 line-height: 1;
 }
+.post-top-right {
+display: grid;
+place-items: center;
+margin-right: 6px;
+flex-shrink: 0;
+background: none;
+font-size: 12px;
+font-weight: normal;
+color: grey;
+}
