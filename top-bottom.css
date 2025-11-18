@@ -17,12 +17,10 @@ font-weight: bold;
 width: 28px;
 height: 28px;
 border-radius: 50%;
-display: inline-flex;
-align-items: center;
-justify-content: center;
+display: grid;
+place-items: center;
 font-size: 14px;
 font-weight: 700;
 color: white;
 margin-right: 6px;
-line-height: 1;
 }
