@@ -38,7 +38,6 @@ function buildDivs(data) {
             </div>
             ${cleanUser}
           </div>
-            <div class="post-top-right">${topHint}</div>
         </div>`;
       const bottomBar = `<div class="post-bottom-bar"></div>`;
       html += `${topBar}${mainDiv}${bottomBar}`;
