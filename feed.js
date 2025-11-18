@@ -32,7 +32,7 @@ function buildDivs(data) {
         <div class="post-top-bar">
           <div class="post-top-left">
             <div class="avatar-circle" style="background-color:${getRandomColor()}">
-              ${cleanUser.charAt(0).toUpperCase()}
+              ${getLetterSVG(cleanUser.charAt(0).toUpperCase())}
             </div>
             ${cleanUser}
           </div>
@@ -72,6 +72,17 @@ function getRandomColor() {
   "#7D6608","#935116","#784212"
   ];
   return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function getLetterSVG(letter) {
+  return `
+    <svg width="28" height="28" viewBox="0 0 28 28">
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        fill="white" font-size="14" font-weight="700" font-family="sans-serif">
+        ${letter}
+      </text>
+    </svg>
+  `;
 }
 
 window.addEventListener("load", function() {
