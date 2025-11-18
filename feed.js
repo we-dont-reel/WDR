@@ -32,7 +32,7 @@ function buildDivs(data) {
         <div class="post-top-bar">
           <div class="post-top-left">
             <div class="avatar-circle" style="background-color:${getRandomColor()}">
-              ${cleanUser.charAt(0).toUpperCase()}
+              <p>${cleanUser.charAt(0).toUpperCase()}</p>
             </div>
             ${cleanUser}
           </div>
