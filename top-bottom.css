@@ -1,3 +1,7 @@
+@font-face {
+font-family: interX;
+src: url('Inter.ttf') format('truetype');
+}
 .post-top-left {
 width: 99%;
 padding-left: 6px;
@@ -19,6 +23,7 @@ height: 28px;
 border-radius: 50%;
 display: grid;
 place-items: center;
+font-family: interX;
 font-size: 14px;
 font-weight: 700;
 color: white;
