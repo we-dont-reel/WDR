@@ -37,7 +37,6 @@ function buildDivs(data) {
               <p>${cleanUser.charAt(0).toUpperCase()}</p>
             </div>
             ${cleanUser}
-              <div class="post-top-right">${topHint}</div>
           </div>
         </div>`;
       const bottomBar = `<div class="post-bottom-bar"></div>`;
