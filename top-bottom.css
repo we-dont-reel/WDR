@@ -3,7 +3,7 @@ font-family: interX;
 src: url('Inter.ttf') format('truetype');
 }
 .post-top-left {
-width: 85%;
+width: 80%;
 padding-left: 6px;
 display: inline-flex;
 align-items: center;
@@ -47,6 +47,7 @@ margin-right: 8px;
 height: 100%;
 font-size: 12px;
 font-weight: normal;
+margin-top: 1px;
 color: grey;
 font-family: sans-serif;
 box-sizing: border-box;
