@@ -65,8 +65,8 @@ box-sizing: border-box;
 background: none;
 border: none;
 cursor: pointer;
-padding: 0 12px;
-font-size: 14px;
+padding: 0 20px;
+font-size: 16px;
 }
 .report-btn i,
 .share-btn i {
@@ -74,8 +74,8 @@ color: #444;
 }
 .more-text {
 margin-right: 8px;
-margin-left: 12px;
+margin-left: 20px;
 font-family: sans-serif;
-font-size: 14px;
+font-size: 16px;
 color: #444;
 }
