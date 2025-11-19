@@ -40,8 +40,7 @@ function buildDivs(data) {
           </div>
             <div class="post-top-right">${topHint}</div>
         </div>`;
-      const bottomBar = `<div class="post-bottom-bar"><div class="post-bottom-content"><button class="report-btn"><i class="fa-solid fa-flag"></i></button><button class="share-btn"><i class="fa-solid fa-share-square"></i></button><span class="more-text">More</span></div></div>`;
-      html += `${topBar}${mainDiv}${bottomBar}`;
+      const bottomBar = `<div class="post-bottom-bar"><div class="post-bottom-content"><button class="report-btn"><i class="fa-solid fa-circle-info"></i></button><button class="share-btn"><i class="fa-solid fa-share-nodes"></i></button><span class="more-text">More</span></div></div>`;
     });
   box.innerHTML = html.trim();
 }
