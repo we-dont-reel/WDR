@@ -74,7 +74,9 @@ color: #444;
 }
 .more-text {
 margin-right: 8px;
+margin-left: 6px;
 font-family: sans-serif;
+font-weight: bold;
 font-size: 14px;
 color: #444;
 }
