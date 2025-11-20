@@ -1,8 +1,4 @@
-MicroModal.init({
-  awaitOpenAnimation: true,
-  awaitCloseAnimation: true,
-  closeAnimationDuration: 300
-});
+MicroModal.init();
 
 setTimeout(function(){
   MicroModal.show('report-modal');
