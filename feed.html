@@ -11,34 +11,67 @@
 <link rel="stylesheet" href="cdn/swiper/css/swiper-bundle.min.css">
 <link rel="stylesheet" href="placeholder.css">
 <link rel="stylesheet" href="top-bottom.css">
+<link rel="stylesheet" href="modal-style.css">
 </head>
 <body>
 
-  <div class="version-marker-251110" hidden></div>
-    
-  <div class="main-body-outer">
-      
-  <div class="top-intro-div" style="background:#000;color:#fff;border-radius:4px;display:flex;max-width:100%;height:40px;font-family:Arial,sans-serif;box-sizing:border-box;margin-top:8px;">
-  <div style="flex:3;display:flex;align-items:center;justify-content:left;">
-    <div style="font-size:16px;line-height:1;margin-left:6px;" class="post-type-title">All Posts</div>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:6px;">
-    <div style="font-size:12px;margin-bottom:4px;color:white;text-align:center;">An initiative of</div>
-    <div style="font-size:14px;font-weight:600;color:#b2e3a8;">wedontreel.com</div>
-  </div>
-  </div>
-  <!--Start of the content-->
-  <div class="the-main-empty-box">
-   
-  </div>
-  <!--End of the content-->
-  <div class="bottom-end-div" style="padding-bottom:25px;padding-top:20px;"><p style="font-family:Arial,sans-serif;text-align:center;color:#619E52;font-weight:bold;">Loading. Please wait...</p></div>
-  </div>
+<div class="version-marker-251110" hidden></div>
 
-  <script src="cdn/swiper/js/swiper-bundle.min.js"></script>
-  <script src="cdn/micromodal/micromodal.min.js"></script>
-  <script src="modal-manager.js"></script>
-  <script src="feed.js"></script>
+<div class="main-body-outer">
+
+<div class="top-intro-div" style="background:#000;color:#fff;border-radius:4px;display:flex;max-width:100%;height:40px;font-family:Arial,sans-serif;box-sizing:border-box;margin-top:8px;">
+<div style="flex:3;display:flex;align-items:center;justify-content:left;">
+<div style="font-size:16px;line-height:1;margin-left:6px;" class="post-type-title">All Posts</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:6px;">
+<div style="font-size:12px;margin-bottom:4px;color:white;text-align:center;">An initiative of</div>
+<div style="font-size:14px;font-weight:600;color:#b2e3a8;">wedontreel.com</div>
+</div>
+</div>
+<!--Start of the content-->
+<div class="the-main-empty-box">
+
+</div>
+<!--End of the content-->
+<div class="bottom-end-div" style="padding-bottom:25px;padding-top:20px;"><p style="font-family:Arial,sans-serif;text-align:center;color:#619E52;font-weight:bold;">Loading. Please wait...</p></div>
+</div>
     
+<div class="modal micromodal-slide" id="report-modal" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="modal__container" role="dialog" aria-modal="true">
+
+      <header class="modal__header">
+        <h2 class="modal-title">Report / Contact</h2>
+        <button class="modal__close" aria-label="Close" data-micromodal-close>×</button>
+      </header>
+
+      <main class="modal__content">
+        <section>
+          <h3>Report</h3>
+          <p><strong>Post ID:</strong> <span class="report-post-id">1234</span></p>
+          <p>To report this post, email <strong>hi@wedontreel.com</strong> and include the post ID along with your reason for reporting</p>
+        </section>
+
+        <hr>
+
+        <section>
+          <h3>Contact Us</h3>
+          <p>For any information or feedback, you can write to <strong>hi@wedontreel.com</strong> for support</p>
+        </section>
+      </main>
+
+      <footer class="modal__footer">
+        <button class="modal-btn" data-micromodal-close>Close</button>
+      </footer>
+
+    </div>
+  </div>
+</div>
+
+<script src="cdn/swiper/js/swiper-bundle.min.js"></script>
+<script src="cdn/micromodal/micromodal.min.js"></script>
+<script src="modal-manager.js"></script>
+<script src="feed.js"></script>
+
 </body>
 </html>
