@@ -93,10 +93,10 @@ display: none;
 .micromodal-slide.is-open {
 display: block;
 }
-.micromodal-slide[aria-hidden="false"] .modal__overlay {
+.micromodal-slide.is-open[aria-hidden="false"] .modal__overlay {
 animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
-.micromodal-slide[aria-hidden="false"] .modal__container {
+.micromodal-slide.is-open[aria-hidden="false"] .modal__container {
 animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
 }
 .micromodal-slide[aria-hidden="true"] .modal__overlay {
