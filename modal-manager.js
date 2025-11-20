@@ -1,6 +1,7 @@
 MicroModal.init({
   awaitOpenAnimation: true,
-  awaitCloseAnimation: true
+  awaitCloseAnimation: true,
+  closeAnimationDuration: 300
 });
 
 setTimeout(function(){
