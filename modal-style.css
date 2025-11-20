@@ -77,3 +77,23 @@ display: none;
 .modal[aria-hidden="false"] {
 display: block;
 }
+.modal__overlay {
+opacity: 0;
+transition: opacity 0.25s ease;
+}
+.modal[aria-hidden="false"] .modal__overlay {
+opacity: 1;
+}
+.modal__container {
+transform: scale(0.95);
+opacity: 0;
+transition: all 0.25s ease;
+}
+.modal[aria-hidden="false"] .modal__container {
+transform: scale(1);
+opacity: 1;
+}
+body.modal-blur {
+filter: blur(4px);
+transition: filter 0.25s ease;
+}
