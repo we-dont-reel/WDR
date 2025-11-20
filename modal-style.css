@@ -71,3 +71,9 @@ border: none;
 border-top: 1px solid rgba(255,255,255,0.08);
 margin: 12px 0;
 }
+.modal[aria-hidden="true"] {
+display: none;
+}
+.modal[aria-hidden="false"] {
+display: block;
+}
