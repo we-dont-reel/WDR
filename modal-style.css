@@ -134,3 +134,13 @@ display: flex;
 justify-content: center;
 gap: 10px;
 }
+.modal-btn,
+.modal-btn:hover,
+.modal-btn:active,
+.modal-btn:focus {
+border-color: #fff !important;
+outline: none;
+}
+.share-textarea {
+height: 50px;
+}
