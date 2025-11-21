@@ -23,7 +23,7 @@ function copyShareText(textareaId){
     btn.innerText="Copied...";
     setTimeout(function(){
       btn.innerHTML=oldText;
-      MicroModal.close('share-modal');
+      closeModal('share-modal');
     },500);
   });
 }
