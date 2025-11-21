@@ -13,9 +13,7 @@ function copyShareText(textareaId){
     btn.innerText="Copied...";
     setTimeout(function(){btn.innerText="Copy";},1200);
   }).catch(function(){
-    el.select();
-    el.setSelectionRange(0,99999);
-    document.execCommand("copy");
+    navigator.clipboard.writeText(el.value);
     el.blur();
     window.getSelection().removeAllRanges();
     btn.innerText="Copied...";
