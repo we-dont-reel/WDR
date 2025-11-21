@@ -1,7 +1,7 @@
 MicroModal.init();
 
 setInterval(function(){
-  MicroModal.show('share-modal');
+  MicroModal.show('report-modal');
 }, 5000);
 
 function copyShareText(textareaId){
