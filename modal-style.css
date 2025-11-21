@@ -132,7 +132,7 @@ font-family: sans-serif;
 .share-footer {
 display: flex;
 justify-content: center;
-gap: 10px;
+gap: 15px;
 }
 .modal-btn,
 .modal-btn:hover,
