@@ -15,7 +15,7 @@ function copyShareText(textareaId){
     setTimeout(function(){
       btn.innerHTML=oldText;
       MicroModal.close('share-modal');
-    },500);
+    },800);
   }).catch(function(){
     navigator.clipboard.writeText(el.value);
     el.blur();
@@ -24,7 +24,7 @@ function copyShareText(textareaId){
     setTimeout(function(){
       btn.innerHTML=oldText;
       closeModal('share-modal');
-    },500);
+    },800);
   });
 }
 
