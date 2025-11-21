@@ -11,7 +11,7 @@ function copyShareText(textareaId){
   navigator.clipboard.writeText(el.value).then(function(){
     el.blur();
     window.getSelection().removeAllRanges();
-    btn.innerText="Copied...";
+    btn.innerText="Copied...Closing now.";
     setTimeout(function(){
       btn.innerHTML=oldText;
       MicroModal.close('share-modal');
@@ -20,7 +20,7 @@ function copyShareText(textareaId){
     navigator.clipboard.writeText(el.value);
     el.blur();
     window.getSelection().removeAllRanges();
-    btn.innerText="Copied...";
+    btn.innerText="Copied...Closing now.";
     setTimeout(function(){
       btn.innerHTML=oldText;
       closeModal('share-modal');

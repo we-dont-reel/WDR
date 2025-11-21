@@ -151,6 +151,11 @@ caret-color: transparent;
 background: transparent;
 color: transparent;
 }
+.share-textarea {
+user-select: none !important;
+-webkit-user-select: none !important;
+-webkit-touch-callout: none !important;
+}
 .share-footer {
 margin-top: 10px;
 }
