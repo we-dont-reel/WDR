@@ -65,6 +65,31 @@
     </div>
   </div>
 </div>
+    
+<div class="modal micromodal-slide" id="share-modal" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1">
+    <div class="modal__container" role="dialog" aria-modal="true">
+
+      <header class="modal__header">
+        <h2 class="modal-title">Share Post</h2>
+      </header>
+
+      <main class="modal__content">
+        <p class="share-label">Please share the following link:</p>
+
+        <textarea id="share-text"
+                  class="share-textarea"
+                  readonly>https://www.google.com</textarea>
+      </main>
+
+      <footer class="modal__footer share-footer">
+        <button class="modal-btn" onclick="copyShareText('share-text')">Copy</button>
+        <button class="modal-btn" onclick="closeModal('share-modal')">OK</button>
+      </footer>
+
+    </div>
+  </div>
+</div>
 
 <script src="cdn/swiper/js/swiper-bundle.min.js"></script>
 <script src="cdn/micromodal/micromodal.min.js"></script>
