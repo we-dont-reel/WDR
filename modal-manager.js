@@ -23,13 +23,6 @@ function copyShareText(textareaId){
   });
 }
 
-document.addEventListener('DOMContentLoaded', function(){
-  document.getElementById('share-modal').addEventListener('transitionend', function(){
-    var el = document.getElementById('share-text');
-    if(el) el.blur();
-  });
-});
-
 function closeModal(id){
   setTimeout(function(){
     MicroModal.close(id);
