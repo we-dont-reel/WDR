@@ -1,7 +1,7 @@
 MicroModal.init();
 
 setInterval(function(){
-  MicroModal.show('report-modal');
+  MicroModal.show('share-modal');
 }, 5000);
 
 function closeModal(id){
