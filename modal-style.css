@@ -151,17 +151,6 @@ caret-color: transparent;
 background: transparent;
 color: transparent;
 }
-.share-textarea::selection {
-background: transparent !important;
-color: inherit !important;
-}
-.share-textarea::-moz-selection {
-background: transparent !important;
-color: inherit !important;
-}
-.share-textarea {
--webkit-tap-highlight-color: transparent;
-}
 .share-footer {
-margin-top: 15px;
+margin-top: 10px;
 }
