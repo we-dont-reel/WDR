@@ -144,3 +144,10 @@ outline: none;
 .share-textarea {
 height: 50px;
 }
+.share-textarea {
+caret-color: transparent;
+}
+.share-textarea::selection {
+background: transparent;
+color: transparent;
+}
