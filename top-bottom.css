@@ -2,6 +2,10 @@
 font-family: interX;
 src: url('Inter.ttf') format('truetype');
 }
+@font-face {
+font-family: notoX;
+src: url('Noto.ttf') format('truetype');
+}
 .post-top-left {
 width: 80%;
 padding-left: 6px;
