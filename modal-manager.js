@@ -1,9 +1,5 @@
 MicroModal.init();
 
-setInterval(function(){
-  MicroModal.show('report-modal');
-}, 5000);
-
 function copyShareText(textareaId){
   var el=document.getElementById(textareaId);
   var btn=event.target;
