@@ -32,11 +32,11 @@ function buildDivs(data) {
       const mainDiv = `<div class="${parts.join(" ")}" data-user="${user}"></div>`;
       const topBar = `
         <div class="post-top-bar">
-          <div class="post-top-left" onclick="location.href='instagram://user?username=${cleanUser}'">
-            <div class="avatar-circle" style="background-color:${getRandomColor()}">
+          <div class="post-top-left">
+            <div class="avatar-circle" style="background-color:${getRandomColor()}" onclick="location.href='instagram://user?username=${cleanUser}'">
               <p>${cleanUser.charAt(0).toUpperCase()}</p>
             </div>
-            ${cleanUser}
+            <a href="instagram://user?username=${cleanUser}">${cleanUser}</a>
           </div>
             <div class="post-top-right">${topHint}</div>
         </div>`;
