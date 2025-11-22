@@ -25,7 +25,7 @@ function buildDivs(data) {
       const parts = item.split(" ");
       const user = parts.pop();
       const cleanUser = user.substring(1);
-      const postClass = parts[1];
+      const postID = parts[1].replace("outid-", "");
       const imageCounter = parts[2].replace("tot-img-", "");
       var topHint = "Single";
       if (imageCounter > 1) topHint = "Swipe";
@@ -44,11 +44,11 @@ function buildDivs(data) {
         <div class="post-bottom-bar">
           <div class="post-bottom-content">
 
-              <button class="report-btn">
+              <button class="report-btn" onclick="showReportModal(postID)">
               <i class="fa-solid fa-circle-info">
               </i></button>
 
-              <button class="share-btn">
+              <button class="share-btn" onclick="showShareModal(postID)">
               <i class="fa-solid fa-share-nodes">
               </i></button>
 

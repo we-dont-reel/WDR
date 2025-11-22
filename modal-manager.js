@@ -1,5 +1,17 @@
 MicroModal.init();
 
+function showReportModal(postid){
+  var el=document.querySelector('.report-post-id');
+  if(el){el.textContent=postid;}
+  MicroModal.show('report-modal');
+}
+
+function showShareModal(postid){
+  var el=document.getElementById('share-text');
+  if(el){el.value='https://in.wedontreel.com/feed?p='+postid;}
+  MicroModal.show('share-modal');    
+}
+
 function copyShareText(textareaId){
   var el=document.getElementById(textareaId);
   var btn=event.target;
