@@ -1,3 +1,8 @@
+#report-modal .modal__content,
+#report-modal .modal__content * {
+user-select: text;
+-webkit-user-select: text;
+}
 .modal__overlay {
 background: rgba(0,0,0,0.55);
 position: fixed;
