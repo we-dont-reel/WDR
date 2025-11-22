@@ -44,11 +44,11 @@ function buildDivs(data) {
         <div class="post-bottom-bar">
           <div class="post-bottom-content">
 
-              <button class="report-btn" onclick="showReportModal(postID)">
+              <button class="report-btn" onclick="showReportModal(${postID})">
               <i class="fa-solid fa-circle-info">
               </i></button>
 
-              <button class="share-btn" onclick="showShareModal(postID)">
+              <button class="share-btn" onclick="showShareModal(${postID})">
               <i class="fa-solid fa-share-nodes">
               </i></button>
 
