@@ -52,7 +52,7 @@ function buildDivs(data) {
               <i class="fa-solid fa-share-nodes">
               </i></button>
 
-              <span class="more-text">MORE</span>
+              <span class="more-text">Show</span>
 
               </div>
           </div>`;
