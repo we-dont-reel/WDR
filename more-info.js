@@ -9,11 +9,17 @@ function moreInfo(postid){
     
   if(txt==='Show')
   {
+      const url = assetRouter(postid);
+      const r = await fetch(url);
+      const txt = await r.text();
+      if(!txt) return;
+      if(txt.trim().startsWith('<')) return;
+      const wrapped = '<pre>' + txt + '</pre>';
       bottomBar.style.minHeight='35px';
       bottomBar.style.height='auto';
       var d=document.createElement('div');
       d.className='more-text-content';
-      d.innerHTML='<pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</pre>';
+      d.innerHTML=wrapped;
       bottomBar.appendChild(d);
       moreSpan.textContent='Less';
   }
