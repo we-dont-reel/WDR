@@ -13,7 +13,7 @@ function moreInfo(postid){
       bottomBar.style.height='auto';
       var d=document.createElement('div');
       d.className='more-text-content';
-      d.textContent='Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+      d.innerHTML='<pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</pre>';
       bottomBar.appendChild(d);
       moreSpan.textContent='Less';
   }
