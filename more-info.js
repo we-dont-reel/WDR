@@ -6,9 +6,22 @@ function moreInfo(postid){
   var moreSpan=bottomBar.querySelector('.post-bottom-content .more-text');
   if(!moreSpan)return;
   var txt=moreSpan.textContent.trim();
-  if(txt==='Show'){
-    alert(postid);
-  }else{
-      console.log("djhf");
+    
+  if(txt==='Show')
+  {
+      bottomBar.style.minHeight='35px';
+      bottomBar.style.height='auto';
+      var d=document.createElement('div');
+      d.className='more-info';
+      d.textContent='Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+      bottomBar.appendChild(d);
+      moreSpan.textContent='Less';
+  }
+  else
+  {
+      var infoDiv=bottomBar.querySelector('.more-info');
+      if(infoDiv) infoDiv.remove();
+      bottomBar.style.removeProperty('min-height');
+      bottomBar.style.height='35px';
   }
 }
