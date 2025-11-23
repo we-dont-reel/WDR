@@ -12,16 +12,17 @@ function moreInfo(postid){
       bottomBar.style.minHeight='35px';
       bottomBar.style.height='auto';
       var d=document.createElement('div');
-      d.className='more-info';
+      d.className='more-text';
       d.textContent='Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
       bottomBar.appendChild(d);
       moreSpan.textContent='Less';
   }
   else
   {
-      var infoDiv=bottomBar.querySelector('.more-info');
+      var infoDiv=bottomBar.querySelector('.more-text');
       if(infoDiv) infoDiv.remove();
       bottomBar.style.removeProperty('min-height');
       bottomBar.style.height='35px';
+      moreSpan.textContent='Show';
   }
 }
