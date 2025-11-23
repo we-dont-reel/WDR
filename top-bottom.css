@@ -6,6 +6,10 @@ src: url('Inter.ttf') format('truetype');
 font-family: notoX;
 src: url('Noto.ttf') format('truetype');
 }
+@font-face {
+font-family: roboX;
+src: url('Robo.ttf') format('truetype');
+}
 .post-top-left {
 width: 80%;
 padding-left: 6px;
