@@ -1,5 +1,8 @@
 .more-text {
 font-family: "roboX", monospace;
+font-size: 16px;
+transform: scaleY(0.9);
+transform-origin: center;
 }
 .more-info {
 font-family: "interX", "notoX", sans-serif;
