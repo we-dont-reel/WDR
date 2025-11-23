@@ -9,7 +9,7 @@ function moreInfo(postid){
     
   if(txt==='Show')
   {
-      const url = assetRouter(postid);
+      const url = assetRouter(postid)+'caption.txt';
         fetch(url)
           .then(r => r.text())
           .then(txt => {
