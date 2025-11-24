@@ -35,3 +35,36 @@ function moreInfo(postid){
       moreSpan.textContent='Show';
   }
 }
+
+var moreTextObserver=null;
+function initMoreTextObserver(){
+if(moreTextObserver) return;
+moreTextObserver=new IntersectionObserver(function(entries,observer){
+entries.forEach(function(entry){
+if(!entry.isIntersecting) return;
+var el=entry.target;
+var id=el.getAttribute('data-postid');
+if(!id){observer.unobserve(el);return;}
+var url=assetRouter(id)+'caption.txt';
+fetch(url).then(function(r){
+if(!r.ok) return null;
+return r.text();
+}).then(function(t){
+if(!t) return;
+t=t.trim();
+if(!t) return;
+if(t.charAt(0)==='<') return;
+if(t.startsWith('[No description available]')) return;
+el.removeAttribute('class');
+el.removeAttribute('data-postid');
+el.className='more-text';
+el.setAttribute('onclick','moreInfo('+id+')');
+el.innerText='Show';
+observer.unobserve(el);
+}).catch(function(){});
+});
+},{threshold:0});
+document.querySelectorAll('.more-text-na').forEach(function(el){
+moreTextObserver.observe(el);
+});
+}

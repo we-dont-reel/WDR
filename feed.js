@@ -59,6 +59,7 @@ function buildDivs(data) {
       html += `${topBar}${mainDiv}${bottomBar}`;
     });
   box.innerHTML = html.trim();
+  initMoreTextObserver();
 }
 
 function startFeedLoad() {
