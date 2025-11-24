@@ -1,16 +1,16 @@
-**/*.jpg
+/**/*.jpg
   Cache-Control: public, max-age=3600, must-revalidate
 
-**/*.jpeg
+/**/*.jpeg
   Cache-Control: public, max-age=3600, must-revalidate
 
-**/*.png
+/**/*.png
   Cache-Control: public, max-age=3600, must-revalidate
 
-**/*.webp
+/**/*.webp
   Cache-Control: public, max-age=3600, must-revalidate
 
-**/*.txt
+/**/*.txt
   Cache-Control: public, max-age=3600, must-revalidate
 
 
