@@ -52,7 +52,7 @@ function buildDivs(data) {
               <i class="fa-solid fa-share-nodes">
               </i></button>
 
-              <span class="more-text-na" data-postid="${postID}">-NA-</span>
+              <span class="more-text-na" data-postid="${postID}">None</span>
 
               </div>
           </div>`;
