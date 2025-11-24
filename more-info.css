@@ -26,9 +26,10 @@ margin-right: 0px;
 .more-text-na {
 padding-right: 8px;
 padding-left: 16px;
-color: grey;
+color: lightgray;
 font-family: "roboX", monospace;
 font-size: 16px;
 transform: scaleY(0.9);
 transform-origin: center;
+white-space: nowrap;
 }
