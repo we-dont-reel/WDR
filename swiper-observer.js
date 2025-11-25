@@ -20,7 +20,7 @@ if(c.indexOf('outid-')===-1||c.indexOf('tot-img-')===-1){el.dataset.active="";re
 var tid=c.split('outid-')[1].split(' ')[0];
 var tot=parseInt(c.split('tot-img-')[1].split(' ')[0],10);
 var url=assetRouter(tid);
-fetch(url).then(function(r){return r.text()}).then(function(t){
+fetch(url+'index.txt').then(function(r){return r.text()}).then(function(t){
 if(!t||t.trim().charAt(0)==='<'){el.dataset.active="";return;}
 var arr=t.trim().split('\n');
 var wrap=document.createElement('div');
