@@ -18,7 +18,7 @@ function moreInfo(postid){
             const wrapped = '<pre>' + txt + '</pre>';
             bottomBar.style.minHeight='45px';
             bottomBar.style.height='auto';
-            bottomBar.style.paddingTop='8px';
+            bottomBar.style.paddingTop='12px';
             var d=document.createElement('div');
             d.className='more-text-content';
             d.innerHTML=wrapped;
