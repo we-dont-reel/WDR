@@ -18,6 +18,7 @@ function moreInfo(postid){
             const wrapped = '<pre>' + txt + '</pre>';
             bottomBar.style.minHeight='35px';
             bottomBar.style.height='auto';
+            bottomBar.style.paddingTop='5px';
             var d=document.createElement('div');
             d.className='more-text-content';
             d.innerHTML=wrapped;
@@ -31,6 +32,7 @@ function moreInfo(postid){
       var infoDiv=bottomBar.querySelector('.more-text-content');
       if(infoDiv) infoDiv.remove();
       bottomBar.style.removeProperty('min-height');
+      bottomBar.style.removeProperty('padding-top');
       bottomBar.style.height='35px';
       moreSpan.textContent='Show';
   }
