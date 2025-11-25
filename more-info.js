@@ -16,7 +16,7 @@ function moreInfo(postid){
             if(!txt) return;
             if(txt.trim().startsWith('<')) return;
             const wrapped = '<pre>' + txt + '</pre>';
-            bottomBar.style.minHeight='35px';
+            bottomBar.style.minHeight='45px';
             bottomBar.style.height='auto';
             bottomBar.style.paddingTop='8px';
             var d=document.createElement('div');
@@ -33,7 +33,7 @@ function moreInfo(postid){
       if(infoDiv) infoDiv.remove();
       bottomBar.style.removeProperty('min-height');
       bottomBar.style.paddingTop='0px';
-      bottomBar.style.height='35px';
+      bottomBar.style.height='45px';
       moreSpan.textContent='Show';
   }
 }
