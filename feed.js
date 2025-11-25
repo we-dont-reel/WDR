@@ -60,6 +60,7 @@ function buildDivs(data) {
     });
   box.innerHTML = html.trim();
   initMoreTextObserver();
+  initSwiperObserver();
 }
 
 function startFeedLoad() {
