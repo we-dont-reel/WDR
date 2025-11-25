@@ -40,13 +40,12 @@ img.style.width='100%';
 img.style.height='100%';
 img.style.objectFit='cover';
 s.appendChild(img);
-var pre=document.createElement('div');
-pre.className='swiper-lazy-preloader';
-s.appendChild(pre);
 w2.appendChild(s);
 }
-var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true}};
+var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,loadOnTransitionStart:true}};
 if(tot===1) cfg.allowTouchMove=false;
+wrap.style.width='100%';
+wrap.style.height='100%';
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
 }).catch(function(){el.dataset.active="";});
