@@ -62,7 +62,9 @@ if(sw){
 sw.slides.forEach(slide => { 
 slideObserver.unobserve(slide);
 });
-sw.destroy(true,true);delete swiperMap[tid];}
+sw.destroy(true,true);
+delete swiperMap[tid];
+}
 el.innerHTML="";
 }
 
