@@ -58,7 +58,11 @@ var c=el.className;
 if(c.indexOf('outid-')===-1) return;
 var tid=c.split('outid-')[1].split(' ')[0];
 var sw=swiperMap[tid];
-if(sw){sw.destroy(true,true);delete swiperMap[tid];}
+if(sw){
+sw.slides.forEach(slide => { 
+slideObserver.unobserve(slide);
+});
+sw.destroy(true,true);delete swiperMap[tid];}
 el.innerHTML="";
 }
 
