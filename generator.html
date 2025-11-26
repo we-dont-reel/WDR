@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Random Image Generator</title>
+  <style>
+    body{font-family:sans-serif;margin:20px;}
+    .controls{margin-bottom:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+    label{font-size:14px;}
+    input,select,button{font-size:14px;padding:4px 6px;}
+    #preview{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+    #preview img{max-width:200px;border:1px solid #ccc;}
+    #filenames{width:100%;margin-top:12px;box-sizing:border-box;}
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>
+      Aspect ratio:
+      <select id="ratioSelect">
+        <option value="1:1">1:1</option>
+        <option value="4:5">4:5</option>
+      </select>
+    </label>
+    <label>
+      Number of images:
+      <input type="number" id="countInput" min="1" max="100" value="12">
+    </label>
+    <button id="generateBtn">Generate</button>
+    <button id="downloadBtn" disabled>Download All</button>
+  </div>
+  <div id="preview"></div>
+  <h3>File names</h3>
+  <textarea id="filenames" rows="6" readonly></textarea>
+  <script>
+    var imagesData=[];
+    function makeTimestamp(){
+      var d=new Date();
+      var p=n=>String(n).padStart(2,"0");
+      return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
+    }
+    var teluguSentences=[
+      "ఇది ఒక సాధారణ పరీక్ష టెక్స్ట్ మాత్రమే.",
+      "ఈ చిత్రం కేవలం నమూనా కోసం మాత్రమే ఉపయోగించబడుతుంది.",
+      "దయచేసి దీన్ని అసలు కథగా భావించవద్దు.",
+      "ఇక్కడ కనిపించే పదాలు అన్నీ ప్లేస్ హోల్డర్ టెక్స్ట్ మాత్రమే.",
+      "ఈ టెక్ట్స్ జనరేటర్ డిజైన్ చూసేందుకు మాత్రమే ఉంది.",
+      "ఇది డెమో కోసం తయారు చేసిన చిన్న వాక్యం.",
+      "ఈ వాక్యాలు ప్రొడక్షన్ ఉపయోగం కోసం కావు.",
+      "దయచేసి ఈ టెక్స్ట్ ని పరీక్ష ప్రయోజనాల కోసం మాత్రమే వినియోగించండి."
+    ];
+    var englishSentences=[
+      "This is a simple sample text for testing only.",
+      "The content on this image is just placeholder text.",
+      "Please do not treat this as a real story or real data.",
+      "These lines are generated only to fill space in the design.",
+      "This generator helps you quickly preview layout and typography.",
+      "Use this image set only for design experiments and drafts.",
+      "Nothing in this block represents real information.",
+      "You can safely ignore the meaning and focus on the visuals."
+    ];
+    function randomItem(arr){return arr[Math.floor(Math.random()*arr.length)];}
+    function randomMixedLorem(){
+      var tel=randomItem(teluguSentences);
+      var eng=randomItem(englishSentences);
+      return tel+" "+eng;
+    }
+    function randomDarkColor(){
+      var r=Math.floor(Math.random()*160);
+      var g=Math.floor(Math.random()*160);
+      var b=Math.floor(Math.random()*160);
+      return "rgb("+r+","+g+","+b+")";
+    }
+    function randomLightColor(){
+      var r=120+Math.floor(Math.random()*136);
+      var g=120+Math.floor(Math.random()*136);
+      var b=120+Math.floor(Math.random()*136);
+      return "rgb("+r+","+g+","+b+")";
+    }
+    function drawAbstractBackground(ctx,w,h,isDark){
+      var c1=isDark?randomDarkColor():randomLightColor();
+      var c2=isDark?randomDarkColor():randomLightColor();
+      var grad=ctx.createLinearGradient(0,0,w,h);
+      grad.addColorStop(0,c1);
+      grad.addColorStop(1,c2);
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,0,w,h);
+      var shapes=8+Math.floor(Math.random()*7);
+      for(var i=0;i<shapes;i++){
+        ctx.globalAlpha=0.25+Math.random()*0.45;
+        ctx.fillStyle=isDark?randomLightColor():randomDarkColor();
+        var x=Math.random()*w;
+        var y=Math.random()*h;
+        var rw=50+Math.random()*w*0.5;
+        var rh=50+Math.random()*h*0.5;
+        var t=Math.random();
+        ctx.beginPath();
+        if(t<0.33){
+          ctx.fillRect(x,y,rw,rh);
+        }else if(t<0.66){
+          ctx.arc(x,y,Math.min(rw,rh)/2,0,Math.PI*2);
+          ctx.fill();
+        }else{
+          ctx.moveTo(x,y);
+          ctx.lineTo(x+rw,y+rh*0.2);
+          ctx.lineTo(x+rw*0.2,y+rh);
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha=1;
+    }
+    function wrapText(ctx,text,x,y,maxWidth,lineHeight){
+      var words=text.split(" ");
+      var line="";
+      for(var n=0;n<words.length;n++){
+        var test=line+words[n]+" ";
+        if(ctx.measureText(test).width>maxWidth && n>0){
+          ctx.fillText(line,x,y);
+          line=words[n]+" ";
+          y+=lineHeight;
+        }else{
+          line=test;
+        }
+      }
+      ctx.fillText(line,x,y);
+    }
+    function generateImages(){
+      var timestamp=makeTimestamp();
+      var ratio=document.getElementById("ratioSelect").value;
+      var count=parseInt(document.getElementById("countInput").value,10);
+      if(count<1)count=1;
+      if(count>100)count=100;
+      imagesData=[];
+      var preview=document.getElementById("preview");
+      preview.innerHTML="";
+      var w,h;
+      if (ratio === "1:1") { w = 1080; h = 1080; } else { w = 1080; h = 1350; }
+      for(var i=1;i<=count;i++){
+        var canvas=document.createElement("canvas");
+        canvas.width=w;
+        canvas.height=h;
+        var ctx=canvas.getContext("2d");
+        var isDark=Math.random()<0.5;
+        drawAbstractBackground(ctx,w,h,isDark);
+        if(!isDark){
+          ctx.fillStyle="rgba(0,0,0,0.35)";
+          ctx.fillRect(0,0,w,h*0.12);
+        }
+        ctx.fillStyle="#ffffff";
+        var titleSize=Math.floor(h*0.055);
+        ctx.font="bold "+titleSize+"px sans-serif";
+        ctx.textBaseline="top";
+        ctx.fillText(timestamp+" — IMG "+i,w*0.05,h*0.04);
+        ctx.fillStyle="rgba(0,0,0,0.55)";
+        ctx.fillRect(w*0.06,h*0.55,w*0.88,h*0.35);
+        ctx.fillStyle="#ffffff";
+        var fs=Math.floor(h*0.035);
+        ctx.font="bold "+fs+"px sans-serif";
+        wrapText(ctx,randomMixedLorem(),w*0.08,h*0.58,w*0.84,fs*1.3);
+        var url=canvas.toDataURL("image/jpeg",0.92);
+        imagesData.push({url:url,filename:i+".jpg"});
+        var img=new Image();
+        img.src=url;
+        img.alt="Image "+i;
+        preview.appendChild(img);
+      }
+      document.getElementById("filenames").value=imagesData.map(function(x){return x.filename;}).join("\n");
+      document.getElementById("downloadBtn").disabled=imagesData.length===0;
+    }
+    function downloadAll(){
+      var i=0;
+      function downloadNextImage(){
+        if(i>=imagesData.length)return;
+        var a=document.createElement("a");
+        a.href=imagesData[i].url;
+        a.download=imagesData[i].filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        i++;
+        setTimeout(downloadNextImage,250);
+      }
+      downloadNextImage();
+    }
+    document.getElementById("generateBtn").addEventListener("click",generateImages);
+    document.getElementById("downloadBtn").addEventListener("click",downloadAll);
+  </script>
+</body>
+</html>
