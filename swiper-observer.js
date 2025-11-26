@@ -48,7 +48,7 @@ s.appendChild(img);
 s.appendChild(preloader);
 w2.appendChild(s);
 }
-var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,loadOnTransitionStart:true}};
+var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:true};
 if(tot===1) cfg.allowTouchMove=false;
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
