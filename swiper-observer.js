@@ -1,3 +1,7 @@
+if (typeof Swiper !== 'undefined' && Swiper.Lazy) {
+    Swiper.use([Swiper.Lazy]);
+}
+
 var swiperObserver=null;
 var swiperMap={};
 function initSwiperObserver(){
