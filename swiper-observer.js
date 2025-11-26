@@ -42,7 +42,7 @@ var s=document.createElement('div');
 s.className='swiper-slide';
 var img=document.createElement('img');
 img.className='swiper-lazy';
-img.setAttribute('data-src', url + arr[i]);
+img.src=url+arr[i];
 img.style.width='100%';
 img.style.height='100%';
 img.style.objectFit='cover';
