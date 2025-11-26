@@ -52,10 +52,14 @@ var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,
 if(tot===1) cfg.allowTouchMove=false;
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
-sw.update();
-if (sw && sw.lazy && typeof sw.lazy.load === 'function') {
-sw.lazy.load();
-}
+window.requestAnimationFrame(function() {
+    if (sw && !sw.destroyed) {
+        sw.update(); 
+        if (sw.lazy && typeof sw.lazy.load === 'function') {
+            sw.lazy.load();
+        }
+    }
+});
 }).catch(function(){el.dataset.active="";});
 }
 
