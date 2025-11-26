@@ -53,18 +53,33 @@ function buildSwiper(el){
         w2.className = 'swiper-wrapper';
         wrap.appendChild(w2);
         el.appendChild(wrap);
+        
+        const loadedClass = 'swiper-lazy-loaded'; 
+
         for(var i = 0; i < tot; i++){
             if(!arr[i]) continue;
             var s = document.createElement('div');
             s.className = 'swiper-slide';
+            
             var preloader = document.createElement('div');
             preloader.className = 'swiper-lazy-preloader';
+            
             var img = document.createElement('img');
             img.dataset.src = url + arr[i];
             img.className = 'swiper-lazy';
             img.style.width = '100%';
             img.style.height = '100%';
             img.style.objectFit = 'cover';
+            
+            img.addEventListener('load', function() {
+                this.classList.add(loadedClass);
+                const parentSlide = this.closest('.swiper-slide');
+                const preloader = parentSlide ? parentSlide.querySelector('.swiper-lazy-preloader') : null;
+                if (preloader) {
+                    preloader.remove();
+                }
+            });
+            
             s.appendChild(preloader);
             s.appendChild(img);
             w2.appendChild(s);
@@ -76,7 +91,8 @@ function buildSwiper(el){
             lazy: {
                 loadPrevNext: true,
                 loadPrevNextAmount: 2, 
-                loadOnTransitionStart: true 
+                loadOnTransitionStart: true,
+                loadedClass: loadedClass
             }
         };
         if(tot === 1) cfg.allowTouchMove = false;
