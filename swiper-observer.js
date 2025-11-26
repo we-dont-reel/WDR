@@ -37,14 +37,16 @@ if(!arr[i]) continue;
 var s=document.createElement('div');
 s.className='swiper-slide';
 var img=document.createElement('img');
+img.className='swiper-lazy';
 img.src=url+arr[i];
 img.style.width='100%';
 img.style.height='100%';
 img.style.objectFit='cover';
 s.appendChild(img);
+s.appendChild(document.createElement('div')).className='swiper-lazy-preloader';
 w2.appendChild(s);
 }
-var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,loadOnTransitionStart:true}};
+var cfg={loop:false,slidesPerView:1,preloadImages:false,watchSlidesProgress:true,lazy:{loadPrevNext:true,loadPrevNextAmount:2,loadOnTransitionStart:true}};
 if(tot===1) cfg.allowTouchMove=false;
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
