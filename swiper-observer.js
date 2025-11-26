@@ -1,7 +1,3 @@
-if (typeof Swiper !== 'undefined' && Swiper.Lazy) {
-    Swiper.use([Swiper.Lazy]);
-}
-
 var swiperObserver=null;
 var swiperMap={};
 function initSwiperObserver(){
@@ -50,7 +46,7 @@ s.appendChild(img);
 s.appendChild(document.createElement('div')).className='swiper-lazy-preloader';
 w2.appendChild(s);
 }
-var cfg={modules:[Swiper.Lazy],loop:false,slidesPerView:1,preloadImages:true,watchSlidesProgress:true,lazy:{loadPrevNext:true,loadPrevNextAmount:2,loadOnTransitionStart:true}};
+var cfg={loop:false,slidesPerView:1,preloadImages:true,watchSlidesProgress:true,lazy:{loadPrevNext:true,loadPrevNextAmount:2,loadOnTransitionStart:true}};
 if(tot===1) cfg.allowTouchMove=false;
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
