@@ -64,3 +64,4 @@ function destroySwiper(el){
   var sw=swiperMap[tid];
   if(sw){sw.destroy(true,true);delete swiperMap[tid];}
   el.innerHTML="";
+}
