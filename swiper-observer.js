@@ -54,8 +54,6 @@ function buildSwiper(el){
         wrap.appendChild(w2);
         el.appendChild(wrap);
         
-        const loadedClass = 'swiper-lazy-loaded'; 
-
         for(var i = 0; i < tot; i++){
             if(!arr[i]) continue;
             var s = document.createElement('div');
@@ -71,15 +69,6 @@ function buildSwiper(el){
             img.style.height = '100%';
             img.style.objectFit = 'cover';
             
-            img.addEventListener('load', function() {
-                this.classList.add(loadedClass);
-                const parentSlide = this.closest('.swiper-slide');
-                const preloader = parentSlide ? parentSlide.querySelector('.swiper-lazy-preloader') : null;
-                if (preloader) {
-                    preloader.remove();
-                }
-            });
-            
             s.appendChild(preloader);
             s.appendChild(img);
             w2.appendChild(s);
@@ -91,18 +80,27 @@ function buildSwiper(el){
             lazy: {
                 loadPrevNext: true,
                 loadPrevNextAmount: 2, 
-                loadOnTransitionStart: true,
-                loadedClass: loadedClass
+                loadOnTransitionStart: true
             }
         };
         if(tot === 1) cfg.allowTouchMove = false;
         var sw = new Swiper(wrap, cfg);
         swiperMap[tid] = sw;
+        
         window.requestAnimationFrame(function() {
             if (sw && !sw.destroyed) {
                 sw.update(); 
+                
+                wrap.querySelectorAll('.swiper-lazy-preloader').forEach(function(p) {
+                    p.remove();
+                });
+                
+                if (sw.lazy && typeof sw.lazy.load === 'function') {
+                    sw.lazy.load();
+                }
             }
         });
+
     }).catch(function(){
         el.dataset.active = "";
     });
