@@ -44,7 +44,7 @@ img.style.objectFit='cover';
 s.appendChild(img);
 w2.appendChild(s);
 }
-var cfg={loop:false,slidesPerView:1};
+var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,loadOnTransitionStart:true}};
 if(tot===1) cfg.allowTouchMove=false;
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
