@@ -52,6 +52,9 @@ var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,
 if(tot===1) cfg.allowTouchMove=false;
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
+if (sw && sw.lazy && typeof sw.lazy.load === 'function') {
+sw.lazy.load();
+}
 }).catch(function(){el.dataset.active="";});
 }
 
