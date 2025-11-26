@@ -37,11 +37,15 @@ if(!arr[i]) continue;
 var s=document.createElement('div');
 s.className='swiper-slide';
 var img=document.createElement('img');
-img.src=url+arr[i];
+img.dataset.src=url+arr[i];
+img.className='swiper-lazy';
 img.style.width='100%';
 img.style.height='100%';
 img.style.objectFit='cover';
+var preloader = document.createElement('div');
+preloader.className = 'swiper-lazy-preloader';
 s.appendChild(img);
+s.appendChild(preloader);
 w2.appendChild(s);
 }
 var cfg={loop:false,slidesPerView:1,preloadImages:false,lazy:{loadPrevNext:true,loadOnTransitionStart:true}};
