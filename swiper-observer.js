@@ -43,6 +43,7 @@ img.style.height='100%';
 img.style.objectFit='cover';
 s.appendChild(img);
 w2.appendChild(s);
+slideObserver.observe(s);
 }
 var cfg={loop:false,slidesPerView:1};
 if(tot===1) cfg.allowTouchMove=false;
@@ -60,3 +61,24 @@ var sw=swiperMap[tid];
 if(sw){sw.destroy(true,true);delete swiperMap[tid];}
 el.innerHTML="";
 }
+
+var slideObserver = new IntersectionObserver(function(entries){
+for (var i = 0; i < entries.length; i++) {
+var e = entries[i];
+var el = e.target;
+if (!e.isIntersecting) continue;
+var img = el.querySelector('img');
+if (img && img.dataset.src) {
+img.src = img.dataset.src;
+img.removeAttribute('data-src');
+}
+var next = el.nextElementSibling;
+if (next) {
+var img2 = next.querySelector('img');
+if (img2 && img2.dataset.src) {
+img2.src = img2.dataset.src;
+img2.removeAttribute('data-src');
+}
+}
+}
+});
