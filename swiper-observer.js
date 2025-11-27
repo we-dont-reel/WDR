@@ -1,7 +1,7 @@
 var swiperObserver=null;
 var swiperMap={};
 function initSwiperObserver(){
-swiperObserver=new IntersectionObserver(handleSwiperObs,{threshold:0});
+swiperObserver=new IntersectionObserver(handleSwiperObs,{threshold:0,rootMargin:'50% 0px 50% 0px'});
 document.querySelectorAll('.obsi').forEach(function(x){swiperObserver.observe(x)});
 }
 
