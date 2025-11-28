@@ -94,14 +94,8 @@ img2.removeAttribute('data-src');
 });
 
 function slideNumberUpdater(current,total,tid){
-if(total===1) return;
-var el=document.querySelector('.outid-' + tid);
-if(!el) return;
-var hdr=el.querySelector('.post-top-right');
-if(!hdr) return;
-if(current===1){
-hdr.textContent='Swipe';
-} else {
-hdr.textContent=current + ' | ' + total;
-}
+if(total===1)return;
+var prev=document.querySelector('.outid-'+tid).previousElementSibling;
+var hdr=prev.querySelector('.post-top-right');
+if(current===1)hdr.textContent='Swipe';else hdr.textContent=current+' | '+total;
 }
