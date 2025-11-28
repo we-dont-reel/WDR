@@ -43,7 +43,6 @@ img.style.height='100%';
 img.style.objectFit='cover';
 s.appendChild(img);
 w2.appendChild(s);
-slideObserver.observe(s);
 }
 var cfg={loop:false,slidesPerView:1};
 if(tot===1) cfg.allowTouchMove=false;
@@ -53,6 +52,11 @@ slideChangeTransitionEnd:function(){slideNumberUpdater(this.activeIndex+1,tot,ti
 };
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
+Promise.resolve().then(function(){
+sw.slides.forEach(function(sl){
+slideObserver.observe(sl);
+});
+});
 }).catch(function(){el.dataset.active="";});
 }
 
