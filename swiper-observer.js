@@ -43,7 +43,7 @@ img.style.height='100%';
 img.style.objectFit='cover';
 s.appendChild(img);
 w2.appendChild(s);
-Promise.resolve().then(() => slideObserver.observe(s));
+slideObserver.observe(s);
 }
 var cfg={loop:false,slidesPerView:1};
 if(tot===1) cfg.allowTouchMove=false;
