@@ -59,6 +59,7 @@ function buildDivs(data) {
       html += `${topBar}${mainDiv}${bottomBar}`;
     });
   box.innerHTML = html.trim();
+  document.querySelector('.bottom-end-div p').textContent = 'Nothing more for now :-)';
   initMoreTextObserver();
   initSwiperObserver();
 }
