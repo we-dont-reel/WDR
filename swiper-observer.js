@@ -76,7 +76,7 @@ if (!e.isIntersecting) continue;
 var slides = el.parentNode.children;
 var total = slides.length;
 var index = Array.prototype.indexOf.call(slides, el);
-el.previousElementSibling.querySelector('.post-top-right').textContent = (index === 0 ? 'Swipe' : (index + 1) + ' | ' + total);
+el.closest('[class*="obsi-"]').previousElementSibling.querySelector('.post-top-right').textContent = (index === 0 ? 'Swipe' : (index + 1) + ' | ' + total);
 var img = el.querySelector('img');
 if (img && img.dataset.src) {
 img.src = img.dataset.src;
