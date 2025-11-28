@@ -73,10 +73,6 @@ for (var i = 0; i < entries.length; i++) {
 var e = entries[i];
 var el = e.target;
 if (!e.isIntersecting) continue;
-var ob = el.closest('.obsi');
-var tid = ob.className.split('outid-')[1].split(' ')[0];
-var sw = swiperMap[tid];
-if (Array.prototype.indexOf.call(el.parentNode.children, el) === sw.realIndex) ob.previousElementSibling.querySelector('.post-top-right').textContent = (sw.slides.length === 1 ? 'Single' : (sw.realIndex === 0 ? 'Swipe' : (sw.realIndex + 1) + ' | ' + sw.slides.length));
 var img = el.querySelector('img');
 if (img && img.dataset.src) {
 img.src = img.dataset.src;
