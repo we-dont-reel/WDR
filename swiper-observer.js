@@ -94,7 +94,7 @@ img2.removeAttribute('data-src');
 });
 
 function slideNumberUpdater(current,total,obsi){
-alert(current, ' ', total);
+console.log(current, ' ', total);
 if(total===1) return;
 var prev=obsi.previousElementSibling;
 if(!prev) return;
