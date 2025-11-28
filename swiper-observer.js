@@ -48,8 +48,8 @@ slideObserver.observe(s);
 var cfg={loop:false,slidesPerView:1};
 if(tot===1) cfg.allowTouchMove=false;
 cfg.on={
-init:function(){slideNumberUpdater(this.activeIndex+1,tot,el)},
-slideChangeTransitionEnd:function(){slideNumberUpdater(this.activeIndex+1,tot,el)}
+init:function(){slideNumberUpdater(this.activeIndex+1,tot,tid)},
+slideChangeTransitionEnd:function(){slideNumberUpdater(this.activeIndex+1,tot,tid)}
 };
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
@@ -93,8 +93,8 @@ img2.removeAttribute('data-src');
 }
 });
 
-function slideNumberUpdater(current,total,obsi){
-console.log(current, ' ', total);
+function slideNumberUpdater(current,total,tid){
+console.log(current, ' ',total, ' ', tid );
 if(total===1) return;
 var prev=obsi.previousElementSibling;
 if(!prev) return;
