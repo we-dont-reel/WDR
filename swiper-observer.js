@@ -94,15 +94,6 @@ img2.removeAttribute('data-src');
 });
 
 function slideNumberUpdater(current,total,tid){
-console.log(current, ' ',total, ' ', tid );
-if(total===1) return;
-var prev=obsi.previousElementSibling;
-if(!prev) return;
-var tbr=prev.querySelector('.top-bar-right');
-if(!tbr) return;
-if(current===1){
-tbr.textContent='Swipe';
-} else {
-tbr.textContent=current+' | '+total;
-}
+console.log(current,total,tid );
+
 }
