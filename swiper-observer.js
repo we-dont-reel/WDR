@@ -99,5 +99,9 @@ var prev=obsi.previousElementSibling;
 if(!prev) return;
 var tbr=prev.querySelector('.top-bar-right');
 if(!tbr) return;
+if(current===1){
+tbr.textContent='Swipe';
+} else {
 tbr.textContent=current+' | '+total;
+}
 }
