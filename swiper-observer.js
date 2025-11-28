@@ -47,6 +47,10 @@ slideObserver.observe(s);
 }
 var cfg={loop:false,slidesPerView:1};
 if(tot===1) cfg.allowTouchMove=false;
+cfg.on={
+init:function(){slideNumberUpdater(this.activeIndex+1,tot,el)},
+slideChangeTransitionEnd:function(){slideNumberUpdater(this.activeIndex+1,tot,el)}
+};
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
 }).catch(function(){el.dataset.active="";});
@@ -88,3 +92,12 @@ img2.removeAttribute('data-src');
 }
 }
 });
+
+function slideNumberUpdater(current,total,obsi){
+if(total===1) return;
+var prev=obsi.previousElementSibling;
+if(!prev) return;
+var tbr=prev.querySelector('.top-bar-right');
+if(!tbr) return;
+tbr.textContent=current+' | '+total;
+}
