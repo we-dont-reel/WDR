@@ -79,15 +79,15 @@ var el = e.target;
 if (!e.isIntersecting) continue;
 var img = el.querySelector('img');
 if (img && img.dataset.src) {
-img.src = img.dataset.src;
-img.removeAttribute('data-src');
+var u=img.dataset.src,t=0;
+(function x(){fetch(u).then(r=>r.ok&&!(r.headers.get("content-type")||"").includes("text/html")?(img.src=u,img.removeAttribute("data-src")):(t++<4&&setTimeout(x,500))).catch(()=>t++<4&&setTimeout(x,500))})();
 }
 var next = el.nextElementSibling;
 if (next) {
 var img2 = next.querySelector('img');
 if (img2 && img2.dataset.src) {
-img2.src = img2.dataset.src;
-img2.removeAttribute('data-src');
+var u2=img2.dataset.src,t2=0;
+(function x2(){fetch(u2).then(r=>r.ok&&!(r.headers.get("content-type")||"").includes("text/html")?(img2.src=u2,img2.removeAttribute("data-src")):(t2++<4&&setTimeout(x2,500))).catch(()=>t2++<4&&setTimeout(x2,500))})();
 }
 }
 }
