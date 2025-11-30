@@ -52,11 +52,6 @@ slideChangeTransitionEnd:function(){slideNumberUpdater(this.activeIndex+1,tot,ti
 };
 var sw=new Swiper(wrap,cfg);
 swiperMap[tid]=sw;
-Promise.resolve().then(function(){
-sw.slides.forEach(function(sl){
-slideObserver.observe(sl);
-});
-});
 }).catch(function(){el.dataset.active="";});
 }
 
@@ -67,45 +62,36 @@ if(c.indexOf('outid-')===-1) return;
 var tid=c.split('outid-')[1].split(' ')[0];
 var sw=swiperMap[tid];
 if(sw){
-sw.slides.forEach(slide => { 
-slideObserver.unobserve(slide);
-});
 sw.destroy(true,true);
 delete swiperMap[tid];
 }
 el.innerHTML="";
 }
 
-var slideObserver = new IntersectionObserver(function(entries){
-for (var i = 0; i < entries.length; i++) {
-var e = entries[i];
-var el = e.target;
-if (!e.isIntersecting) continue;
-var img = el.querySelector('img');
-if (img && img.dataset.src) {
-let u = img.dataset.src, t = 0;
-(function x(){
-  fetch(u).then(r => r.ok ? r.blob() : Promise.reject())
-  .then(b => { img.src = URL.createObjectURL(b); img.removeAttribute('data-src'); })
-  .catch(() => { if(t++ < 4) setTimeout(x, 1000); });
-})();
-}
-var next = el.nextElementSibling;
-if (next) {
-var img2 = next.querySelector('img');
-if (img2 && img2.dataset.src) {
-let u2 = img2.dataset.src, t2 = 0;
-(function x2(){
-  fetch(u2).then(r => r.ok ? r.blob() : Promise.reject())
-  .then(b => { img2.src = URL.createObjectURL(b); img2.removeAttribute('data-src'); })
-  .catch(() => { if(t2++ < 4) setTimeout(x2, 1000); });
-})();
-}
-}
-}
-});
-
 function slideNumberUpdater(current,total,tid){
+var idx=current-1;
+var container=document.querySelector('.outid-'+tid);
+if(!container)return;
+var slides=container.querySelectorAll('.swiper-slide');
+var load=function(i){
+if(i<0||i>=slides.length)return;
+var im=slides[i].querySelector('img');
+if(im&&im.dataset.src){
+var u=im.dataset.src,t=0;
+(function x(){
+fetch(u).then(function(r){
+if(r.ok&&!(r.headers.get("content-type")||"").includes("text/html")){
+im.src=u;
+im.removeAttribute('data-src');
+}else if(t++<5)setTimeout(x,1000);
+}).catch(function(){
+if(t++<5)setTimeout(x,1000);
+});
+})();
+}
+};
+load(idx);
+load(idx+1);
 if(total===1)return;
 var prev=document.querySelector('.outid-'+tid).previousElementSibling;
 var hdr=prev.querySelector('.post-top-right');
