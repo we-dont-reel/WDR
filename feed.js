@@ -14,6 +14,52 @@ function loadFeedJSON() {
       }
     }
     let filteredDivs = allRandomized;
+    var p=new URLSearchParams(location.search).get("p");
+    var u=new URLSearchParams(location.search).get("u");
+    var l=new URLSearchParams(location.search).get("l");
+    if(p){
+    var oc="outid-"+p;
+    var pi=filteredDivs.find(v=>v.includes(oc));
+    if(pi){
+    var pl=pi.split(" ").find(x=>x.startsWith("lan-"));
+    filteredDivs=filteredDivs.filter(v=>v.includes("lan-en")||v.includes(pl));
+    filteredDivs=filteredDivs.filter(v=>v!==pi);
+    filteredDivs.unshift(pi);
+    document.querySelector('.top-intro-div').firstElementChild.firstElementChild.textContent='Post First';
+    }}
+    if(u){
+    var un="@"+u;
+    var ups=filteredDivs.filter(v=>v.endsWith(un));
+    var uls=[];
+    ups.forEach(v=>{
+    var pl=v.split(" ").find(x=>x.startsWith("lan-"));
+    if(pl)uls.push(pl);
+    });
+    uls=[...new Set(uls)];
+    uls.push("lan-en");
+    ups.sort(function(a,b){
+    var pa=parseInt(a.split(" ").find(x=>x.startsWith("outid-")).replace("outid-",""));
+    var pb=parseInt(b.split(" ").find(x=>x.startsWith("outid-")).replace("outid-",""));
+    return pa-pb;
+    });
+    filteredDivs=filteredDivs.filter(v=>{
+    var pl=v.split(" ").find(x=>x.startsWith("lan-"));
+    return uls.includes(pl);
+    });
+    ups.forEach(v=>{
+    filteredDivs=filteredDivs.filter(x=>x!==v);
+    });
+    filteredDivs.unshift(...ups);
+    if(ups.length>0)document.querySelector('.top-intro-div').firstElementChild.firstElementChild.textContent='Creator First';
+    }
+    if(l){
+      var ls=l.split(",").map(x=>x.trim().toLowerCase()).filter(Boolean).map(x=>x.startsWith("lan-")?x:"lan-"+x);
+      ls=[...new Set(ls)];
+      filteredDivs=filteredDivs.filter(v=>{
+        var pl=v.split(" ").find(x=>x.startsWith("lan-"));
+        return pl && ls.includes(pl);
+      });
+    }
     return { divs: filteredDivs };
   });
 }
