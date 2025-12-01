@@ -40,7 +40,7 @@ function loadFeedJSON() {
     ups.sort(function(a,b){
     var pa=parseInt(a.split(" ").find(x=>x.startsWith("outid-")).replace("outid-",""));
     var pb=parseInt(b.split(" ").find(x=>x.startsWith("outid-")).replace("outid-",""));
-    return pa-pb;
+    return pb-pa;
     });
     filteredDivs=filteredDivs.filter(v=>{
     var pl=v.split(" ").find(x=>x.startsWith("lan-"));
