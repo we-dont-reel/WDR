@@ -1,2 +1,1 @@
-@domain noreel.in
-/:user  https://in.wedontreel.com/feed?u=:user  301
+/@:user   https://in.wedontreel.com/feed?u=:user   301
