@@ -39,11 +39,14 @@ align-items: center;
 justify-content: center;
 margin-right: 6px;
 }
-.avatar-circle p {
-font-family: 'Font Awesome 7 Free';
-font-size: 12px;
-font-weight: bold;
+.avatar-circle i {
+font-size: 14px;
+font-weight: 900;
 color: white;
+line-height: 1;
+display: inline-block;
+width: auto;
+height: 14px;
 margin: 0;
 padding: 0;
 }
