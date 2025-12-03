@@ -80,7 +80,7 @@ function buildDivs(data) {
         <div class="post-top-bar">
           <div class="post-top-left">
             <div class="avatar-circle" style="background-color:${getRandomColor()}" onclick="location.href='instagram://user?username=${cleanUser}'">
-              <p>${cleanUser.charAt(0).toUpperCase()}</p>
+              <p>@</p>
             </div>
             <a href="instagram://user?username=${cleanUser}">${cleanUser}</a>
           </div>
