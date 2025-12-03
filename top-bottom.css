@@ -29,11 +29,14 @@ font-weight: bold;
 width: 28px;
 height: 28px;
 border-radius: 50%;
-display: grid;
+/*display: grid;
 place-items: center;
 margin-right: 6px;
 flex-shrink: 0;
-background: none;
+background: none;*/
+display: flex;
+align-items: center;
+justify-content: center;
 }
 .avatar-circle p {
 font-family: interX;
@@ -42,7 +45,7 @@ font-weight: bold;
 color: white;
 margin: 0;
 padding: 0;
-line-height: 1;
+/*line-height: 1;*/
 }
 .post-top-right {
 float: right;
