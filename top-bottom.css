@@ -37,6 +37,7 @@ background: none;*/
 display: flex;
 align-items: center;
 justify-content: center;
+margin-right: 6px;
 }
 .avatar-circle p {
 font-family: interX;
