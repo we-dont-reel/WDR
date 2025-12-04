@@ -81,6 +81,7 @@ function buildDivs(data) {
           <div class="post-top-left">
             <div class="avatar-circle" style="background-color:${getRandomColor()}" onclick="location.href='instagram://user?username=${cleanUser}'">
               <i class="fa-regular fa-user"></i>
+              <i class="fa-solid mini-fa fa-${cleanUser.charAt(0).toLowerCase()}"></i>
             </div>
             <a href="instagram://user?username=${cleanUser}">${cleanUser}</a>
           </div>
