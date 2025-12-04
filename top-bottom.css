@@ -28,7 +28,7 @@ font-weight: bold;
 .avatar-circle {
 width: 28px;
 height: 28px;
-border-radius: 8px;
+border-radius: 50%;
 /*display: grid;
 place-items: center;
 margin-right: 6px;
