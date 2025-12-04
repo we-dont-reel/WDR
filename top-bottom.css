@@ -40,13 +40,13 @@ justify-content: center;
 margin-right: 6px;
 }
 .avatar-circle i {
-font-size: 14px;
+font-size: 12px;
 font-weight: 900;
 color: white;
 line-height: 1;
 display: inline-block;
 width: auto;
-height: 14px;
+height: 12px;
 margin: 0;
 padding: 0;
 }
@@ -97,9 +97,8 @@ position: relative;
 }
 .avatar-circle .mini-fa {
 position: absolute;
-bottom: 4px;
 font-size: 6px;
 line-height: 1;
 color: white;
-left: 19px;
+left: 18px;
 }
