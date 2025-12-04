@@ -102,4 +102,6 @@ font-size: 6px;
 line-height: 1;
 color: white;
 left: 20px;
+top: 50%;
+transform: translateY(-50%);
 }
