@@ -77,6 +77,8 @@ font-family: interX;
 font-size: 14px;
 font-weight: bold;
 text-decoration: none;
+-webkit-font-smoothing: antialiased; 
+font-feature-settings: 'zero' 0;
 }
 .post-top-left a:hover,
 .post-top-left a:visited,
