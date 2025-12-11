@@ -92,13 +92,9 @@ font-family: sans-serif;
 font-size: 16px;
 color: #444;
 }
-.avatar-circle {
-position: relative;
-}
-.avatar-circle .mini-fa {
-position: absolute;
-font-size: 6px;
-line-height: 1;
-color: white;
-left: 18px;
+.avatar-circle img.avatar-letter {
+width: 20px;
+height: 20px;
+object-fit: contain;
+display: block;
 }
