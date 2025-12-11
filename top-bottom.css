@@ -93,8 +93,8 @@ font-size: 16px;
 color: #444;
 }
 .avatar-circle img.avatar-letter {
-width: 20px;
-height: 20px;
+width: 18px;
+height: 18px;
 object-fit: contain;
 display: block;
 }
