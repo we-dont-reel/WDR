@@ -20,6 +20,7 @@ function loadFeedJSON() {
     if(p){
     var oc="outid-"+p;
     var pi=filteredDivs.find(v=>v.includes(oc));
+    if(!pi) filteredDivs = filteredDivs.filter(v=>v.includes("lan-en"));
     if(pi){
     var pl=pi.split(" ").find(x=>x.startsWith("lan-"));
     filteredDivs=filteredDivs.filter(v=>v.includes("lan-en")||v.includes(pl));
