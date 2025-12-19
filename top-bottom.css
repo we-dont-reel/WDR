@@ -103,5 +103,5 @@ object-fit: contain;
 display: block;
 }
 .bottom-end-div > p {
-font-family: "nuniX", sans-serif;
+font-family: "nuniX", sans-serif !important;
 }
