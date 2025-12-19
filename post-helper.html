@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Post Helper</title>
+<style>
+body{
+font-family:sans-serif;
+background:#f1f3f4;
+margin:0;
+padding:16px
+}
+.box{
+max-width:600px;
+margin:0 auto;
+background:#fff;
+border:1px solid #dadce0;
+border-radius:4px;
+padding:12px;
+box-sizing:border-box
+}
+.drop{
+border:2px dashed #999;
+padding:20px;
+text-align:center;
+cursor:pointer;
+margin-bottom:12px
+}
+.drop.drag{
+background:#eef
+}
+input,textarea,button{
+width:100%;
+box-sizing:border-box;
+margin-bottom:8px;
+padding:6px;
+font-size:14px
+}
+textarea{
+min-height:120px;
+resize:vertical
+}
+button{
+cursor:pointer
+}
+.output{
+background:#111;
+color:#0f0;
+padding:8px;
+font-family:monospace;
+font-size:13px;
+white-space:pre-wrap;
+margin-top:8px
+}
+.files{
+margin-top:8px;
+display:flex;
+gap:8px
+}
+</style>
+</head>
+<body>
+<div class="box">
+<p id="imgstatus">No image(s) uploaded</p>
+<div class="drop" id="drop">Drag & Drop Images or Click</div>
+<input type="file" id="file" multiple accept="image/*" style="display:none">
+
+<input id="outid" placeholder="outid (example: 251210209)">
+<input id="lan" placeholder="language (example: hi)">
+<input id="dname" placeholder="display name">
+<input id="handle" placeholder="handle (without @)">
+<textarea id="caption" placeholder="caption (new lines preserved)"></textarea>
+
+<button id="gen">Generate</button>
+
+<div class="output" id="control"></div>
+
+<div class="files">
+<button id="capbtn">Download caption.txt</button>
+<button id="idxbtn">Download index.txt</button>
+</div>
+</div>
+
+<script>
+var files=[];
+var asp="asp11";
+
+var drop=document.getElementById("drop");
+var fileInput=document.getElementById("file");
+
+drop.onclick=function(){fileInput.click()};
+
+drop.ondragover=function(e){
+e.preventDefault();
+drop.classList.add("drag")
+};
+drop.ondragleave=function(){
+drop.classList.remove("drag")
+};
+drop.ondrop=function(e){
+e.preventDefault();
+drop.classList.remove("drag");
+handleFiles(e.dataTransfer.files)
+};
+fileInput.onchange=function(){
+handleFiles(this.files)
+};
+
+function handleFiles(f){
+files=[...f];
+document.getElementById("imgstatus").textContent=files.length+" image"+(files.length>1?"s":"")+" uploaded";
+if(!files.length)return;
+
+var r=Math.floor(Math.random()*files.length);
+var img=new Image();
+img.onload=function(){
+asp=(img.naturalWidth===img.naturalHeight)?"asp11":"asp45"
+};
+img.src=URL.createObjectURL(files[r])
+}
+
+document.getElementById("gen").onclick=function(){
+if(!files.length)return;
+var outid=document.getElementById("outid").value.trim();
+var lan=document.getElementById("lan").value.trim();
+var dname=document.getElementById("dname").value.trim();
+var handle=document.getElementById("handle").value.trim();
+var tot=files.length;
+
+var ctrl="obsi outid-"+outid+" tot-img-"+tot+" lan-"+lan+" "+asp;
+if(handle)ctrl+=" @"+handle;
+ctrl="\""+ctrl+"\",";
+
+document.getElementById("control").textContent=ctrl;
+
+window.captionText=buildCaption(dname,handle);
+window.indexText=buildIndex(files)
+};
+
+function buildCaption(d,h){
+var t="";
+t+=document.getElementById("caption").value;
+if(d||h){
+t+="\n[By:";
+if(d)t+=" "+d;
+if(h)t+=", @"+h;
+t+="]";
+}
+return t
+}
+
+function buildIndex(f){
+var names=f.map(x=>x.name);
+names.sort(function(a,b){
+var na=num(a),nb=num(b);
+return na-nb
+});
+return names.join("\n")
+}
+
+function num(n){
+var b=n.slice(0,n.lastIndexOf("."));
+var m=b.match(/_(\d+)$/);
+return m?parseInt(m[1],10):0
+}
+
+document.getElementById("capbtn").onclick=function(){
+if(!window.captionText)return;
+download("caption.txt",window.captionText)
+};
+document.getElementById("idxbtn").onclick=function(){
+if(!window.indexText)return;
+download("index.txt",window.indexText)
+};
+
+function download(n,t){
+var b=new Blob([t],{type:"text/plain"});
+var a=document.createElement("a");
+a.href=URL.createObjectURL(b);
+a.download=n;
+a.click()
+}
+</script>
+</body>
+</html>
