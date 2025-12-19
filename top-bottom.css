@@ -10,6 +10,10 @@ src: url('Noto.ttf') format('truetype');
 font-family: roboX;
 src: url('Robo.ttf') format('truetype');
 }
+@font-face {
+font-family: nuniX;
+src: url('Nuni.ttf') format('truetype');
+}
 .post-top-left {
 width: 80%;
 padding-left: 6px;
