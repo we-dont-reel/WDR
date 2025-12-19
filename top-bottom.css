@@ -104,4 +104,6 @@ display: block;
 }
 .bottom-end-div > p {
 font-family: "nuniX", sans-serif !important;
+font-synthesis: none !important;
+-webkit-font-smoothing: antialiased;
 }
