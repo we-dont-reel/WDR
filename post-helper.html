@@ -111,6 +111,22 @@ function handleFiles(f){
 files=[...f];
 document.getElementById("imgstatus").textContent=files.length+" image"+(files.length>1?"s":"")+" uploaded";
 if(!files.length)return;
+    
+var mode=null,loaded=0,ok=true;
+for(var i=0;i<files.length;i++){
+var im=new Image();
+im.onload=function(){
+loaded++;
+var w=this.naturalWidth,h=this.naturalHeight;
+var r=(w===h)?"sq":(Math.abs(w*5-h*4)<=1)?"p":"bad";
+if(r==="bad")ok=false;
+if(mode===null)mode=r;
+else if(r!==mode)ok=false;
+if(loaded===files.length&&!ok)
+alert("Images are not of desired aspect ratio. All images must be either 1:1 or 4:5. Please change the ratio class if needed.");
+};
+im.src=URL.createObjectURL(files[i]);
+}
 
 var r=Math.floor(Math.random()*files.length);
 var img=new Image();
@@ -140,9 +156,11 @@ window.indexText=buildIndex(files)
 
 function buildCaption(d,h){
 var t="";
-t+=document.getElementById("caption").value;
+t+=document.getElementById("caption").value.trim();
 if(d||h){
-t+="\n[By:";
+if(t!="")
+t+="\n";
+t+="[By:";
 if(d)t+=" "+d;
 if(h)t+=", @"+h;
 t+="]";
