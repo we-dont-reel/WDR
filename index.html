@@ -69,6 +69,39 @@
       .headline { font-size: 400%; }
       .domains, .subtext { font-size: 90%; }
     }
+    .actions{
+      width:100%;
+      max-width:420px;
+      display:flex;
+      flex-direction:column;
+      gap:50px;
+    }
+    .action-btn{
+      background:#ffffff;
+      color:#0d5ecc;
+      border:none;
+      border-radius:4px;
+      padding:14px 16px;
+      font-size:16px;
+      font-weight:600;
+      width:200px;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
+      text-decoration:none;
+      display:block;
+      cursor:pointer;
+      user-select:none;
+      -webkit-user-select:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .action-btn:hover,
+    .action-btn:focus,
+    .action-btn:active{
+      background:#ffffff;
+      color:#0d5ecc;
+      outline:none;
+    }
   </style>
 </head>
 <body>
@@ -76,8 +109,25 @@
     <h5 class="toptext">
     Thank you for being here!<br>&nbsp;<br>No reels and no noise. Just swipes. Tuned to save battery and data.<br>&nbsp;<br>(An initiative of wedontreel.com)
     </h5>
-    <h1 class="headline">Coming<span>Soon!</span></h1>
-      <div class="subtext">Made in India, for the world!<br>&nbsp;<br>Write to us at <b>hi@wedontreel.com</b></div>
+      
+    <div class="actions">
+      <a class="action-btn"
+         href="https://in.wedontreel.com/feed"
+         target="_blank"
+         rel="noopener noreferrer">
+         See All Posts
+      </a>
+
+      <a class="action-btn"
+         href="https://www.instagram.com/wedontreel/"
+         target="_blank"
+         rel="noopener noreferrer">
+         Submit New Post
+      </a>
+    </div>
+      
+     <div class="subtext">Made in India, for the world!<br>&nbsp;<br>Write to us at <b>hi@wedontreel.com</b></div>
+      
   </div>
     <script>
     (function(){
