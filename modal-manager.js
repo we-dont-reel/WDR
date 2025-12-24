@@ -7,6 +7,13 @@ function showReportModal(postid){
 }
 
 function showShareModal(postid){
+  if (navigator.share) {
+    navigator.share({
+    text: "Hey, just check this! ",
+    url: "https://in.wedontreel.com/feed?p=" + postid
+    });
+    return;
+  }
   var el=document.getElementById('share-text');
   if(el){el.value='https://in.wedontreel.com/feed?p='+postid;}
   MicroModal.show('share-modal');    
