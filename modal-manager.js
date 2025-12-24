@@ -9,7 +9,7 @@ function showReportModal(postid){
 function showShareModal(postid){
   if (navigator.share) {
     navigator.share({
-    text: "Hey, just check this! \n",
+    text: "Hey, just check this!\n",
     url: "https://in.wedontreel.com/feed?p=" + postid
     });
     return;
