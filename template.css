@@ -48,6 +48,7 @@
     overflow: hidden;
     text-align: center;
     font-family: sans-serif;
+    padding-bottom: 12px;
     }
     .gsml-youtube-container {
     background: white;
@@ -568,6 +569,7 @@
     background: rgba(30, 30, 30, 0.5);
     border-radius: 10px;
     margin-bottom: 10px;
+    padding-bottom: 12px;
     }
     .gsml-chatblock > :first-child {
     margin-top: 0;
