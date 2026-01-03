@@ -1136,13 +1136,13 @@ function GSML_Map(rawContent)
 {
   const clean = rawContent.trim();
   const lines = clean.split('\n').map(line => line.trim()).filter(Boolean);
-  const links = lines.filter(line => line.startsWith('https://'));
+  const links = lines;
   if (links.length === 0) return `<p class="gsml-error">#Map;<br>Please add a map link starting with https://</p>`;
   if (links.length > 1) return `<p class="gsml-error">#Map;<br>Only one map link allowed per widget. You can add multiple map widgets.</p>`;
   const link = links[0];
   return `<a href="${link}" target="_blank" class="gsml-map-container">
   <div class="gsml-map-icon"><img src="https://we-dont-reel.github.io/WDR/img/map.png" alt="map icon"></div>
-  <div class="gsml-map-text">Open Map Link</div>
+  <div class="gsml-map-text">${link}</div>
   </a>`;
 }
 function GSML_Date(rawContent)
