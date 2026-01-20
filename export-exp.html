@@ -95,7 +95,7 @@ async function contentPopulatorGenZerME() {
     doc.querySelectorAll("head script").forEach(scriptInHead => scripts.push(scriptInHead));
     const newBody = document.createElement("body");
     newBody.style.width = "512px";
-    newBody.style.height = "640px";
+    newBody.style.height = "768px";
     newBody.style.overflow = "auto";
     newBody.style.background = "black";
     Array.from(doc.body.childNodes).forEach(node => {
