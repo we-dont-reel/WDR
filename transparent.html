@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex">
-<meta name="robots" content="nofollow">
+<meta name="robots" content="noindex,nofollow">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Pixel Diff Export</title>
-
 <style>
 html,body{margin:0;padding:0;background:#000;color:#fff;font-family:system-ui}
 body{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh}
@@ -19,8 +16,11 @@ canvas{display:none}
 </head>
 <body>
 
-<p>Upload an image of exactly <b>1080 × 1620</b></p>
-<input type="file" accept="image/*" id="upload">
+<p>Upload <b>Base Image</b> (1080 × 1620)</p>
+<input type="file" accept="image/*" id="baseUpload">
+
+<p>Upload <b>Compare Image</b> (1080 × 1620)</p>
+<input type="file" accept="image/*" id="userUpload" disabled>
 
 <div class="buttons">
 <button id="download" disabled>Download PNG</button>
@@ -33,10 +33,9 @@ canvas{display:none}
 
 <script>
 const W=1080,H=1620
-const baseImg=new Image()
-baseImg.src='bg/bg1.jpg'
 
-const upload=document.getElementById('upload')
+const baseUpload=document.getElementById('baseUpload')
+const userUpload=document.getElementById('userUpload')
 const download=document.getElementById('download')
 const refresh=document.getElementById('refresh')
 
@@ -50,22 +49,34 @@ const xBase=cBase.getContext('2d')
 const xUser=cUser.getContext('2d')
 const xOut=cOut.getContext('2d')
 
-baseImg.onload=()=>{
-if(baseImg.width!==W||baseImg.height!==H){
-alert('Base image bg/bg1.jpg must be exactly 1080 × 1620')
-upload.disabled=true
-return
-}
-xBase.drawImage(baseImg,0,0)
-}
+let baseReady=false
 
-upload.onchange=e=>{
+baseUpload.onchange=e=>{
 const f=e.target.files[0]
 if(!f)return
 const img=new Image()
 img.onload=()=>{
 if(img.width!==W||img.height!==H){
-alert('Uploaded image must be exactly 1080 × 1620')
+alert('Base image must be exactly 1080 × 1620')
+baseUpload.value=''
+return
+}
+xBase.clearRect(0,0,W,H)
+xBase.drawImage(img,0,0)
+baseReady=true
+userUpload.disabled=false
+}
+img.src=URL.createObjectURL(f)
+}
+
+userUpload.onchange=e=>{
+if(!baseReady)return
+const f=e.target.files[0]
+if(!f)return
+const img=new Image()
+img.onload=()=>{
+if(img.width!==W||img.height!==H){
+alert('Compare image must be exactly 1080 × 1620')
 return
 }
 xUser.clearRect(0,0,W,H)
@@ -105,8 +116,12 @@ a.click()
 }
 
 refresh.onclick=()=>{
-upload.value=''
+baseUpload.value=''
+userUpload.value=''
+userUpload.disabled=true
 download.disabled=true
+baseReady=false
+xBase.clearRect(0,0,W,H)
 xUser.clearRect(0,0,W,H)
 xOut.clearRect(0,0,W,H)
 }
