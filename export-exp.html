@@ -94,12 +94,10 @@ async function contentPopulatorGenZerME() {
     const scripts = [];
     doc.querySelectorAll("head script").forEach(scriptInHead => scripts.push(scriptInHead));
     const newBody = document.createElement("body");
-    newBody.style.width = "1080px";
-    newBody.style.height = "1620px";
+    newBody.style.width = "540px";
+    newBody.style.height = "810px";
     newBody.style.overflow = "auto";
     newBody.style.background = "black";
-    newBody.style.transform = "scale(0.5)";
-    newBody.style.transformOrigin = "top left";
     Array.from(doc.body.childNodes).forEach(node => {
         if (node.tagName?.toLowerCase() === "script") {
             scripts.push(node);
