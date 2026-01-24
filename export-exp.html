@@ -233,9 +233,9 @@ function startCreatingImages() {
                 setTimeout(() => {
                     html2canvas(slides[index], {
                         backgroundColor: "#000",
-                        width: 1080,
+                        width: 540,
                         height: 1620,
-                        scale: 1,
+                        scale: 2,
                         useCORS: true
                     }).then(canvas => {
                         imageUrls.push(canvas.toDataURL("image/jpeg", 0.95));
