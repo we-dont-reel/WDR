@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="robots" content="nofollow">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Pixel Diff Export</title>
+
+<style>
+html,body{margin:0;padding:0;background:#000;color:#fff;font-family:system-ui}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh}
+input,button{margin-top:12px}
+.buttons{display:flex;gap:12px}
+canvas{display:none}
+</style>
+</head>
+<body>
+
+<p>Upload an image of exactly <b>1080 × 1620</b></p>
+<input type="file" accept="image/*" id="upload">
+
+<div class="buttons">
+<button id="download" disabled>Download PNG</button>
+<button id="refresh">Refresh</button>
+</div>
+
+<canvas id="base"></canvas>
+<canvas id="user"></canvas>
+<canvas id="out"></canvas>
+
+<script>
+const W=1080,H=1620
+const baseImg=new Image()
+baseImg.src='bg/bg1.jpg'
+
+const upload=document.getElementById('upload')
+const download=document.getElementById('download')
+const refresh=document.getElementById('refresh')
+
+const cBase=document.getElementById('base')
+const cUser=document.getElementById('user')
+const cOut=document.getElementById('out')
+
+;[cBase,cUser,cOut].forEach(c=>{c.width=W;c.height=H})
+
+const xBase=cBase.getContext('2d')
+const xUser=cUser.getContext('2d')
+const xOut=cOut.getContext('2d')
+
+baseImg.onload=()=>{
+if(baseImg.width!==W||baseImg.height!==H){
+alert('Base image bg/bg1.jpg must be exactly 1080 × 1620')
+upload.disabled=true
+return
+}
+xBase.drawImage(baseImg,0,0)
+}
+
+upload.onchange=e=>{
+const f=e.target.files[0]
+if(!f)return
+const img=new Image()
+img.onload=()=>{
+if(img.width!==W||img.height!==H){
+alert('Uploaded image must be exactly 1080 × 1620')
+return
+}
+xUser.clearRect(0,0,W,H)
+xOut.clearRect(0,0,W,H)
+xUser.drawImage(img,0,0)
+
+const b=xBase.getImageData(0,0,W,H)
+const u=xUser.getImageData(0,0,W,H)
+const o=xOut.createImageData(W,H)
+
+for(let i=0;i<b.data.length;i+=4){
+const same=
+b.data[i]===u.data[i] &&
+b.data[i+1]===u.data[i+1] &&
+b.data[i+2]===u.data[i+2] &&
+b.data[i+3]===u.data[i+3]
+
+if(!same){
+o.data[i]=u.data[i]
+o.data[i+1]=u.data[i+1]
+o.data[i+2]=u.data[i+2]
+o.data[i+3]=u.data[i+3]
+}
+}
+
+xOut.putImageData(o,0,0)
+download.disabled=false
+}
+img.src=URL.createObjectURL(f)
+}
+
+download.onclick=()=>{
+const a=document.createElement('a')
+a.href=cOut.toDataURL('image/png')
+a.download='diff.png'
+a.click()
+}
+
+refresh.onclick=()=>{
+upload.value=''
+download.disabled=true
+xUser.clearRect(0,0,W,H)
+xOut.clearRect(0,0,W,H)
+}
+</script>
+
+</body>
+</html>
