@@ -94,8 +94,8 @@ async function contentPopulatorGenZerME() {
     const scripts = [];
     doc.querySelectorAll("head script").forEach(scriptInHead => scripts.push(scriptInHead));
     const newBody = document.createElement("body");
-    newBody.style.width = "540px";
-    newBody.style.height = "810px";
+    newBody.style.width = "1080px";
+    newBody.style.height = "1620px";
     newBody.style.overflow = "auto";
     newBody.style.background = "black";
     Array.from(doc.body.childNodes).forEach(node => {
@@ -233,9 +233,9 @@ function startCreatingImages() {
                 setTimeout(() => {
                     html2canvas(slides[index], {
                         backgroundColor: "#000",
-                        width: 540,
+                        width: 1080,
                         height: 1620,
-                        scale: 2,
+                        scale: 1,
                         useCORS: true
                     }).then(canvas => {
                         imageUrls.push(canvas.toDataURL("image/jpeg", 0.95));
