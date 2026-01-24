@@ -106,6 +106,12 @@ async function contentPopulatorGenZerME() {
         }
     });
     document.body.replaceWith(newBody);
+    const swiperRoot = document.querySelector('.swiper');
+    if (swiperRoot) {
+        swiperRoot.style.transform = 'scale(2)';
+        swiperRoot.style.transformOrigin = 'top left';
+        swiperRoot.style.width = '540px';
+    }
     for (let script of scripts) {
         await new Promise((resolve) => {
             let newScript = document.createElement("script");
