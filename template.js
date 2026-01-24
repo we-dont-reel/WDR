@@ -30,7 +30,7 @@ function applyRbgenToSlide(el) {
     el.setAttribute('data-rbgen-current-bgcolor-hex', backgroundColorHex);
     el.setAttribute('data-rbgen-current-raw', btoa(svgHtml));
     //el.style.background = "no-repeat black " + url;
-    el.style.background = "url('https://we-dont-reel.github.io/WDR/bg/bg1.jpg') no-repeat center center";
+    el.style.background = "url('https://we-dont-reel.github.io/WDR/bg/bg1.png') no-repeat center center";
     el.style.backgroundSize = "cover";
     el.setAttribute('data-rbgen-applied', '1');
 }

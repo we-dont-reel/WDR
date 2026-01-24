@@ -189,7 +189,7 @@ function startCreatingImages() {
                                 const timestamp = new Date().toISOString().replace(/[:.-]/g, "");
                                 const a = document.createElement("a");
                                 a.href = imageUrls[i];
-                                a.download = `s${String(i + 1).padStart(2, '0')}-${timestamp}.jpg`;
+                                a.download = `s${String(i + 1).padStart(2, '0')}-${timestamp}.png`;
                                 document.body.appendChild(a);
                                 a.click();
                                 a.remove();
@@ -238,7 +238,7 @@ function startCreatingImages() {
                         scale: 2,
                         useCORS: true
                     }).then(canvas => {
-                        imageUrls.push(canvas.toDataURL("image/jpeg", 0.95));
+                        imageUrls.push(canvas.toDataURL("image/png"));
                         index++;
                         next();
                     }).catch(() => {
