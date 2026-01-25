@@ -601,6 +601,13 @@
 /* =========================
    GSML — 2× EXPORT SCALE
    ========================= */
+.gsml-time-text,
+.gsml-place-text{
+display:flex;
+flex-direction:column;
+justify-content:center;
+text-align:center;
+}
 
 /* text blocks */
 .gsml-error{
