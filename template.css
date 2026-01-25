@@ -599,3 +599,269 @@
     .gsml-error + [class*="gsml-"] {
       margin-top: 22px;
     }
+
+/* =========================
+   GSML — 2× EXPORT SCALE
+   ========================= */
+
+/* text blocks */
+.gsml-error{
+font-size:36px;
+margin-top:48px;
+margin-bottom:48px;
+}
+
+.gsml-text{
+font-size:36px;
+}
+
+.gsml-title{
+margin-top:48px;
+margin-bottom:48px;
+font-size:48px;
+}
+
+/* big label */
+.gsml-biglabel-container{
+margin-top:48px;
+margin-bottom:48px;
+}
+
+.gsml-biglabel{
+padding:20px 40px;
+font-size:40px;
+line-height:1.6;
+margin:0 10px;
+border-radius:1998px;
+padding-bottom:24px;
+}
+
+/* youtube / image */
+.gsml-youtube-container,
+.gsml-image-container{
+margin-top:48px;
+margin-bottom:48px;
+padding:4px;
+border-radius:20px;
+}
+
+.gsml-youtube-container iframe,
+.gsml-image-full,
+.gsml-image-top{
+border-radius:16px;
+}
+
+.gsml-image-desc{
+font-size:32px;
+padding:20px;
+line-height:1.4;
+border-radius:0 0 16px 16px;
+}
+
+/* list */
+.gsml-list{
+margin-top:48px;
+margin-bottom:48px;
+}
+
+.gsml-list ul{
+padding-left:40px;
+}
+
+.gsml-list li{
+margin-bottom:16px;
+}
+
+/* table */
+.gsml-table-container{
+margin-top:48px;
+margin-bottom:48px;
+padding:4px;
+border-radius:20px;
+}
+
+.gsml-table-inner{
+font-size:32px;
+border-radius:16px;
+}
+
+.gsml-table-cell-left,
+.gsml-table-cell-right{
+padding:24px;
+}
+
+/* embed */
+.gsml-embed-container{
+margin-top:48px;
+margin-bottom:48px;
+padding:4px;
+border-radius:20px;
+}
+
+.gsml-embed-inner{
+border-radius:16px;
+}
+
+/* links */
+.gsml-links-container{
+margin:48px 0;
+gap:20px;
+}
+
+.gsml-link-item{
+padding:20px 28px;
+border-radius:20px;
+font-size:36px;
+gap:20px;
+}
+
+.gsml-link-item i{
+font-size:36px;
+}
+
+.gsml-link-item span{
+font-size:36px;
+}
+
+/* action buttons */
+.gsml-actionbuttons-container{
+margin:48px 0;
+border-radius:20px;
+border:4px solid white;
+}
+
+.gsml-actionbuttons-description{
+font-size:36px;
+padding:24px;
+}
+
+.gsml-actionbuttons-buttons{
+padding:24px;
+}
+
+.gsml-actionbutton-link{
+font-size:28px;
+}
+
+.gsml-actionbutton-link i{
+margin-right:12px;
+}
+
+.gsml-actionbuttons-buttons a:not(:last-child){
+border-right:2px solid #ccc;
+}
+
+.gsml-actionbuttons-divider{
+border-top:2px solid #ccc;
+}
+
+/* socials */
+.gsml-socials-container{
+margin:48px 0;
+padding:20px;
+gap:16px;
+border-radius:20px;
+}
+
+.gsml-social-icon{
+width:80px;
+height:80px;
+font-size:40px;
+}
+
+/* date / time / place / map / timebomb */
+.gsml-date-container,
+.gsml-time-container,
+.gsml-place-container,
+.gsml-map-container,
+.gsml-timebomb-container{
+height:200px;
+margin:48px 0;
+border-radius:20px;
+}
+
+.gsml-date-icon,
+.gsml-time-icon,
+.gsml-place-icon,
+.gsml-map-icon,
+.gsml-timebomb-icon{
+width:200px;
+height:200px;
+padding:12px;
+}
+
+.gsml-date-text,
+.gsml-place-text,
+.gsml-map-text{
+font-size:44px;
+padding:0 24px;
+max-width:640px;
+}
+
+.gsml-time-text,
+.gsml-timebomb-text{
+font-size:36px;
+padding:0 24px;
+max-width:640px;
+}
+
+/* custom div */
+.gsml-customdiv{
+margin-top:48px;
+margin-bottom:48px;
+}
+
+/* code block */
+.gsml-codeblock-container{
+margin-top:48px;
+margin-bottom:48px;
+}
+
+.gsml-codeblock{
+font-size:36px;
+padding:20px;
+border-radius:20px;
+}
+
+/* MCQ */
+.gsml-mcqoptions-container{
+margin:48px 0;
+font-size:36px;
+}
+
+.gsml-mcqoptions{
+margin-top:24px;
+padding:24px 32px;
+border-radius:20px;
+}
+
+/* chat */
+.gsml-chatblock{
+margin-top:48px;
+margin-bottom:48px;
+}
+
+.gsml-chat-left,
+.gsml-chat-right{
+font-size:36px;
+padding:20px;
+padding-bottom:24px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+/* vertical rhythm harmonization */
+.gsml-title,
+.gsml-text,
+.gsml-list,
+.gsml-error{
+margin-top:44px;
+margin-bottom:44px;
+}
+
+.gsml-title + [class*="gsml-"],
+.gsml-text + [class*="gsml-"],
+.gsml-list + [class*="gsml-"],
+.gsml-error + [class*="gsml-"]{
+margin-top:44px;
+}
