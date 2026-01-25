@@ -604,6 +604,15 @@
    GSML — 2× EXPORT SCALE
    ========================= */
 
+.gsml-place-text,
+.gsml-time-text{
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+white-space:normal;
+}
+
 /* text blocks */
 .gsml-error{
 font-size:36px;
@@ -800,7 +809,7 @@ max-width:640px;
 
 .gsml-time-text,
 .gsml-timebomb-text{
-font-size:36px;
+font-size:44px;
 padding:0 24px;
 max-width:640px;
 }
