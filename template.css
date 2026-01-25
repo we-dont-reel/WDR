@@ -367,7 +367,6 @@
     font-family: sans-serif !important;
     font-weight: bold;
     flex: 1;
-    overflow: auto;
     white-space: normal;
     }
     .gsml-place-container {
@@ -410,7 +409,6 @@
     font-family: sans-serif !important;
     font-weight: bold;
     flex: 1;
-    overflow: auto;
     white-space: normal;
     }
     .gsml-timebomb-container {
@@ -603,15 +601,6 @@
 /* =========================
    GSML — 2× EXPORT SCALE
    ========================= */
-
-.gsml-place-text,
-.gsml-time-text{
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-white-space:normal;
-}
 
 /* text blocks */
 .gsml-error{
