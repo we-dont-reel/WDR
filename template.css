@@ -865,6 +865,11 @@ font-weight: bold;
 .gsml-chat-right {
 font-weight: bold;
 }
+
+.gsml-list ul{
+list-style: none;
+}
+
 /* vertical rhythm harmonization */
 .gsml-title,
 .gsml-text,
