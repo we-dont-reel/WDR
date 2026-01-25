@@ -617,7 +617,8 @@ margin-bottom:48px;
 }
 
 .gsml-text{
-font-size:40px;
+font-size:44px;
+font-weight: bold;
 }
 
 .gsml-title{
@@ -856,7 +857,8 @@ margin-bottom:20px;
 }
 
 .gsml-list li{
-font-size: 40px;
+font-size: 44px;
+font-weight: bold;
 }
 
 .gsml-chat-left,
