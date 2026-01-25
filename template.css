@@ -617,11 +617,11 @@ margin-bottom:48px;
 }
 
 .gsml-text{
-font-size:36px;
+font-size:40px;
 }
 
 .gsml-title{
-margin-top:48px;
+margin-top:56px;
 margin-bottom:48px;
 font-size:48px;
 }
@@ -855,6 +855,14 @@ border-radius:20px;
 margin-bottom:20px;
 }
 
+.gsml-list li{
+font-size: 40px;
+}
+
+.gsml-chat-left,
+.gsml-chat-right {
+font-weight: bold;
+}
 /* vertical rhythm harmonization */
 .gsml-title,
 .gsml-text,
