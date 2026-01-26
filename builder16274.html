@@ -403,6 +403,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
+if (!localStorage.getItem('gsmlBgImage')) localStorage.setItem('gsmlBgImage','');
 const widgets = [
   {
     display_name: `New Slide`,
@@ -790,6 +791,19 @@ Before you start, clear this!\n`);
     function attachImageUploadHandler() {
         document.getElementById("imageInput").addEventListener("change", function () {
             const file = this.files[0];
+            if (file && file.type === 'image/png') {
+                const r = new FileReader();
+                const i = new Image();
+                r.onload = function () {
+                    i.onload = function () {
+                        if (i.width === 1080 && i.height === 1620) {
+                            localStorage.setItem('gsmlBgImage', r.result);
+                        }
+                    };
+                    i.src = r.result;
+                };
+                r.readAsDataURL(file);
+            }
             if (!file) return;
             const maxSize = 6500 * 1024;
             if (file.size > maxSize) {
@@ -820,6 +834,7 @@ Before you start, clear this!\n`);
       `;
     }
     function removeImage() {
+        localStorage.setItem('gsmlBgImage','');
         imageB64 = "";
         imageMime = "";
         document.getElementById("imageUploadContainer").innerHTML = `
