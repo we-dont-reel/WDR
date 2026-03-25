@@ -95,7 +95,7 @@ async function contentPopulatorGenZerME() {
     doc.querySelectorAll("head script").forEach(scriptInHead => scripts.push(scriptInHead));
     const newBody = document.createElement("body");
     newBody.style.width = "1080px";
-    newBody.style.height = "1620px";
+    newBody.style.height = "1350px";
     newBody.style.overflow = "auto";
     newBody.style.background = "black";
     Array.from(doc.body.childNodes).forEach(node => {
@@ -234,7 +234,7 @@ function startCreatingImages() {
                     html2canvas(slides[index], {
                         backgroundColor: "#000",
                         width: 1080,
-                        height: 1620,
+                        height: 1350,
                         scale: 1,
                         useCORS: true
                     }).then(canvas => {
