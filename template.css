@@ -885,3 +885,9 @@ margin-bottom:44px;
 .gsml-error + [class*="gsml-"]{
 margin-top:44px;
 }
+
+.swiper-slide {
+padding-left: 120px;
+padding-right: 120px;
+box-sizing: border-box;
+}
