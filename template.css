@@ -899,3 +899,11 @@ text-shadow:
 -2px  2px 0 black,
  2px  2px 0 black;
 }
+
+.gsml-chat-left, .gsml-chat-right {
+text-shadow:
+-2px -2px 0 black,
+ 2px -2px 0 black,
+-2px  2px 0 black,
+ 2px  2px 0 black;
+}
