@@ -891,3 +891,7 @@ padding-left: 100px;
 padding-right: 100px;
 box-sizing: border-box;
 }
+
+.gsml-text {
+text-shadow: 0 1px 2px black;
+}
