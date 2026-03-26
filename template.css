@@ -893,5 +893,9 @@ box-sizing: border-box;
 }
 
 .gsml-text {
--webkit-text-stroke: 2px black;
+text-shadow:
+-2px -2px 0 black,
+ 2px -2px 0 black,
+-2px  2px 0 black,
+ 2px  2px 0 black;
 }
