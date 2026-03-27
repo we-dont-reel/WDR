@@ -907,3 +907,7 @@ text-shadow:
 -2px  2px 0 black,
  2px  2px 0 black;
 }
+
+.gsml-table-cell-left, .gsml-table-cell-right {
+font-weight: bold;
+}
