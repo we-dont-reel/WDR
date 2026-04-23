@@ -911,3 +911,11 @@ text-shadow:
 .gsml-table-cell-left, .gsml-table-cell-right {
 font-weight: bold;
 }
+
+.gsml-list ul{
+text-shadow:
+-2px -2px 0 black,
+ 2px -2px 0 black,
+-2px  2px 0 black,
+ 2px  2px 0 black;
+}
