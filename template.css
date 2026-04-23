@@ -912,7 +912,15 @@ text-shadow:
 font-weight: bold;
 }
 
-.gsml-list ul{
+.gsml-list ul {
+text-shadow:
+-2px -2px 0 black,
+ 2px -2px 0 black,
+-2px  2px 0 black,
+ 2px  2px 0 black;
+}
+
+.gsml-date-text, .gsml-place-text, .gsml-map-text, .gsml-time-text {
 text-shadow:
 -2px -2px 0 black,
  2px -2px 0 black,
