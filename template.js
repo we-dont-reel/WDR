@@ -49,7 +49,7 @@ window.addEventListener('load', function() {
         const paddingBottom = parseFloat(style.paddingBottom) || 0;
         const height = label.offsetHeight - paddingTop - paddingBottom;
         const lines = Math.round(height / lineHeight);
-        if (lines > 1) {
+        if (lines > 10) {
             label.style.borderRadius = "10px";
             label.style.width = "100%";
             label.style.paddingLeft = "5px";
